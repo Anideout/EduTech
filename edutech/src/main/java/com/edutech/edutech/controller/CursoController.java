@@ -10,27 +10,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.edutech.edutech.model.Profesor;
-import com.edutech.edutech.service.ProfesorService;
+import com.edutech.edutech.model.Curso;
+import com.edutech.edutech.service.CursoService;
 
 @RestController
-@RequestMapping("/profesores")
-public class ProfesorController {
+@RequestMapping("/cursos")
+public class CursoController {
     @Autowired
-    private ProfesorService profesorService;
+    private CursoService cursoService;
 
     @PostMapping
-    public String almacenar(@RequestBody Profesor profesor) {
-        return profesorService.almacenar(profesor);
+    public String almacenar(@RequestBody Curso curso) {
+        return cursoService.almacenar(curso);
     }
 
     @GetMapping
-    public List<Profesor> listar() {
-        return profesorService.listar();
+    public List<Curso> listar() {
+        return cursoService.listar();
     }
 
     @GetMapping("/{nombre}")
-    public List<Profesor> buscar(@PathVariable String nombre) {
-        return profesorService.buscar(nombre);
+    public List<Curso> buscar(@PathVariable String nombre) {
+        return cursoService.buscar(nombre);
     }
 }

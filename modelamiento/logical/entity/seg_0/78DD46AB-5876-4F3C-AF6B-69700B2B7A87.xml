@@ -1,7 +1,7 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="F1294853-F44E-D495-17F0-003632174A9C" name="Tarjeta">
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="78DD46AB-5876-4F3C-AF6B-69700B2B7A87" name="Inscripcion">
 <createdBy>matim</createdBy>
-<createdTime>2025-05-20 23:10:18 UTC</createdTime>
+<createdTime>2025-05-21 12:23:03 UTC</createdTime>
 <ownerDesignName>modelamiento</ownerDesignName>
 <engineerTo>
 <item key="A6D36E2C-7A5E-2AA1-1E0D-21C862752ADA" value="true"/>
@@ -15,22 +15,21 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="numero_tarjeta" id="0078903D-8034-E6D3-CA5A-156CBF8B1954">
+<Attribute name="nro_seguimiento" id="A2FF009B-65EA-6E63-FEE7-7EDA10F8411A">
 <createdBy>matim</createdBy>
-<createdTime>2025-05-20 23:10:32 UTC</createdTime>
+<createdTime>2025-05-21 12:23:14 UTC</createdTime>
 <ownerDesignName>modelamiento</ownerDesignName>
 <engineerTo>
 <item key="A6D36E2C-7A5E-2AA1-1E0D-21C862752ADA" value="true"/>
 </engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>16</dataTypeSize>
-<ownDataTypeParameters>16,,</ownDataTypeParameters>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="titular" id="F388EE77-277F-F93D-5F43-036C5ECF6AD9">
+<Attribute name="metodo de pago" id="5BFF2648-8155-83E1-9095-91EA88E3F29C">
 <createdBy>matim</createdBy>
-<createdTime>2025-05-20 23:10:32 UTC</createdTime>
+<createdTime>2025-05-21 12:23:14 UTC</createdTime>
 <ownerDesignName>modelamiento</ownerDesignName>
 <engineerTo>
 <item key="A6D36E2C-7A5E-2AA1-1E0D-21C862752ADA" value="true"/>
@@ -41,46 +40,33 @@
 <dataTypeSize>50</dataTypeSize>
 <ownDataTypeParameters>50,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="id" id="D22ED9D3-8F08-6766-9A44-4994B443A95A">
+<Attribute name="mail" id="AD571B67-D0AA-E229-0834-20AE1A726FA2">
 <createdBy>matim</createdBy>
-<createdTime>2025-05-20 23:26:31 UTC</createdTime>
-<generatorID>4E45607B-F15A-FE66-9D70-0A29DDC824CB</generatorID>
+<createdTime>2025-05-21 12:24:27 UTC</createdTime>
+<generatorID>B258A6D7-6F41-3013-2590-57EC526A20B8</generatorID>
 <ownerDesignName>modelamiento</ownerDesignName>
 <engineerTo>
 <item key="A6D36E2C-7A5E-2AA1-1E0D-21C862752ADA" value="true"/>
 </engineerTo>
-<referedAttribute>EB518328-89C1-D791-1F4F-8EC3C3C0EE9A</referedAttribute>
+<referedAttribute>EA50AD79-FC13-EE06-5C12-1C191786BB6F</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="nro_seguimiento" id="5FE3496A-9C8D-860F-90F9-FB30E49E8A04">
-<createdBy>matim</createdBy>
-<createdTime>2025-05-21 12:24:53 UTC</createdTime>
-<generatorID>F6BA3BA5-A1D2-3875-B17E-844ED1438FF8</generatorID>
-<ownerDesignName>modelamiento</ownerDesignName>
-<engineerTo>
-<item key="A6D36E2C-7A5E-2AA1-1E0D-21C862752ADA" value="true"/>
-</engineerTo>
-<referedAttribute>A2FF009B-65EA-6E63-FEE7-7EDA10F8411A</referedAttribute>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
-<identifier id="C1A027E6-7148-0661-9C76-1AB59F6EDADD" name="Tarjeta PK">
+<identifier id="242E5FAF-5642-46B9-8112-A1549B79B447" name="Inscripcion PK">
 <createdBy>matim</createdBy>
-<createdTime>2025-05-20 23:10:45 UTC</createdTime>
+<createdTime>2025-05-21 12:23:52 UTC</createdTime>
 <ownerDesignName>modelamiento</ownerDesignName>
 <engineerTo>
 <item key="A6D36E2C-7A5E-2AA1-1E0D-21C862752ADA" value="true"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>
-<attributeRef>0078903D-8034-E6D3-CA5A-156CBF8B1954</attributeRef>
+<attributeRef>A2FF009B-65EA-6E63-FEE7-7EDA10F8411A</attributeRef>
 </usedAttributes>
 </identifier>
 </identifiers>

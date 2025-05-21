@@ -1,5 +1,7 @@
 package com.edutech.edutech.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
@@ -9,18 +11,14 @@ public class Usuario {
     @Id
     private String email;
     private String contrasena;
-    private String rol;
 
     @OneToOne(mappedBy = "usuario")
-    private Profesor profesor;
-
-    @OneToOne(mappedBy = "usuario")
+    @JsonBackReference
     private Persona persona;
 
     public Usuario() {
         this.email = "";
         this.contrasena = "";
-        this.rol = "";
     }
 
     public String getEmail() {
@@ -37,22 +35,6 @@ public class Usuario {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
-    }
-
-    public String getRol() {
-        return rol;
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol;
-    }
-
-    public Profesor getProfesor() {
-        return profesor;
-    }
-
-    public void setProfesor(Profesor profesor) {
-        this.profesor = profesor;
     }
 
     public Persona getPersona() {

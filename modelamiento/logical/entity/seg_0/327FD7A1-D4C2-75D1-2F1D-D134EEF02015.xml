@@ -93,21 +93,6 @@
 <dataTypeSize>50</dataTypeSize>
 <ownDataTypeParameters>50,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="mail1" id="E0348E86-04F4-73AB-19A5-B0AF24AAF68D">
-<createdBy>matim</createdBy>
-<createdTime>2025-05-20 23:26:50 UTC</createdTime>
-<generatorID>FC82AB0D-6817-4149-13C4-AE88EF8D7FDE</generatorID>
-<ownerDesignName>modelamiento</ownerDesignName>
-<engineerTo>
-<item key="A6D36E2C-7A5E-2AA1-1E0D-21C862752ADA" value="true"/>
-</engineerTo>
-<referedAttribute>EA50AD79-FC13-EE06-5C12-1C191786BB6F</referedAttribute>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>50</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
 <identifier id="7FF4D038-26CF-5559-04F2-F03677EBED8F" name="Profesor PK">

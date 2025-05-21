@@ -16,10 +16,10 @@ public class UsuarioService {
     public String almacenar(Usuario usuario) {
         Usuario validacion = usuarioRepository.findByEmail(usuario.getEmail());
         if (validacion != null) {
-            return "error: persona con este RUT ya existe";
-        } else { // Si no se encuentra ninguna persona con este RUT
+            return "error: usuario con este email ya existe";
+        } else {
             usuarioRepository.save(usuario);
-            return "persona almacenada con exito";
+            return "usuario " + usuario.getEmail() + " almacenada con exito";
         }
     }
 

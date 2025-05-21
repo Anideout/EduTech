@@ -14,7 +14,7 @@ import com.edutech.edutech.model.Persona;
 import com.edutech.edutech.service.PersonaService;
 
 @RestController
-@RequestMapping("/persona")
+@RequestMapping("/personas")
 public class PersonaController {
     @Autowired
     private PersonaService personaService;

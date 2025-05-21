@@ -2,8 +2,6 @@ package com.edutech.edutech.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 
 @Entity
 public class Profesor {
@@ -11,20 +9,16 @@ public class Profesor {
     private String rut;
     private String nombre;
     private String apellido;
-    private String contrasena;
     private String direccion;
+    private String contrasena;
     private String especialidad;
-
-    @OneToOne
-    @JoinColumn(name = "email")
-    private Usuario usuario;
 
     public Profesor() {
         this.rut = "";
         this.nombre = "";
         this.apellido = "";
-        this.contrasena = "";
         this.direccion = "";
+        this.contrasena = "";
         this.especialidad = "";
     }
 
@@ -74,14 +68,6 @@ public class Profesor {
 
     public void setEspecialidad(String especialidad) {
         this.especialidad = especialidad;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 
 }

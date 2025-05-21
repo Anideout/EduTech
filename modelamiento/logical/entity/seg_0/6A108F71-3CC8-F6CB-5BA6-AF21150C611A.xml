@@ -67,22 +67,7 @@
 <use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
 <dataTypeSize>12</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="rut1" id="3E8D6365-9875-6FFE-C817-D4C62F8F6F4C">
-<createdBy>matim</createdBy>
-<createdTime>2025-05-20 23:26:46 UTC</createdTime>
-<generatorID>FC82AB0D-6817-4149-13C4-AE88EF8D7FDE</generatorID>
-<ownerDesignName>modelamiento</ownerDesignName>
-<engineerTo>
-<item key="A6D36E2C-7A5E-2AA1-1E0D-21C862752ADA" value="true"/>
-</engineerTo>
-<referedAttribute>E6B87996-9C08-653D-EA01-6C6EE707BDF8</referedAttribute>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT024</logicalDatatype>
-<dataTypeSize>12</dataTypeSize>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<ownDataTypeParameters>12,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="id" id="C8CB39DB-172F-7993-182B-69B7A7030B1E">
 <createdBy>matim</createdBy>
