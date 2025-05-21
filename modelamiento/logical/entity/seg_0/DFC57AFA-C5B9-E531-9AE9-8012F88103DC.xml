@@ -1,0 +1,113 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="DFC57AFA-C5B9-E531-9AE9-8012F88103DC" name="Persona">
+<createdBy>matim</createdBy>
+<createdTime>2025-05-20 23:09:10 UTC</createdTime>
+<ownerDesignName>modelamiento</ownerDesignName>
+<engineerTo>
+<item key="A6D36E2C-7A5E-2AA1-1E0D-21C862752ADA" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="rut" id="CBAEA9CD-4F59-707B-6777-3F7B7AF62C16">
+<createdBy>matim</createdBy>
+<createdTime>2025-05-20 23:09:16 UTC</createdTime>
+<ownerDesignName>modelamiento</ownerDesignName>
+<engineerTo>
+<item key="A6D36E2C-7A5E-2AA1-1E0D-21C862752ADA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>12</dataTypeSize>
+<ownDataTypeParameters>12,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="mail" id="02908390-CA82-85DF-0EE6-4A69F88266DE">
+<createdBy>matim</createdBy>
+<createdTime>2025-05-20 23:09:16 UTC</createdTime>
+<ownerDesignName>modelamiento</ownerDesignName>
+<engineerTo>
+<item key="A6D36E2C-7A5E-2AA1-1E0D-21C862752ADA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nombre" id="F1BAC714-2397-D756-AEB9-767DE31220DF">
+<createdBy>matim</createdBy>
+<createdTime>2025-05-20 23:09:16 UTC</createdTime>
+<ownerDesignName>modelamiento</ownerDesignName>
+<engineerTo>
+<item key="A6D36E2C-7A5E-2AA1-1E0D-21C862752ADA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="apellido" id="3C6521FA-1CF5-A770-9195-D1C2A2238BA0">
+<createdBy>matim</createdBy>
+<createdTime>2025-05-20 23:09:17 UTC</createdTime>
+<ownerDesignName>modelamiento</ownerDesignName>
+<engineerTo>
+<item key="A6D36E2C-7A5E-2AA1-1E0D-21C862752ADA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="direccion" id="66078A49-6E2B-937E-DD66-B92ED4B78D6D">
+<createdBy>matim</createdBy>
+<createdTime>2025-05-21 00:01:08 UTC</createdTime>
+<ownerDesignName>modelamiento</ownerDesignName>
+<engineerTo>
+<item key="A6D36E2C-7A5E-2AA1-1E0D-21C862752ADA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>30,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="mail1" id="0E2081F4-46B8-4647-E954-A5AE5D971B3A">
+<createdBy>matim</createdBy>
+<createdTime>2025-05-20 23:25:54 UTC</createdTime>
+<generatorID>BDDC68C1-C535-B0F4-6122-A5EFB058D4F9</generatorID>
+<ownerDesignName>modelamiento</ownerDesignName>
+<engineerTo>
+<item key="A6D36E2C-7A5E-2AA1-1E0D-21C862752ADA" value="true"/>
+</engineerTo>
+<referedAttribute>EA50AD79-FC13-EE06-5C12-1C191786BB6F</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="D716B32C-0F05-3FA1-B104-7044630C2D66" name="Persona PK">
+<createdBy>matim</createdBy>
+<createdTime>2025-05-20 23:09:29 UTC</createdTime>
+<ownerDesignName>modelamiento</ownerDesignName>
+<engineerTo>
+<item key="A6D36E2C-7A5E-2AA1-1E0D-21C862752ADA" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>CBAEA9CD-4F59-707B-6777-3F7B7AF62C16</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

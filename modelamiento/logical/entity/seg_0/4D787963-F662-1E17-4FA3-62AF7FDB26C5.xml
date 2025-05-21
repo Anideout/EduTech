@@ -1,0 +1,75 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="4D787963-F662-1E17-4FA3-62AF7FDB26C5" name="Alumno">
+<createdBy>matim</createdBy>
+<createdTime>2025-05-20 23:11:49 UTC</createdTime>
+<ownerDesignName>modelamiento</ownerDesignName>
+<engineerTo>
+<item key="A6D36E2C-7A5E-2AA1-1E0D-21C862752ADA" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="BE0C5539-08A9-AA5D-FD26-F5C4C90FC79D">
+<createdBy>matim</createdBy>
+<createdTime>2025-05-20 23:12:00 UTC</createdTime>
+<ownerDesignName>modelamiento</ownerDesignName>
+<engineerTo>
+<item key="A6D36E2C-7A5E-2AA1-1E0D-21C862752ADA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="mail" id="58405C31-4745-83C4-1F70-258DE5BDA9DB">
+<createdBy>matim</createdBy>
+<createdTime>2025-05-20 23:28:20 UTC</createdTime>
+<generatorID>C9BDB71C-E313-BFB3-E97E-C5C647E93BB0</generatorID>
+<ownerDesignName>modelamiento</ownerDesignName>
+<engineerTo>
+<item key="A6D36E2C-7A5E-2AA1-1E0D-21C862752ADA" value="true"/>
+</engineerTo>
+<referedAttribute>EA50AD79-FC13-EE06-5C12-1C191786BB6F</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="sigla" id="C43087DE-2057-AC9F-8188-DB50CD403A1B">
+<createdBy>matim</createdBy>
+<createdTime>2025-05-20 23:28:33 UTC</createdTime>
+<generatorID>F23DA1C0-FEA2-726B-417A-76B4821F6A3A</generatorID>
+<ownerDesignName>modelamiento</ownerDesignName>
+<engineerTo>
+<item key="A6D36E2C-7A5E-2AA1-1E0D-21C862752ADA" value="true"/>
+</engineerTo>
+<referedAttribute>80D2AE51-6C37-405F-362F-0F77CC33BDBE</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>6</dataTypeSize>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="B153DAC1-E739-F864-E068-A31D19BE9B7A" name="Usuario_curso PK">
+<createdBy>matim</createdBy>
+<createdTime>2025-05-20 23:12:12 UTC</createdTime>
+<ownerDesignName>modelamiento</ownerDesignName>
+<engineerTo>
+<item key="A6D36E2C-7A5E-2AA1-1E0D-21C862752ADA" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>BE0C5539-08A9-AA5D-FD26-F5C4C90FC79D</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Relation_13" directorySegmentName="seg_0" id="0D79DE98-EB9A-E0C3-9EA3-CEE60B117AEC">
+<createdBy>matim</createdBy>
+<createdTime>2025-05-20 23:40:11 UTC</createdTime>
+<ownerDesignName>modelamiento</ownerDesignName>
+<engineerTo>
+<item key="A6D36E2C-7A5E-2AA1-1E0D-21C862752ADA" value="true"/>
+</engineerTo>
+<sourcePk>0089E168-E2C1-81AF-7F89-AFD9ECE5E1BB</sourcePk>
+<targetPk>6C443038-D89A-9270-D4E0-D7ED5953B468</targetPk>
+<identifying>false</identifying>
+<optionalSource>false</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>BA88A4ED-F82B-539C-4BD5-80D1C27E2F71</sourceEntity>
+<targetCardinalityString>1</targetCardinalityString>
+<targetEntity>859118FA-7EE8-976B-DE6C-B89B0B492842</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

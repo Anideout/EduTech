@@ -1,0 +1,85 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="BA88A4ED-F82B-539C-4BD5-80D1C27E2F71" name="Resultado_evaluacion">
+<createdBy>matim</createdBy>
+<createdTime>2025-05-20 23:38:32 UTC</createdTime>
+<ownerDesignName>modelamiento</ownerDesignName>
+<engineerTo>
+<item key="A6D36E2C-7A5E-2AA1-1E0D-21C862752ADA" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id" id="3245AA77-C74C-D71E-097D-DDA5BFC6D23C">
+<createdBy>matim</createdBy>
+<createdTime>2025-05-20 23:38:41 UTC</createdTime>
+<ownerDesignName>modelamiento</ownerDesignName>
+<engineerTo>
+<item key="A6D36E2C-7A5E-2AA1-1E0D-21C862752ADA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="calificacion" id="445FD938-4C88-55AC-911B-FFFD7760C5A2">
+<createdBy>matim</createdBy>
+<createdTime>2025-05-20 23:38:41 UTC</createdTime>
+<ownerDesignName>modelamiento</ownerDesignName>
+<engineerTo>
+<item key="A6D36E2C-7A5E-2AA1-1E0D-21C862752ADA" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>69230305-AB6A-99EB-35A1-CC306D543604</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="sigla_evaluacion" id="1E5ECC14-20C7-C991-81CB-3E27C4F9DB07">
+<createdBy>matim</createdBy>
+<createdTime>2025-05-20 23:40:14 UTC</createdTime>
+<generatorID>0D79DE98-EB9A-E0C3-9EA3-CEE60B117AEC</generatorID>
+<ownerDesignName>modelamiento</ownerDesignName>
+<engineerTo>
+<item key="A6D36E2C-7A5E-2AA1-1E0D-21C862752ADA" value="true"/>
+</engineerTo>
+<referedAttribute>18DF8923-31AF-46C1-554F-DEADCFC3AE95</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id1" id="765E8CEA-E1F3-0042-BE90-598161207D52">
+<createdBy>matim</createdBy>
+<createdTime>2025-05-20 23:40:58 UTC</createdTime>
+<generatorID>E49A276A-F882-41E5-41E3-A86D56CF02CE</generatorID>
+<ownerDesignName>modelamiento</ownerDesignName>
+<engineerTo>
+<item key="A6D36E2C-7A5E-2AA1-1E0D-21C862752ADA" value="true"/>
+</engineerTo>
+<referedAttribute>BE0C5539-08A9-AA5D-FD26-F5C4C90FC79D</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="0089E168-E2C1-81AF-7F89-AFD9ECE5E1BB" name="Resultado_evaluacion PK">
+<createdBy>matim</createdBy>
+<createdTime>2025-05-20 23:39:15 UTC</createdTime>
+<ownerDesignName>modelamiento</ownerDesignName>
+<engineerTo>
+<item key="A6D36E2C-7A5E-2AA1-1E0D-21C862752ADA" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>3245AA77-C74C-D71E-097D-DDA5BFC6D23C</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>
