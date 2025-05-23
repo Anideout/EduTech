@@ -9,23 +9,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.edutech.edutech.model.Inscripcion;
-import com.edutech.edutech.service.InscripcionService;
+import com.edutech.edutech.model.Asistencia;
+import com.edutech.edutech.service.Asistenciaservice;
 
 @RestController
-@RequestMapping("/inscripciones")
-public class InscripcionController {
+@RequestMapping("/asistencia")
+public class AsistenciaController {
     @Autowired
-    private InscripcionService inscripcionService;
+    private Asistenciaservice asistenciaService;
 
     @PostMapping
-    public String almacenar(@RequestBody Inscripcion inscripcion) {
-        return inscripcionService.almacenar(inscripcion);
+    public String almacenar(@RequestBody Asistencia asistencia) {
+        return asistenciaService.almacenar(asistencia);
     }
 
     @GetMapping
-    public List<Inscripcion> listar() {
-        return inscripcionService.listar();
+    public List<Asistencia> listar() {
+        return asistenciaService.listar();
     }
 
 }

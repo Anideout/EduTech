@@ -14,7 +14,7 @@ public class InscripcionService {
     private InscripcionRepository inscripcionRepository;
 
     public String almacenar(Inscripcion inscripcion) {
-        Inscripcion validacion = inscripcionRepository.findByid(inscripcion.getId());
+        Inscripcion validacion = inscripcionRepository.findBySeguimiento(inscripcion.getseguimiento());
         if (validacion != null) {
             return "Inscripcion ya existe";
         } else {
@@ -25,10 +25,6 @@ public class InscripcionService {
 
     public List<Inscripcion> listar() {
         return inscripcionRepository.findAll();
-    }
-
-    public List<Inscripcion> buscar(Integer id) {
-        return inscripcionRepository.findByIdContaining(id);
     }
 
 }

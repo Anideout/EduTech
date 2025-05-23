@@ -33,4 +33,9 @@ public class ProfesorController {
     public List<Profesor> buscar(@PathVariable String nombre) {
         return profesorService.buscar(nombre);
     }
+
+    @PostMapping("/asignar/{rut}/{id}")
+    public String asignarEspecialidad(@PathVariable String rut, @PathVariable Integer id) {
+        return profesorService.asignarEspecialidad(rut, id);
+    }
 }

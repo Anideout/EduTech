@@ -1,19 +1,22 @@
 package com.edutech.edutech.model;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Curso {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int sigla;
     private String nombre;
     private String descripcion;
     private String estado;
     private int valor;
+
+    @ManyToMany(mappedBy = "cursos")
+    private List<Usuario> usuarios;
 
     public Curso() {
         this.sigla = 0;
@@ -61,6 +64,14 @@ public class Curso {
 
     public void setValor(int valor) {
         this.valor = valor;
+    }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 
 }

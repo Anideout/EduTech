@@ -1,7 +1,5 @@
 package com.edutech.edutech.model;
 
-import java.time.LocalDate;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,13 +10,15 @@ public class Inscripcion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private int seguimiento;
     private String estado;
-    private LocalDate fechaIngreso;
+    private String fechaIngreso;
 
     public Inscripcion() {
         this.id = 0;
+        this.seguimiento = 0;
         this.estado = "";
-        this.fechaIngreso = LocalDate.now();
+        this.fechaIngreso = "";
     }
 
     public int getId() {
@@ -29,11 +29,19 @@ public class Inscripcion {
         this.id = id;
     }
 
-    public LocalDate getFechaIngreso() {
+    public int getSeguimiento() {
+        return seguimiento;
+    }
+
+    public void setSeguimiento(int seguimiento) {
+        this.seguimiento = seguimiento;
+    }
+
+    public String getFechaIngreso() {
         return fechaIngreso;
     }
 
-    public void setFechaIngreso(LocalDate fechaIngreso) {
+    public void setFechaIngreso(String fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
 
@@ -43,6 +51,14 @@ public class Inscripcion {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public int getseguimiento() {
+        return seguimiento;
+    }
+
+    public void setseguimiento(int seguimiento) {
+        this.seguimiento = seguimiento;
     }
 
 }
