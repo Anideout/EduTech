@@ -2,27 +2,21 @@ package com.edutech.edutech.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Perfil {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int tag;
+    private String tag;
     private String nombre;
 
-    @OneToMany(mappedBy = "perfil")
-    @JsonBackReference
-    private List<Usuario> usuario;
+    @ManyToMany(mappedBy = "perfiles")
+    private List<Usuario> usuarios;
 
     public Perfil() {
-        this.tag = 0;
+        this.tag = "";
         this.nombre = "";
     }
 
@@ -34,20 +28,20 @@ public class Perfil {
         this.nombre = nombre;
     }
 
-    public int getTag() {
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
+
+    public String getTag() {
         return tag;
     }
 
-    public void setTag(int tag) {
+    public void setTag(String tag) {
         this.tag = tag;
-    }
-
-    public List<Usuario> getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(List<Usuario> usuario) {
-        this.usuario = usuario;
     }
 
 }

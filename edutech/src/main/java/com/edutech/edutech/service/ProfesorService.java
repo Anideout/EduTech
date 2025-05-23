@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.edutech.edutech.dto.ProfesorEspecialidadDto;
 import com.edutech.edutech.model.Especialidad;
 import com.edutech.edutech.model.Profesor;
 import com.edutech.edutech.repository.EspecialidadRepository;
@@ -44,6 +45,23 @@ public class ProfesorService {
         } else {
             Profesor profesor = profesorRepository.findById(rut).get();
             Especialidad especialidad = especialidadRepository.findById(id).get();
+
+            profesor.setEspecialidad(especialidad);
+            profesorRepository.save(profesor);
+
+            return "Especialidad: " + especialidad.getNombre() + " asignada al profesor: " + profesor.getNombre() + " "
+                    + profesor.getApellido();
+        }
+    }
+
+    public String asignarEspecialidad(ProfesorEspecialidadDto dto) {
+        if (!profesorRepository.existsById(dto.getRut())) {
+            return "El rut ingresado no existe!";
+        } else if (!especialidadRepository.existsById(dto.getId())) {
+            return "La especiadad no existe";
+        } else {
+            Profesor profesor = profesorRepository.findById(dto.getRut()).get();
+            Especialidad especialidad = especialidadRepository.findById(dto.getId()).get();
 
             profesor.setEspecialidad(especialidad);
             profesorRepository.save(profesor);

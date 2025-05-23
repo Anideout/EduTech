@@ -14,7 +14,7 @@ public class PerfilService {
     private PerfilRepository perfilRepository;
 
     public String almacenar(Perfil perfil) {
-        if (perfilRepository.findByNombre(perfil.getNombre()) == null) {
+        if (perfilRepository.findByTag(perfil.getTag()) == null) {
             perfilRepository.save(perfil);
             return "perfil " + perfil.getNombre() + " almacenado correctamente";
         } else {

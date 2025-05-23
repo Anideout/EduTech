@@ -9,7 +9,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
@@ -23,9 +22,9 @@ public class Usuario {
     @JsonBackReference
     private Persona persona;
 
-    @ManyToOne
-    @JoinColumn(name = "perfil_tag")
-    private Perfil perfil;
+    @ManyToMany
+    @JoinTable(name = "usuario_perfil", joinColumns = @JoinColumn(name = "usuario_rut"), inverseJoinColumns = @JoinColumn(name = "perfil_tag"))
+    private List<Perfil> perfiles;
 
     @OneToMany(mappedBy = "usuario")
     @JsonBackReference
@@ -64,14 +63,6 @@ public class Usuario {
         this.persona = persona;
     }
 
-    public Perfil getPerfil() {
-        return perfil;
-    }
-
-    public void setPerfil(Perfil perfil) {
-        this.perfil = perfil;
-    }
-
     public List<Asistencia> getAsistencia() {
         return asistencia;
     }
@@ -86,6 +77,14 @@ public class Usuario {
 
     public void setCursos(List<Curso> cursos) {
         this.cursos = cursos;
+    }
+
+    public List<Perfil> getPerfiles() {
+        return perfiles;
+    }
+
+    public void setPerfiles(List<Perfil> perfiles) {
+        this.perfiles = perfiles;
     }
 
 }

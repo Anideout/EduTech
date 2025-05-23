@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.edutech.edutech.model.Perfil;
 
-public interface PerfilRepository extends JpaRepository<Perfil, Integer> {
-    Perfil findByNombre(String nombre);
+public interface PerfilRepository extends JpaRepository<Perfil, String> {
+    Perfil findByTag(String tag);
 
     List<Perfil> findByNombreContaining(String nombre);
 }

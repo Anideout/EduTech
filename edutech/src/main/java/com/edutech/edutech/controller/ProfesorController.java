@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.edutech.edutech.dto.ProfesorEspecialidadDto;
 import com.edutech.edutech.model.Profesor;
 import com.edutech.edutech.service.ProfesorService;
 
@@ -35,7 +36,13 @@ public class ProfesorController {
     }
 
     @PostMapping("/asignar/{rut}/{id}")
-    public String asignarEspecialidad(@PathVariable String rut, @PathVariable Integer id) {
+    public String asignarEspecialidad(@PathVariable String rut, @PathVariable int id) {
         return profesorService.asignarEspecialidad(rut, id);
     }
+
+    @PostMapping("/asignar")
+    public String asignarEspecialidad(@RequestBody ProfesorEspecialidadDto dto) {
+        return profesorService.asignarEspecialidad(dto);
+    }
+
 }
