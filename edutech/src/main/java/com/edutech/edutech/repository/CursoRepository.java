@@ -12,4 +12,6 @@ public interface CursoRepository extends JpaRepository<Curso, Integer> {
 
     List<Curso> findByNombreContaining(String nombre);
 
+    boolean existsBySigla(int sigla);
+
 }

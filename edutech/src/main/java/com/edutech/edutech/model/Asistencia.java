@@ -12,7 +12,9 @@ public class Asistencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private double porcentaje;
+    private String nombreAsignatura;
+    private int porcentaje;
+    private String fecha;
 
     @ManyToOne
     @JoinColumn(name = "rut_usuario")
@@ -20,7 +22,9 @@ public class Asistencia {
 
     public Asistencia() {
         this.id = 0;
-        this.porcentaje = 0.0;
+        this.nombreAsignatura = "";
+        this.porcentaje = 0;
+        this.fecha = "";
     }
 
     public int getId() {
@@ -31,20 +35,36 @@ public class Asistencia {
         this.id = id;
     }
 
-    public double getPorcentaje() {
-        return porcentaje;
-    }
-
-    public void setPorcentaje(double porcentaje) {
-        this.porcentaje = porcentaje;
-    }
-
     public Usuario getUsuario() {
         return usuario;
     }
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public String getNombreAsignatura() {
+        return nombreAsignatura;
+    }
+
+    public void setNombreAsignatura(String nombreAsignatura) {
+        this.nombreAsignatura = nombreAsignatura;
+    }
+
+    public int getPorcentaje() {
+        return porcentaje;
+    }
+
+    public void setPorcentaje(int porcentaje) {
+        this.porcentaje = porcentaje;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
 }

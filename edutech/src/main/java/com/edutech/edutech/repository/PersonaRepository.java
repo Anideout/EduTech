@@ -10,4 +10,7 @@ public interface PersonaRepository extends JpaRepository<Persona, String> {
     Persona findByRut(String rut);
 
     List<Persona> findByNombreContaining(String nombre);
+
+    public boolean existsByRut(String rut);
+
 }

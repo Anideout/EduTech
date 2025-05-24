@@ -1,7 +1,5 @@
 package com.edutech.edutech.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -17,7 +15,6 @@ public class Persona {
 
     @OneToOne
     @JoinColumn(name = "email")
-    @JsonBackReference
     private Usuario usuario;
 
     public Persona() {

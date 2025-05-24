@@ -34,4 +34,37 @@ public class UsuarioController {
         return usuarioService.buscar(email);
     }
 
+    @PostMapping("/asignar/{email}/{rut}")
+    public String asignar(@PathVariable String email, @PathVariable String rut) {
+        return usuarioService.asignarPersona(email, rut);
+
+    }
+    // @GetMapping("/usuarios/{email}")
+    // public ResponseEntity<Usuario> verDatosUsuario(@PathVariable String email) {
+    // Usuario usuario = usuarioRepository.findByEmail(email)
+    // .orElseThrow(() -> new ResourceNotFoundException("usuario no encontrado"));
+
+    // return ResponseEntity.ok().body(usuario);
+
+    // }
+
+    // @PutMapping("/usuarios/{rut}")
+    // public ResponseEntity<Usuario> ActualizarUsuario(@PathVariable String email,
+    // @RequestBody Usuario usuarioActualizado) {
+    // Usuario usuario = usuarioRepository.findByEmail(email)
+    // .orElseThrow(() -> new ResourceNotFoundException("usuario no encontrado"));
+    // usuario.setEmail(usuarioActualizado.getEmail());
+    // return ResponseEntity.ok(usuarioActualizado);
+    // }
+
+    // @DeleteMapping("/usuarios/{email}")
+    // public Map<String, Boolean> eliminarUsuario(@PathVariable String email) {
+    // Usuario usuario = usuarioRepository.findByEmail(email)
+    // .orElseThrow(() -> new ResourceNotFoundException("usuario no encontrado"));
+    // usuarioRepository.delete(usuario);
+    // Map<String, Boolean> respuesta = new HashMap<>();
+    // respuesta.put("Usuario eliminado!", Boolean.TRUE);
+    // return respuesta;
+    // }
+
 }

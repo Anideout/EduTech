@@ -31,4 +31,22 @@ public class CursoService {
         return cursoRepository.findByNombreContaining(nombre);
     }
 
+    // public String asignarEspecialidad(String sigla, int id) {
+    // if (!cursoRepository.existsBySigla(sigla)) {
+    // return "El curso ingresado no existe!";
+    // } else if (!evaluacionRepository.existsById(id)) {
+    // return "La especiadad no existe";
+    // } else {
+    // Profesor profesor = profesorRepository.findById(rut).get();
+    // Especialidad especialidad = especialidadRepository.findById(id).get();
+
+    // profesor.setEspecialidad(especialidad);
+    // profesorRepository.save(profesor);
+
+    // return "Especialidad: " + especialidad.getNombre() + " asignada al profesor:
+    // " + profesor.getNombre() + " "
+    // + profesor.getApellido();
+    // }
+    // }
+
 }

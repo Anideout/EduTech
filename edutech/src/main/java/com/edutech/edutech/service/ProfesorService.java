@@ -1,6 +1,8 @@
 package com.edutech.edutech.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,6 +71,35 @@ public class ProfesorService {
             return "Especialidad: " + especialidad.getNombre() + " asignada al profesor: " + profesor.getNombre() + " "
                     + profesor.getApellido();
         }
+    }
+
+    public String actualizarProfesor(String rut, Profesor profesorActualizado) {
+        Profesor profesor = profesorRepository.findByRut(rut);
+        if (profesor != null) {
+            profesor.setRut(profesorActualizado.getRut());
+            profesor.setNombre(profesorActualizado.getNombre());
+            profesor.setApellido(profesorActualizado.getApellido());
+            profesor.setDireccion(profesorActualizado.getDireccion());
+            profesor.setEspecialidad(profesorActualizado.getEspecialidad());
+            profesorRepository.save(profesor);
+            return "profesor actualizado con exito!";
+        } else {
+            return "rut del profesor no existe!";
+        }
+    }
+
+    // @DeleteMapping("/Personas/{rut}")
+    public Map<String, Boolean> eliminarProfesor(String rut) {
+        Profesor profesor = profesorRepository.findByRut(rut);
+        Map<String, Boolean> respuesta = new HashMap<>();
+        if (profesor != null) {
+            profesorRepository.delete(profesor);
+            respuesta.put("profesor eliminado", Boolean.TRUE);
+
+        } else {
+            respuesta.put("profesor no encontrado", Boolean.FALSE);
+        }
+        return respuesta;
     }
 
 }

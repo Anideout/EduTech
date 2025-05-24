@@ -10,6 +10,7 @@ import com.edutech.edutech.repository.AsistenciaRepository;
 
 @Service
 public class Asistenciaservice {
+
     @Autowired
     private AsistenciaRepository asistenciaRepository;
 

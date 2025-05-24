@@ -6,13 +6,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Evaluacion {
+public class Sede {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nombre;
 
-    public Evaluacion() {
+    public Sede() {
         this.id = 0;
         this.nombre = "";
     }

@@ -1,10 +1,9 @@
 package com.edutech.edutech.model;
 
-import java.util.List;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Curso {
@@ -15,8 +14,14 @@ public class Curso {
     private String estado;
     private int valor;
 
-    @ManyToMany(mappedBy = "cursos")
-    private List<Usuario> usuarios;
+    /*
+     * @ManyToMany(mappedBy = "cursos")
+     * private List<Usuario> usuarios;
+     */
+
+    @ManyToOne
+    @JoinColumn(name = "evaluacion_id")
+    private Evaluacion evaluacion;
 
     public Curso() {
         this.sigla = 0;
@@ -66,12 +71,21 @@ public class Curso {
         this.valor = valor;
     }
 
-    public List<Usuario> getUsuarios() {
-        return usuarios;
+    /*
+     * public List<Usuario> getUsuarios() {
+     * return usuarios;
+     * }
+     * 
+     * public void setUsuarios(List<Usuario> usuarios) {
+     * this.usuarios = usuarios;
+     * }
+     */
+
+    public Evaluacion getEvaluacion() {
+        return evaluacion;
     }
 
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
+    public void setEvaluacion(Evaluacion evaluacion) {
+        this.evaluacion = evaluacion;
     }
-
 }
