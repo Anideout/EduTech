@@ -12,6 +12,7 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class Notificacion {
     @Id
+    //asignar un id del 1
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String mensaje;
