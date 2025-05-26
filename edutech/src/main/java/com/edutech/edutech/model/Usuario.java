@@ -2,7 +2,7 @@ package com.edutech.edutech.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -17,13 +17,15 @@ public class Usuario {
     private String email;
     private String contrasena;
 
-    @OneToOne(mappedBy = "usuario")
+    @OneToOne
     @JoinColumn(name = "rut_persona", referencedColumnName = "rut")
-    @JsonBackReference
+    // jsonManagedReference va de la mano con jsonbackReference,
+    // para evitar bucles, es necesario cuando se tiene más de una relacion con el
+    // mismo nombre
+    @JsonManagedReference("usuario-persona")
     private Persona persona;
 
     // @ManyToMany
-
     // @JoinTable(name = "usuario_perfil", joinColumns = @JoinColumn(name =
     // "usuario_rut"), inverseJoinColumns = @JoinColumn(name = "perfil_tag"))
     // private List<Perfil> perfiles;
@@ -33,9 +35,12 @@ public class Usuario {
     // se elimine la asistencia. y orphan es para eliminar las asistencias si se
     // borran de la lista
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonBackReference
+    @JsonManagedReference("usuario-asistencia")
     private List<Asistencia> asistencia;
 
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("usuario-notificacion")
+    private List<Notificacion> notificacion;
     // @ManyToMany
 
     // @JoinTable(name = "alumno_curso", joinColumns = @JoinColumn(name =
@@ -79,20 +84,12 @@ public class Usuario {
         this.asistencia = asistencia;
     }
 
-    // public List<Curso> getCursos() {
-    // return cursos;
-    // }
+    public List<Notificacion> getNotificacion() {
+        return notificacion;
+    }
 
-    // public void setCursos(List<Curso> cursos) {
-    // this.cursos = cursos;
-    // }
-
-    // public List<Perfil> getPerfiles() {
-    // return perfiles;
-    // }
-
-    // public void setPerfiles(List<Perfil> perfiles) {
-    // this.perfiles = perfiles;
-    // }
+    public void setNotificacion(List<Notificacion> notificacion) {
+        this.notificacion = notificacion;
+    }
 
 }

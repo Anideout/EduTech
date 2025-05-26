@@ -1,8 +1,14 @@
 package com.edutech.edutech.model;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -17,6 +23,13 @@ public class Profesor {
     @ManyToOne
     @JoinColumn(name = "especialidad_id")
     private Especialidad especialidad;
+
+    @ManyToMany
+    @JoinTable(name = "profesor_curso", joinColumns = @JoinColumn(name = "profesor_rut", referencedColumnName = "rut"), inverseJoinColumns = @JoinColumn(name = "curso_sigla", referencedColumnName = "sigla")
+
+    )
+    @JsonBackReference("profesor_curso")
+    private List<Curso> cursos;
 
     public Profesor() {
         this.rut = "";
@@ -73,6 +86,14 @@ public class Profesor {
 
     public void setEspecialidad(Especialidad especialidad) {
         this.especialidad = especialidad;
+    }
+
+    public List<Curso> getCursos() {
+        return cursos;
+    }
+
+    public void setCursos(List<Curso> cursos) {
+        this.cursos = cursos;
     }
 
 }

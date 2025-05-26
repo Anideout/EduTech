@@ -19,9 +19,6 @@ public class Resenia {
         this.fecha = "";
     }
 
-    
-
-
     /**
      * @return int return the id
      */

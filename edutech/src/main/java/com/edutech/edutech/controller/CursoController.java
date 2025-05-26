@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.edutech.edutech.dto.CursoEvaluacionDto;
 import com.edutech.edutech.model.Curso;
 import com.edutech.edutech.service.CursoService;
 
@@ -33,4 +34,25 @@ public class CursoController {
     public List<Curso> buscar(@PathVariable String nombre) {
         return cursoService.buscar(nombre);
     }
+
+    @PostMapping("/asignar/{sigla}/{id}")
+    public String asignarEvaluacion(@PathVariable String sigla, @PathVariable int id) {
+        return cursoService.asignarEvaluacion(sigla, id);
+    }
+
+
+        //----------------------Asignaciones----------------------
+
+
+    @PostMapping("/asignar")
+    public String asignarEvaluacion(@RequestBody CursoEvaluacionDto dto) {
+        return cursoService.asignarEvaluacion(dto);
+    }
+
+    @PostMapping("/asignarProfesor/{sigla}/{rut}")
+    public String asignarProfesor(@PathVariable String sigla, @PathVariable String rut) {
+        return cursoService.AsignarProfesorCurso(sigla, rut);
+    }
+
+
 }

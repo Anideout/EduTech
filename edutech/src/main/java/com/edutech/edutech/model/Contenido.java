@@ -11,19 +11,23 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Evaluacion {
+public class Contenido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String nombre;
+    private String titulo;
+    private String descripcion;
+    private String estado;
 
-    @OneToMany(mappedBy = "evaluacion")
+    @OneToMany(mappedBy = "contenido")
     @JsonBackReference
     private List<Curso> cursos;
 
-    public Evaluacion() {
+    public Contenido() {
         this.id = 0;
-        this.nombre = "";
+        this.titulo = "";
+        this.descripcion = "";
+        this.estado = "";
     }
 
     public int getId() {
@@ -34,12 +38,28 @@ public class Evaluacion {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public List<Curso> getCursos() {

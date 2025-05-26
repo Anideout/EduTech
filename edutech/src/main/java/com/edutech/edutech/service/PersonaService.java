@@ -50,7 +50,7 @@ public class PersonaService {
         }
     }
 
-    // @DeleteMapping("/Personas/{rut}")
+    // @DeleteMapping("/eliminar/{rut}")
     public Map<String, Boolean> eliminarPersona(String rut) {
         Persona persona = personaRepository.findByRut(rut);
         Map<String, Boolean> respuesta = new HashMap<>();

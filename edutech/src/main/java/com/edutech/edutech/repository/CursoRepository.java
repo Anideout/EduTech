@@ -6,12 +6,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.edutech.edutech.model.Curso;
 
-public interface CursoRepository extends JpaRepository<Curso, Integer> {
+public interface CursoRepository extends JpaRepository<Curso, String> {
 
-    Curso findByNombre(String nombre);
+    Curso findBySigla(String sigla);
 
     List<Curso> findByNombreContaining(String nombre);
 
-    boolean existsBySigla(int sigla);
+    boolean existsBySigla(String sigla);
 
 }

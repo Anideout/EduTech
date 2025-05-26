@@ -6,4 +6,5 @@ import com.edutech.edutech.model.Evaluacion;
 
 public interface EvaluacionRepository extends JpaRepository<Evaluacion, Integer> {
 
+    Evaluacion findByNombre(String nombre);
 }

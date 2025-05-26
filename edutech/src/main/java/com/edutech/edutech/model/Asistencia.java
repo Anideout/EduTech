@@ -1,5 +1,7 @@
 package com.edutech.edutech.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,17 +14,18 @@ public class Asistencia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String nombreAsignatura;
+    private String nombre;
     private int porcentaje;
     private String fecha;
 
     @ManyToOne
-    @JoinColumn(name = "rut_usuario")
+    @JoinColumn(name = "usuario_email")
+    @JsonBackReference("usuario-asistencia")
     private Usuario usuario;
 
     public Asistencia() {
         this.id = 0;
-        this.nombreAsignatura = "";
+        this.nombre = "";
         this.porcentaje = 0;
         this.fecha = "";
     }
@@ -43,14 +46,6 @@ public class Asistencia {
         this.usuario = usuario;
     }
 
-    public String getNombreAsignatura() {
-        return nombreAsignatura;
-    }
-
-    public void setNombreAsignatura(String nombreAsignatura) {
-        this.nombreAsignatura = nombreAsignatura;
-    }
-
     public int getPorcentaje() {
         return porcentaje;
     }
@@ -65,6 +60,14 @@ public class Asistencia {
 
     public void setFecha(String fecha) {
         this.fecha = fecha;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
 }

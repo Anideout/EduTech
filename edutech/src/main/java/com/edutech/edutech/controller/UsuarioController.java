@@ -1,11 +1,14 @@
 package com.edutech.edutech.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,35 +39,27 @@ public class UsuarioController {
 
     @PostMapping("/asignar/{email}/{rut}")
     public String asignar(@PathVariable String email, @PathVariable String rut) {
-        return usuarioService.asignarPersona(email, rut);
+        return usuarioService.almacenarPersona(email, rut);
 
     }
-    // @GetMapping("/usuarios/{email}")
-    // public ResponseEntity<Usuario> verDatosUsuario(@PathVariable String email) {
-    // Usuario usuario = usuarioRepository.findByEmail(email)
-    // .orElseThrow(() -> new ResourceNotFoundException("usuario no encontrado"));
 
-    // return ResponseEntity.ok().body(usuario);
+    @PostMapping("/asistencia/{email}/{id}")
+    public String asignarAsistencia(@PathVariable String email, @PathVariable Integer id) {
+        return usuarioService.asignarAsistencia(email, id);
+    }
 
-    // }
+    @PostMapping("/notificacion/{email}/{id}")
+    public String asignarNotificacion(@PathVariable String email, @PathVariable Integer id) {
+        return usuarioService.asignarAsistencia(email, id);
+    }
 
-    // @PutMapping("/usuarios/{rut}")
-    // public ResponseEntity<Usuario> ActualizarUsuario(@PathVariable String email,
-    // @RequestBody Usuario usuarioActualizado) {
-    // Usuario usuario = usuarioRepository.findByEmail(email)
-    // .orElseThrow(() -> new ResourceNotFoundException("usuario no encontrado"));
-    // usuario.setEmail(usuarioActualizado.getEmail());
-    // return ResponseEntity.ok(usuarioActualizado);
-    // }
+    @PutMapping("/modificar/{email}")
+    public String modificar(@PathVariable String email, @RequestBody Usuario usuario) {
+        return usuarioService.ActualizarUsuario(email, usuario);
+    }
 
-    // @DeleteMapping("/usuarios/{email}")
-    // public Map<String, Boolean> eliminarUsuario(@PathVariable String email) {
-    // Usuario usuario = usuarioRepository.findByEmail(email)
-    // .orElseThrow(() -> new ResourceNotFoundException("usuario no encontrado"));
-    // usuarioRepository.delete(usuario);
-    // Map<String, Boolean> respuesta = new HashMap<>();
-    // respuesta.put("Usuario eliminado!", Boolean.TRUE);
-    // return respuesta;
-    // }
-
+    @DeleteMapping("/eliminar/{email}")
+    public Map<String, Boolean> eliminar(@PathVariable String email) {
+        return usuarioService.eliminarUsuario(email);
+    }
 }

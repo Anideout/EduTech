@@ -1,14 +1,19 @@
 package com.edutech.edutech.model;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Curso {
     @Id
-    private int sigla;
+    private String sigla;
     private String nombre;
     private String descripcion;
     private String estado;
@@ -19,24 +24,24 @@ public class Curso {
      * private List<Usuario> usuarios;
      */
 
+    @ManyToMany(mappedBy = "cursos")
+    @JsonManagedReference("profesor-curso")
+    private List<Profesor> profesores;
+
     @ManyToOne
     @JoinColumn(name = "evaluacion_id")
     private Evaluacion evaluacion;
 
+    @ManyToOne
+    @JoinColumn(name = "contenido_id")
+    private Contenido contenido;
+
     public Curso() {
-        this.sigla = 0;
+        this.sigla = "";
         this.nombre = "";
         this.descripcion = "";
         this.estado = "";
         this.valor = 0;
-    }
-
-    public int getSigla() {
-        return sigla;
-    }
-
-    public void setSigla(int sigla) {
-        this.sigla = sigla;
     }
 
     public String getNombre() {
@@ -88,4 +93,29 @@ public class Curso {
     public void setEvaluacion(Evaluacion evaluacion) {
         this.evaluacion = evaluacion;
     }
+
+    public String getSigla() {
+        return sigla;
+    }
+
+    public void setSigla(String sigla) {
+        this.sigla = sigla;
+    }
+
+    public Contenido getContenido() {
+        return contenido;
+    }
+
+    public void setContenido(Contenido contenido) {
+        this.contenido = contenido;
+    }
+
+    public List<Profesor> getProfesores() {
+        return profesores;
+    }
+
+    public void setProfesores(List<Profesor> profesores) {
+        this.profesores = profesores;
+    }
+
 }

@@ -11,6 +11,6 @@ public interface PersonaRepository extends JpaRepository<Persona, String> {
 
     List<Persona> findByNombreContaining(String nombre);
 
-    public boolean existsByRut(String rut);
+    boolean existsByRut(String rut);
 
 }

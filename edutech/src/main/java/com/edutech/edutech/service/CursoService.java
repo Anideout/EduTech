@@ -1,20 +1,32 @@
 package com.edutech.edutech.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.edutech.edutech.dto.CursoEvaluacionDto;
 import com.edutech.edutech.model.Curso;
+import com.edutech.edutech.model.Evaluacion;
+import com.edutech.edutech.model.Profesor;
 import com.edutech.edutech.repository.CursoRepository;
+import com.edutech.edutech.repository.EvaluacionRepository;
+import com.edutech.edutech.repository.ProfesorRepository;
 
 @Service
 public class CursoService {
     @Autowired
     private CursoRepository cursoRepository;
 
+    @Autowired
+    private ProfesorRepository profesorRepository;
+    @Autowired
+    private EvaluacionRepository evaluacionRepository;
+
     public String almacenar(Curso curso) {
-        Curso validacion = cursoRepository.findByNombre(curso.getNombre());
+        Curso validacion = cursoRepository.findBySigla(curso.getSigla());
         if (validacion != null) {
             return "El curso ya existe";
         } else {
@@ -31,22 +43,86 @@ public class CursoService {
         return cursoRepository.findByNombreContaining(nombre);
     }
 
-    // public String asignarEspecialidad(String sigla, int id) {
-    // if (!cursoRepository.existsBySigla(sigla)) {
-    // return "El curso ingresado no existe!";
-    // } else if (!evaluacionRepository.existsById(id)) {
-    // return "La especiadad no existe";
-    // } else {
-    // Profesor profesor = profesorRepository.findById(rut).get();
-    // Especialidad especialidad = especialidadRepository.findById(id).get();
+    public String actualizarCurso(String sigla, Curso cursoActualizado) {
+        Curso curso = cursoRepository.findBySigla(sigla);
+        if (curso != null) {
+            curso.setSigla(cursoActualizado.getSigla());
+            curso.setNombre(cursoActualizado.getNombre());
+            curso.setDescripcion(cursoActualizado.getDescripcion());
+            curso.setEstado(cursoActualizado.getEstado());
+            curso.setValor(cursoActualizado.getValor());
+            cursoRepository.save(curso);
+            return "sigla actualizado con exito!";
+        } else {
+            return "rut del sigla no existe!";
+        }
+    }
 
-    // profesor.setEspecialidad(especialidad);
-    // profesorRepository.save(profesor);
+    // @DeleteMapping("/Personas/{rut}")
+    public Map<String, Boolean> eliminarsigla(String sigla) {
+        Curso curso = cursoRepository.findBySigla(sigla);
+        Map<String, Boolean> respuesta = new HashMap<>();
+        if (curso != null) {
+            cursoRepository.delete(curso);
+            respuesta.put("sigla eliminado", Boolean.TRUE);
 
-    // return "Especialidad: " + especialidad.getNombre() + " asignada al profesor:
-    // " + profesor.getNombre() + " "
-    // + profesor.getApellido();
-    // }
-    // }
+        } else {
+            respuesta.put("sigla no encontrado", Boolean.FALSE);
+        }
+        return respuesta;
+    }
+
+    // ------------------ASIGNACIONES ----------------------------
+
+    public String asignarEvaluacion(String sigla, int id) {
+        if (!cursoRepository.existsBySigla(sigla)) {
+            return "El curso ingresado no existe!";
+        } else if (!evaluacionRepository.existsById(id)) {
+            return "La evaluacion no existe";
+        } else {
+            Curso curso = cursoRepository.findBySigla(sigla);
+            Evaluacion evaluacion = evaluacionRepository.findById(id).orElse(null);
+
+            curso.setEvaluacion(evaluacion);
+            cursoRepository.save(curso);
+
+            return "Evaluacion asignada correctamente al curso";
+        }
+    }
+
+    public String AsignarProfesorCurso(String sigla, String rut) {
+        if (!cursoRepository.existsBySigla(sigla)) {
+            return "el curso ingresado no existe";
+        } else if (!profesorRepository.existsById(rut)) {
+            return "el profesor ingresado no existe";
+        } else {
+            Curso curso = cursoRepository.findBySigla(sigla);
+            Profesor profesor = profesorRepository.findById(rut).orElse(null);
+
+            curso.getProfesores().add(profesor);
+            cursoRepository.save(curso);
+            
+            profesor.getCursos().add(curso);
+            profesorRepository.save(profesor);
+            return "Profesor asignado correctamente al curso";
+        }
+
+    }
+
+    public String asignarEvaluacion(CursoEvaluacionDto dto) {
+        if (!cursoRepository.existsBySigla(dto.getSigla())) {
+            return "El curso ingresado no existe!";
+        } else if (!evaluacionRepository.existsById(dto.getId())) {
+            return "La evaluacion no existe";
+        } else {
+            Curso curso = cursoRepository.findBySigla(dto.getSigla());
+            Evaluacion evaluacion = evaluacionRepository.findById(dto.getId()).orElse(null);
+
+            curso.setEvaluacion(evaluacion);
+            cursoRepository.save(curso);
+
+            return "Evaluacion asignada correctamente al curso";
+        }
+    }
 
 }
