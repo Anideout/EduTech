@@ -2,7 +2,9 @@ package com.edutech.edutech.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -11,6 +13,8 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "sigla")
+
 public class Curso {
     @Id
     private String sigla;
@@ -19,13 +23,9 @@ public class Curso {
     private String estado;
     private int valor;
 
-    /*
-     * @ManyToMany(mappedBy = "cursos")
-     * private List<Usuario> usuarios;
-     */
-
+    // ------------- RELACIONES ---------------------
     @ManyToMany(mappedBy = "cursos")
-    @JsonManagedReference("profesor-curso")
+    @JsonIgnore
     private List<Profesor> profesores;
 
     @ManyToOne
@@ -35,6 +35,9 @@ public class Curso {
     @ManyToOne
     @JoinColumn(name = "contenido_id")
     private Contenido contenido;
+
+    @ManyToMany(mappedBy = "cursos")
+    private List<Usuario> usuarios;
 
     public Curso() {
         this.sigla = "";
@@ -76,16 +79,6 @@ public class Curso {
         this.valor = valor;
     }
 
-    /*
-     * public List<Usuario> getUsuarios() {
-     * return usuarios;
-     * }
-     * 
-     * public void setUsuarios(List<Usuario> usuarios) {
-     * this.usuarios = usuarios;
-     * }
-     */
-
     public Evaluacion getEvaluacion() {
         return evaluacion;
     }
@@ -116,6 +109,14 @@ public class Curso {
 
     public void setProfesores(List<Profesor> profesores) {
         this.profesores = profesores;
+    }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 
 }

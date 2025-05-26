@@ -15,7 +15,7 @@ public class ReseniaService {
 
     public String almacenar(Resenia resenia) {
         reseniaRepository.save(resenia);
-        return "resenia guardad con exito!";
+        return "resenia guardada con exito!";
     }
 
     public List<Resenia> listar() {

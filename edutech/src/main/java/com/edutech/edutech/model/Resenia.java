@@ -1,9 +1,12 @@
 package com.edutech.edutech.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Resenia {
@@ -12,6 +15,10 @@ public class Resenia {
     private int id;
     private String descripcion;
     private String fecha;
+
+    @OneToOne(mappedBy = "resenia")
+    @JsonBackReference("usuario-resenia")
+    private Usuario usuario;
 
     public Resenia() {
         this.id = 0;
@@ -59,6 +66,14 @@ public class Resenia {
      */
     public void setFecha(String fecha) {
         this.fecha = fecha;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
 }

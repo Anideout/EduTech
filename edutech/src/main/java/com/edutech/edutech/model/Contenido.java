@@ -2,7 +2,7 @@ package com.edutech.edutech.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,7 +20,7 @@ public class Contenido {
     private String estado;
 
     @OneToMany(mappedBy = "contenido")
-    @JsonBackReference
+    @JsonIgnore
     private List<Curso> cursos;
 
     public Contenido() {

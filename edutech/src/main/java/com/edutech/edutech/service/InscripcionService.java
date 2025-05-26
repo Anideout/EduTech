@@ -13,17 +13,11 @@ public class InscripcionService {
     @Autowired
     private InscripcionRepository inscripcionRepository;
 
-    /*
-     * public String almacenar(Inscripcion inscripcion) {
-     * Inscripcion validacion = inscripcionRepository.findById(id);
-     * if (validacion != null) {
-     * return "Inscripcion ya existe";
-     * } else {
-     * inscripcionRepository.save(inscripcion);
-     * return "Inscripcion guardada";
-     * }
-     * }
-     */
+    public String almacenar(Inscripcion inscripcion) {
+        inscripcionRepository.save(inscripcion);
+        return "Inscripcion almacenada";
+    }
+
     public List<Inscripcion> listar() {
         return inscripcionRepository.findAll();
     }

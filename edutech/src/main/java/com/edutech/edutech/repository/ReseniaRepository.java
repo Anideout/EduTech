@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.edutech.edutech.model.Resenia;
 
-public interface ReseniaRepository extends JpaRepository<Resenia, Integer>{
-    
+public interface ReseniaRepository extends JpaRepository<Resenia, Integer> {
+
 }

@@ -19,7 +19,7 @@ public class ReseniaController {
     private ReseniaService reseniaService;
 
     @PostMapping
-    public String listar(@RequestBody Resenia resenia) {
+    public String almacenar(@RequestBody Resenia resenia) {
         return reseniaService.almacenar(resenia);
     }
 

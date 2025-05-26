@@ -33,7 +33,7 @@ public class ContenidoService {
         return contenidoRepository.findByTituloContaining(titulo);
     }
 
-    public String actualizarcontenido(int id, Contenido contenidoActualizado) {
+    public String actualizarContenido(int id, Contenido contenidoActualizado) {
         Contenido contenido = contenidoRepository.findById(id);
         if (contenido != null) {
             contenido.setId(contenidoActualizado.getId());

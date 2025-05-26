@@ -8,12 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.edutech.edutech.dto.CursoEvaluacionDto;
+import com.edutech.edutech.model.Contenido;
 import com.edutech.edutech.model.Curso;
 import com.edutech.edutech.model.Evaluacion;
 import com.edutech.edutech.model.Profesor;
+import com.edutech.edutech.model.Usuario;
+import com.edutech.edutech.repository.ContenidoRepository;
 import com.edutech.edutech.repository.CursoRepository;
 import com.edutech.edutech.repository.EvaluacionRepository;
 import com.edutech.edutech.repository.ProfesorRepository;
+import com.edutech.edutech.repository.UsuarioRepository;
 
 @Service
 public class CursoService {
@@ -21,9 +25,14 @@ public class CursoService {
     private CursoRepository cursoRepository;
 
     @Autowired
+    private UsuarioRepository usuarioRepository;
+    @Autowired
     private ProfesorRepository profesorRepository;
     @Autowired
     private EvaluacionRepository evaluacionRepository;
+
+    @Autowired
+    private ContenidoRepository contenidoRepository;
 
     public String almacenar(Curso curso) {
         Curso validacion = cursoRepository.findBySigla(curso.getSigla());
@@ -90,6 +99,22 @@ public class CursoService {
         }
     }
 
+    public String asignarContenido(String sigla, int id) {
+        if (!cursoRepository.existsBySigla(sigla)) {
+            return "El curso ingresado no existe!";
+        } else if (!evaluacionRepository.existsById(id)) {
+            return "La evaluacion no existe";
+        } else {
+            Curso curso = cursoRepository.findBySigla(sigla);
+            Contenido contenido = contenidoRepository.findById(id);
+
+            curso.setContenido(contenido);
+            cursoRepository.save(curso);
+
+            return "Cotneido asignado correctamente al curso";
+        }
+    }
+
     public String AsignarProfesorCurso(String sigla, String rut) {
         if (!cursoRepository.existsBySigla(sigla)) {
             return "el curso ingresado no existe";
@@ -101,10 +126,30 @@ public class CursoService {
 
             curso.getProfesores().add(profesor);
             cursoRepository.save(curso);
-            
+
             profesor.getCursos().add(curso);
             profesorRepository.save(profesor);
             return "Profesor asignado correctamente al curso";
+        }
+
+    }
+
+    public String AsignarUsuarioCurso(String sigla, String email) {
+        if (!cursoRepository.existsBySigla(sigla)) {
+            return "el curso ingresado no existe";
+        } else if (!usuarioRepository.existsByEmail(email)) {
+            return "el usuario ingresado no existe";
+        } else {
+            // si aseguramos que ambos existen, entonces asignamos el usuario al curso
+            Curso curso = cursoRepository.findBySigla(sigla);
+            Usuario usuario = usuarioRepository.findByEmail(email);
+
+            curso.getUsuarios().add(usuario);
+            cursoRepository.save(curso);
+
+            usuario.getCursos().add(curso);
+            usuarioRepository.save(usuario);
+            return "usuario asignado correctamente al curso";
         }
 
     }

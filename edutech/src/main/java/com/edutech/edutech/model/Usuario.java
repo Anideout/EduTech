@@ -2,12 +2,15 @@ package com.edutech.edutech.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
@@ -19,17 +22,17 @@ public class Usuario {
 
     @OneToOne
     @JoinColumn(name = "rut_persona", referencedColumnName = "rut")
-    // jsonManagedReference va de la mano con jsonbackReference,
+    // jsonManagedReference va en la entidad padre de la relación. de la mano con
+    // jsonbackReference,
     // para evitar bucles, es necesario cuando se tiene más de una relacion con el
     // mismo nombre
     @JsonManagedReference("usuario-persona")
     private Persona persona;
 
-    // @ManyToMany
-    // @JoinTable(name = "usuario_perfil", joinColumns = @JoinColumn(name =
-    // "usuario_rut"), inverseJoinColumns = @JoinColumn(name = "perfil_tag"))
-    // private List<Perfil> perfiles;
-
+    @OneToOne
+    @JoinColumn(name = "id_resenia", referencedColumnName = "id")
+    @JsonManagedReference("usuario-resenia")
+    private Resenia resenia;
     // mapped hace referencia al atributo usuario en la clase asistencia,
     // cascade hace que al eliminar un usuario,
     // se elimine la asistencia. y orphan es para eliminar las asistencias si se
@@ -41,11 +44,15 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference("usuario-notificacion")
     private List<Notificacion> notificacion;
-    // @ManyToMany
 
-    // @JoinTable(name = "alumno_curso", joinColumns = @JoinColumn(name =
-    // "usuario_rut"), inverseJoinColumns = @JoinColumn(name = "curso_sigla"))
-    // private List<Curso> cursos;
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference("usuario-inscripcion")
+    private List<Inscripcion> inscripcion;
+
+    @ManyToMany
+    @JoinTable(name = "usuario_curso", joinColumns = @JoinColumn(name = "usuario_email"), inverseJoinColumns = @JoinColumn(name = "curso_sigla"))
+    @JsonIgnore
+    private List<Curso> cursos;
 
     public Usuario() {
         this.email = "";
@@ -90,6 +97,30 @@ public class Usuario {
 
     public void setNotificacion(List<Notificacion> notificacion) {
         this.notificacion = notificacion;
+    }
+
+    public List<Curso> getCursos() {
+        return cursos;
+    }
+
+    public void setCursos(List<Curso> cursos) {
+        this.cursos = cursos;
+    }
+
+    public Resenia getResenia() {
+        return resenia;
+    }
+
+    public void setResenia(Resenia resenia) {
+        this.resenia = resenia;
+    }
+
+    public List<Inscripcion> getInscripcion() {
+        return inscripcion;
+    }
+
+    public void setInscripcion(List<Inscripcion> inscripcion) {
+        this.inscripcion = inscripcion;
     }
 
 }

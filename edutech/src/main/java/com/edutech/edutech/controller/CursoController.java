@@ -40,9 +40,7 @@ public class CursoController {
         return cursoService.asignarEvaluacion(sigla, id);
     }
 
-
-        //----------------------Asignaciones----------------------
-
+    // ----------------------Asignaciones----------------------
 
     @PostMapping("/asignar")
     public String asignarEvaluacion(@RequestBody CursoEvaluacionDto dto) {
@@ -54,5 +52,14 @@ public class CursoController {
         return cursoService.AsignarProfesorCurso(sigla, rut);
     }
 
+    @PostMapping("/asignarUsuario/{sigla}/{email}")
+    public String asignarUsuario(@PathVariable String sigla, @PathVariable String email) {
+        return cursoService.AsignarUsuarioCurso(sigla, email);
+    }
+
+    @PostMapping("/asignarContenido/{sigla}/{id}")
+    public String asignarContenido(@PathVariable String sigla, @PathVariable int id) {
+        return cursoService.asignarContenido(sigla, id);
+    }
 
 }

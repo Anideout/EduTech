@@ -43,16 +43,6 @@ public class UsuarioController {
 
     }
 
-    @PostMapping("/asistencia/{email}/{id}")
-    public String asignarAsistencia(@PathVariable String email, @PathVariable Integer id) {
-        return usuarioService.asignarAsistencia(email, id);
-    }
-
-    @PostMapping("/notificacion/{email}/{id}")
-    public String asignarNotificacion(@PathVariable String email, @PathVariable Integer id) {
-        return usuarioService.asignarAsistencia(email, id);
-    }
-
     @PutMapping("/modificar/{email}")
     public String modificar(@PathVariable String email, @RequestBody Usuario usuario) {
         return usuarioService.ActualizarUsuario(email, usuario);
@@ -61,5 +51,26 @@ public class UsuarioController {
     @DeleteMapping("/eliminar/{email}")
     public Map<String, Boolean> eliminar(@PathVariable String email) {
         return usuarioService.eliminarUsuario(email);
+    }
+
+    // -------------------ASIGNACIONES--------------------------
+    @PostMapping("/asistencia/{email}/{id}")
+    public String asignarAsistencia(@PathVariable String email, @PathVariable Integer id) {
+        return usuarioService.asignarAsistencia(email, id);
+    }
+
+    @PostMapping("/notificacion/{email}/{id}")
+    public String asignarNotificacion(@PathVariable String email, @PathVariable Integer id) {
+        return usuarioService.asignarNotificacion(email, id);
+    }
+
+    @PostMapping("/resenia/{email}/{id}")
+    public String asignarResenia(@PathVariable String email, @PathVariable int id) {
+        return usuarioService.almacenarResenia(email, id);
+    }
+
+    @PostMapping("/inscripcion/{email}/{id}")
+    public String asignarInscripcion(@PathVariable String email, @PathVariable Integer id) {
+        return usuarioService.asignarInscripcion(email, id);
     }
 }
