@@ -67,8 +67,8 @@ public class CursoService {
         }
     }
 
-    // @DeleteMapping("/Personas/{rut}")
-    public Map<String, Boolean> eliminarsigla(String sigla) {
+    // @DeleteMapping("/eliminarCurso/{rut}")
+    public Map<String, Boolean> eliminarCurso(String sigla) {
         Curso curso = cursoRepository.findBySigla(sigla);
         Map<String, Boolean> respuesta = new HashMap<>();
         if (curso != null) {

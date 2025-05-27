@@ -18,6 +18,7 @@ public class Inscripcion {
     private String estado;
     private String fechaIngreso;
 
+    
     @ManyToOne
     @JoinColumn(name = "usuario_email")
     @JsonBackReference("usuario_inscripcion")

@@ -37,12 +37,7 @@ public class UsuarioController {
         return usuarioService.buscar(email);
     }
 
-    @PostMapping("/asignar/{email}/{rut}")
-    public String asignar(@PathVariable String email, @PathVariable String rut) {
-        return usuarioService.almacenarPersona(email, rut);
-
-    }
-
+   
     @PutMapping("/modificar/{email}")
     public String modificar(@PathVariable String email, @RequestBody Usuario usuario) {
         return usuarioService.ActualizarUsuario(email, usuario);
@@ -54,6 +49,13 @@ public class UsuarioController {
     }
 
     // -------------------ASIGNACIONES--------------------------
+    
+    @PostMapping("/asignar/{email}/{rut}")
+    public String asignarPersona(@PathVariable String email, @PathVariable String rut) {
+        return usuarioService.almacenarPersona(email, rut);
+
+    }
+
     @PostMapping("/asistencia/{email}/{id}")
     public String asignarAsistencia(@PathVariable String email, @PathVariable Integer id) {
         return usuarioService.asignarAsistencia(email, id);

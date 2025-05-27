@@ -2,8 +2,8 @@ package com.edutech.edutech.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -14,6 +14,8 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "email")
 @Entity
 public class Usuario {
     @Id
@@ -22,36 +24,27 @@ public class Usuario {
 
     @OneToOne
     @JoinColumn(name = "rut_persona", referencedColumnName = "rut")
-    // jsonManagedReference va en la entidad padre de la relación. de la mano con
-    // jsonbackReference,
-    // para evitar bucles, es necesario cuando se tiene más de una relacion con el
-    // mismo nombre
-    @JsonManagedReference("usuario-persona")
+
     private Persona persona;
 
     @OneToOne
     @JoinColumn(name = "id_resenia", referencedColumnName = "id")
-    @JsonManagedReference("usuario-resenia")
     private Resenia resenia;
     // mapped hace referencia al atributo usuario en la clase asistencia,
     // cascade hace que al eliminar un usuario,
     // se elimine la asistencia. y orphan es para eliminar las asistencias si se
     // borran de la lista
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference("usuario-asistencia")
     private List<Asistencia> asistencia;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference("usuario-notificacion")
     private List<Notificacion> notificacion;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference("usuario-inscripcion")
     private List<Inscripcion> inscripcion;
 
     @ManyToMany
     @JoinTable(name = "usuario_curso", joinColumns = @JoinColumn(name = "usuario_email"), inverseJoinColumns = @JoinColumn(name = "curso_sigla"))
-    @JsonIgnore
     private List<Curso> cursos;
 
     public Usuario() {

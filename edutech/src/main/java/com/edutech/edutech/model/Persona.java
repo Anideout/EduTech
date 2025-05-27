@@ -1,12 +1,15 @@
 package com.edutech.edutech.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "rut")
 public class Persona {
     @Id
     private String rut;
@@ -15,7 +18,7 @@ public class Persona {
     private String direccion;
 
     @OneToOne(mappedBy = "persona")
-    @JsonBackReference("usuario-persona")
+    @JsonIgnore
     private Usuario usuario;
 
     public Persona() {
