@@ -62,7 +62,7 @@ public class AdministradorService {
     }
 
     // Asignar rol a administrador
-    public String asignarRol(String Rut, Long Id) {
+    public String asignarRol(String Rut, int Id) {
         Administrador admin = administradorRepository.findByRut(Rut);
         Rol rol = rolRepository.findById(Id).orElse(null);
         if (admin == null || rol == null) {
