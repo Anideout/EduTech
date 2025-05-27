@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
@@ -26,7 +27,10 @@ public class Usuario {
     @JoinColumn(name = "rut_persona", referencedColumnName = "rut")
 
     private Persona persona;
-
+    @ManyToOne
+    @JoinColumn(name = "rol_id")
+    private Rol rol;
+    
     @OneToOne
     @JoinColumn(name = "id_resenia", referencedColumnName = "id")
     private Resenia resenia;
@@ -114,6 +118,21 @@ public class Usuario {
 
     public void setInscripcion(List<Inscripcion> inscripcion) {
         this.inscripcion = inscripcion;
+    }
+
+
+    /**
+     * @return Rol return the rol
+     */
+    public Rol getRol() {
+        return rol;
+    }
+
+    /**
+     * @param rol the rol to set
+     */
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 
 }

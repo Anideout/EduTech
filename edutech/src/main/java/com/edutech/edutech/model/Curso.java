@@ -3,7 +3,6 @@ package com.edutech.edutech.model;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Entity;
@@ -25,7 +24,6 @@ public class Curso {
 
     // ------------- RELACIONES ---------------------
     @ManyToMany(mappedBy = "cursos")
-    @JsonIgnore
     private List<Profesor> profesores;
 
     @ManyToOne

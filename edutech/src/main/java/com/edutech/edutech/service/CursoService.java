@@ -72,6 +72,21 @@ public class CursoService {
         Curso curso = cursoRepository.findBySigla(sigla);
         Map<String, Boolean> respuesta = new HashMap<>();
         if (curso != null) {
+            //elimina las relaciones entre curso y profesor
+            //en la lista de profesores del curso
+            for(Profesor profesor: curso.getProfesores()) {
+                profesor.getCursos().remove(curso);
+                profesorRepository.save(profesor);
+            }
+            curso.getProfesores().clear();
+            for(Usuario usuario : curso.getUsuarios()) {
+                usuario.getCursos().remove(curso);
+                usuarioRepository.save(usuario);
+            }
+            //elimina las relaciones entre curso y usuario
+            curso.getUsuarios().clear();
+            
+            cursoRepository.save(curso);
             cursoRepository.delete(curso);
             respuesta.put("sigla eliminado", Boolean.TRUE);
 

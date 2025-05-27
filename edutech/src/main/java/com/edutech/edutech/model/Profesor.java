@@ -22,6 +22,10 @@ public class Profesor {
     private String apellido;
     private String direccion;
     private String contrasena;
+    
+    @ManyToOne
+    @JoinColumn(name = "rol_id")
+    private Rol rol;
 
     @ManyToOne
     @JoinColumn(name = "especialidad_id")
@@ -107,6 +111,21 @@ public class Profesor {
 
     public void setSedes(List<Sede> sedes) {
         this.sedes = sedes;
+    }
+
+
+    /**
+     * @return Rol return the rol
+     */
+    public Rol getRol() {
+        return rol;
+    }
+
+    /**
+     * @param rol the rol to set
+     */
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 
 }

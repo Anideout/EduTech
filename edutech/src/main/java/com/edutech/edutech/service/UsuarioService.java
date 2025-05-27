@@ -11,12 +11,14 @@ import org.springframework.stereotype.Service;
 
 import com.edutech.edutech.dto.UsuarioDto;
 import com.edutech.edutech.model.Asistencia;
+import com.edutech.edutech.model.Curso;
 import com.edutech.edutech.model.Inscripcion;
 import com.edutech.edutech.model.Notificacion;
 import com.edutech.edutech.model.Persona;
 import com.edutech.edutech.model.Resenia;
 import com.edutech.edutech.model.Usuario;
 import com.edutech.edutech.repository.AsistenciaRepository;
+import com.edutech.edutech.repository.CursoRepository;
 import com.edutech.edutech.repository.InscripcionRepository;
 import com.edutech.edutech.repository.NotificacionRepository;
 import com.edutech.edutech.repository.PersonaRepository;
@@ -43,6 +45,8 @@ public class UsuarioService {
     @Autowired
     private InscripcionRepository inscripcionRepository;
 
+    @Autowired
+    private CursoRepository cursoRepository;
     public String almacenar(Usuario usuario) {
         Usuario validacion = usuarioRepository.findByEmail(usuario.getEmail());
         if (validacion != null) {
@@ -84,24 +88,25 @@ public class UsuarioService {
 
     }
 
-    public Map<String, Boolean> eliminarUsuario(String email) {
-        Usuario usuario = usuarioRepository.findByEmail(email);
-        Map<String, Boolean> respuesta = new HashMap<>();
-        if (usuario != null) {
-            // if para desvincular el usuario de la persona asignada
-            if (usuario.getPersona() != null) {
-                Persona persona = usuario.getPersona();
-                persona.setUsuario(null);// desvincula la relacion en persona
-                personaRepository.save(persona);
-                usuario.setPersona(null);// desvincula la relacion en usuario
-            }
-            usuarioRepository.delete(usuario);
-            respuesta.put("usuario eliminado con exito!", Boolean.TRUE);
-        } else {
-            respuesta.put("usuario no encontrado....", Boolean.FALSE);
+   public Map<String, Boolean> eliminarUsuario(String email) {
+    Usuario usuario = usuarioRepository.findByEmail(email);
+    Map<String, Boolean> respuesta = new HashMap<>();
+    if (usuario != null) {
+        // Elimina la relación en ambos lados con cursos
+        for (Curso curso : usuario.getCursos()) {
+            curso.getUsuarios().remove(usuario);
+            cursoRepository.save(curso);
         }
-        return respuesta;
+        usuario.getCursos().clear();
+
+        usuarioRepository.save(usuario);
+        usuarioRepository.delete(usuario);
+        respuesta.put("usuario eliminado", Boolean.TRUE);
+    } else {
+        respuesta.put("usuario no encontrado", Boolean.FALSE);
     }
+    return respuesta;
+}
 
     public String almacenarPersona(String email, String rut) {
         Usuario usuario = usuarioRepository.findByEmail(email);
