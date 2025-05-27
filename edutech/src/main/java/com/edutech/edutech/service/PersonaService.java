@@ -37,7 +37,6 @@ public class PersonaService {
     public String actualizarPersona(String rut, Persona personaActualizada) {
         Persona persona = personaRepository.findByRut(rut);
         if (persona != null) {
-            persona.setRut(personaActualizada.getRut());
             persona.setNombre(personaActualizada.getNombre());
             persona.setApellido(personaActualizada.getApellido());
             persona.setDireccion(personaActualizada.getDireccion());

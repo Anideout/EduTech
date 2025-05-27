@@ -32,7 +32,7 @@ public class SedeController {
         return sedeService.listar();
     }
 
-    @PutMapping("/modificar({id})")
+    @PutMapping("/modificar/{id}")
     public String modificar(@PathVariable int id, @RequestBody Sede sede) {
         return sedeService.modificar(id, sede);
     }
@@ -45,6 +45,11 @@ public class SedeController {
     @PostMapping("/profesor/{id}/{rut}")
     public String asignaProfesor(@PathVariable int id, @PathVariable String rut) {
         return sedeService.asignarProfesorSede(id, rut);
+    }
+
+    @PostMapping("/admin/{id}/{rut}")
+    public String asignarAdmin(@PathVariable int id, @PathVariable String rut) {
+        return sedeService.asignarSedeAdministrador(id, rut);
     }
 
 }

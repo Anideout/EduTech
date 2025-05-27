@@ -58,19 +58,19 @@ public class SedeService {
     public String asignarSedeAdministrador(int id, String rut) {
         if (!sedeRepository.existsById(id)) {
             return "La sede ingresada no existe";
-        } else if (!profesorRepository.existsByRut(rut)) {
+        } else if (!administradorRepository.existsByRut(rut)) {
             return "El administrador ingresado no existe";
-        } else {
-            Sede sede = sedeRepository.findById(id).orElse(null);
-            Administrador administrador = administradorRepository.findByRut(rut);
+        } 
+        Sede sede = sedeRepository.findById(id).orElse(null);
+        Administrador administrador = administradorRepository.findByRut(rut);
 
-            sede.setAdministrador(administrador);
-            sedeRepository.save(sede);
+        sede.setAdministrador(administrador);
+        sedeRepository.save(sede);
 
-            administrador.setSede(sede);
-            administradorRepository.save(administrador);
-            return "Administrador asignado correctamente a la sede";
-        }
+        administrador.setSede(sede);
+        administradorRepository.save(administrador);
+        return "Administrador asignado correctamente a la sede";
+        
     }
 
     public String modificar(int id, Sede sedeActualizado) {

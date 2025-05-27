@@ -21,4 +21,24 @@ public class ReseniaService {
     public List<Resenia> listar() {
         return reseniaRepository.findAll();
     }
+
+    public String modificar (int id, Resenia reseniaModificada) {
+        Resenia resenia = reseniaRepository.findById(id).orElse(null);
+        if(resenia == null) {
+            return "resenia no encontrada";
+        }
+        resenia.setDescripcion(reseniaModificada.getDescripcion());
+        resenia.setFecha(reseniaModificada.getFecha());
+        reseniaRepository.save(resenia);
+        return "Reseña guardada con exito!";
+    }
+
+    public String eliminar(int id) {
+         Resenia resenia = reseniaRepository.findById(id).orElse(null);
+         if(resenia == null) {
+            return "reseña no encontrada";
+         }
+         reseniaRepository.delete(resenia);
+         return "Reseña eliminada con exito!";
+    }
 }

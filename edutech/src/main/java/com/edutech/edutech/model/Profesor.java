@@ -3,6 +3,7 @@ package com.edutech.edutech.model;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Entity;
@@ -12,9 +13,8 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
-@Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "rut")
-
+@Entity
 public class Profesor {
     @Id
     private String rut;
@@ -32,12 +32,17 @@ public class Profesor {
     private Especialidad especialidad;
 
     @ManyToMany
+    @JsonIgnore
     @JoinTable(name = "sede_profesor", joinColumns = @JoinColumn(name = "profesor_rut", referencedColumnName = "rut"), inverseJoinColumns = @JoinColumn(name = "sede_id", referencedColumnName = "id"))
 
     private List<Sede> sedes;
 
     @ManyToMany
-    @JoinTable(name = "profesor_curso", joinColumns = @JoinColumn(name = "profesor_rut", referencedColumnName = "rut"), inverseJoinColumns = @JoinColumn(name = "curso_sigla", referencedColumnName = "sigla"))
+    @JoinTable(
+        name = "profesor_curso",
+        joinColumns = @JoinColumn(name = "profesor_rut", referencedColumnName = "rut"),
+        inverseJoinColumns = @JoinColumn(name = "curso_sigla", referencedColumnName = "sigla")
+    )
     private List<Curso> cursos;
 
     public Profesor() {

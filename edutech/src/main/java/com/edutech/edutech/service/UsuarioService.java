@@ -56,11 +56,11 @@ public class UsuarioService {
             return "usuario " + usuario.getEmail() + " almacenada con exito";
         }
     }
-
+    //listar
     public List<Usuario> listar() {
         return usuarioRepository.findAll();
     }
-
+    //buscar por email
     public List<Usuario> buscar(String email) {
         return usuarioRepository.findByEmailContaining(email);
     }
@@ -76,7 +76,6 @@ public class UsuarioService {
     public String modificarUsuario(String email, Usuario usuarioActualizado) {
         Usuario usuario = usuarioRepository.findByEmail(email);
         if (usuario != null) {
-            usuario.setEmail(usuarioActualizado.getEmail());
             usuario.setContrasena(usuarioActualizado.getContrasena());
             usuario.setPersona(usuarioActualizado.getPersona());
 
@@ -189,4 +188,6 @@ public class UsuarioService {
         return "Inscripcion asignada correctamente al usuario";
     }
 
+    //-------------------- DTO --------------------
+   
 }

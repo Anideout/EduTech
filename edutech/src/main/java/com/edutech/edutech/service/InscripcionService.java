@@ -22,4 +22,25 @@ public class InscripcionService {
         return inscripcionRepository.findAll();
     }
 
+
+    public String modificar(int id, Inscripcion inscripcionModificada) {
+        Inscripcion inscripcion = inscripcionRepository.findById(id).orElse(null);
+        if(inscripcion == null) {
+            return "inscripcion no encontrada";
+        }
+        inscripcion.setNombre(inscripcionModificada.getNombre());
+        inscripcion.setEstado(inscripcionModificada.getEstado());
+        inscripcion.setFechaIngreso(inscripcionModificada.getFechaIngreso());
+        inscripcionRepository.save(inscripcion);
+        return "Inscripcion modificada con exito";
+    }
+
+    public String eliminar(int id) {
+        Inscripcion inscripcion = inscripcionRepository.findById(id).orElse(null);
+        if(inscripcion == null) {
+            return "inscripcion no encontrada";
+        }
+        inscripcionRepository.delete(inscripcion);
+        return "inscripcion eliminada con exito!";
+    }
 }

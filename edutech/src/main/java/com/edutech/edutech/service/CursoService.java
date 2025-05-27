@@ -61,9 +61,9 @@ public class CursoService {
             curso.setEstado(cursoActualizado.getEstado());
             curso.setValor(cursoActualizado.getValor());
             cursoRepository.save(curso);
-            return "sigla actualizado con exito!";
+            return "Curso actualizado con exito!";
         } else {
-            return "rut del sigla no existe!";
+            return "Curso no existe!";
         }
     }
 
@@ -88,10 +88,10 @@ public class CursoService {
             
             cursoRepository.save(curso);
             cursoRepository.delete(curso);
-            respuesta.put("sigla eliminado", Boolean.TRUE);
+            respuesta.put("Curso eliminado", Boolean.TRUE);
 
         } else {
-            respuesta.put("sigla no encontrado", Boolean.FALSE);
+            respuesta.put("Curso no encontrado", Boolean.FALSE);
         }
         return respuesta;
     }
@@ -103,15 +103,15 @@ public class CursoService {
             return "El curso ingresado no existe!";
         } else if (!evaluacionRepository.existsById(id)) {
             return "La evaluacion no existe";
-        } else {
-            Curso curso = cursoRepository.findBySigla(sigla);
-            Evaluacion evaluacion = evaluacionRepository.findById(id).orElse(null);
+        } 
+        Curso curso = cursoRepository.findBySigla(sigla);
+        Evaluacion evaluacion = evaluacionRepository.findById(id).orElse(null);
 
-            curso.setEvaluacion(evaluacion);
-            cursoRepository.save(curso);
+        curso.setEvaluacion(evaluacion);
+        cursoRepository.save(curso);
 
-            return "Evaluacion asignada correctamente al curso";
-        }
+        return "Evaluacion asignada correctamente al curso";
+        
     }
 
     public String asignarContenido(String sigla, int id) {
@@ -119,15 +119,17 @@ public class CursoService {
             return "El curso ingresado no existe!";
         } else if (!evaluacionRepository.existsById(id)) {
             return "La evaluacion no existe";
-        } else {
-            Curso curso = cursoRepository.findBySigla(sigla);
-            Contenido contenido = contenidoRepository.findById(id);
-
-            curso.setContenido(contenido);
-            cursoRepository.save(curso);
-
-            return "Cotneido asignado correctamente al curso";
+        } 
+        Curso curso = cursoRepository.findBySigla(sigla);
+        Contenido contenido = contenidoRepository.findById(id);
+        if(contenido == null ) {
+            return "el contenido no existe";
         }
+        curso.setContenido(contenido);
+        cursoRepository.save(curso);
+
+        return "Contenido asignado correctamente al curso";
+    
     }
 
     public String AsignarProfesorCurso(String sigla, String rut) {
@@ -135,17 +137,17 @@ public class CursoService {
             return "el curso ingresado no existe";
         } else if (!profesorRepository.existsById(rut)) {
             return "el profesor ingresado no existe";
-        } else {
-            Curso curso = cursoRepository.findBySigla(sigla);
-            Profesor profesor = profesorRepository.findById(rut).orElse(null);
-
-            curso.getProfesores().add(profesor);
-            cursoRepository.save(curso);
-
-            profesor.getCursos().add(curso);
-            profesorRepository.save(profesor);
-            return "Profesor asignado correctamente al curso";
         }
+        Curso curso = cursoRepository.findBySigla(sigla);
+        Profesor profesor = profesorRepository.findById(rut).orElse(null);
+
+        curso.getProfesores().add(profesor);
+        cursoRepository.save(curso);
+
+        profesor.getCursos().add(curso);
+        profesorRepository.save(profesor);
+        return "Profesor asignado correctamente al curso";
+        
 
     }
 
@@ -154,18 +156,18 @@ public class CursoService {
             return "el curso ingresado no existe";
         } else if (!usuarioRepository.existsByEmail(email)) {
             return "el usuario ingresado no existe";
-        } else {
-            // si aseguramos que ambos existen, entonces asignamos el usuario al curso
-            Curso curso = cursoRepository.findBySigla(sigla);
-            Usuario usuario = usuarioRepository.findByEmail(email);
+        } 
+        // si aseguramos que ambos existen, entonces asignamos el usuario al curso
+        Curso curso = cursoRepository.findBySigla(sigla);
+        Usuario usuario = usuarioRepository.findByEmail(email);
 
-            curso.getUsuarios().add(usuario);
-            cursoRepository.save(curso);
+        curso.getUsuarios().add(usuario);
+        cursoRepository.save(curso);
 
-            usuario.getCursos().add(curso);
-            usuarioRepository.save(usuario);
-            return "usuario asignado correctamente al curso";
-        }
+        usuario.getCursos().add(curso);
+        usuarioRepository.save(usuario);
+        return "usuario asignado correctamente al curso";
+        
 
     }
 
@@ -174,15 +176,15 @@ public class CursoService {
             return "El curso ingresado no existe!";
         } else if (!evaluacionRepository.existsById(dto.getId())) {
             return "La evaluacion no existe";
-        } else {
-            Curso curso = cursoRepository.findBySigla(dto.getSigla());
-            Evaluacion evaluacion = evaluacionRepository.findById(dto.getId()).orElse(null);
+        } 
+        Curso curso = cursoRepository.findBySigla(dto.getSigla());
+        Evaluacion evaluacion = evaluacionRepository.findById(dto.getId()).orElse(null);
 
-            curso.setEvaluacion(evaluacion);
-            cursoRepository.save(curso);
+        curso.setEvaluacion(evaluacion);
+        cursoRepository.save(curso);
 
-            return "Evaluacion asignada correctamente al curso";
-        }
+        return "Evaluacion asignada correctamente al curso";
+    
     }
 
 }

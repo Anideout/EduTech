@@ -39,5 +39,15 @@ public class TarjetaService {
     public List<Tarjeta> listar() {
         return tarjetaRepository.findAll();
     }
+    
 
+    public String eliminar(String nroTarjeta) {
+        Tarjeta tarjeta = tarjetaRepository.findById(nroTarjeta).orElse(null);
+        if (tarjeta == null) {
+            return "tarjeta no encontrada";
+        }
+        tarjetaRepository.delete(tarjeta);
+        return "tarjeta eliminada con éxito!";
+    }
+    
 }

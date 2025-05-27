@@ -1,6 +1,5 @@
 package com.edutech.edutech.dto;
 
-import com.edutech.edutech.model.Persona;
 
 public class UsuarioPersonaDto {
     private String email;
@@ -16,44 +15,85 @@ public class UsuarioPersonaDto {
         this.direccion = "";
     }
 
-    public UsuarioPersonaDto(String email,Persona persona) {
+    public UsuarioPersonaDto(String email,String rut, String nombre, String apellido, String direccion) {
         this.email = email;
         this.rut = rut;
-        this.nombre = "";
-        this.apellido = "";
-        this.direccion = "";
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.direccion = direccion;
 
     }
 
+    
+
+
+    /**
+     * @return String return the email
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * @param email the email to set
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getnombre() {
+    /**
+     * @return String return the rut
+     */
+    public String getRut() {
+        return rut;
+    }
+
+    /**
+     * @param rut the rut to set
+     */
+    public void setRut(String rut) {
+        this.rut = rut;
+    }
+
+    /**
+     * @return String return the nombre
+     */
+    public String getNombre() {
         return nombre;
     }
 
-    public void setnombre(String nombre) {
+    /**
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public String getnombre() {
-        return nombre;
+    /**
+     * @return String return the apellido
+     */
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setnombre(String nombre) {
-        this.nombre = nombre;
+    /**
+     * @param apellido the apellido to set
+     */
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
-    public String getdireccion() {
+    /**
+     * @return String return the direccion
+     */
+    public String getDireccion() {
         return direccion;
     }
 
-    public void setdireccion(String direccion) {
+    /**
+     * @param direccion the direccion to set
+     */
+    public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
 

@@ -48,17 +48,17 @@ public class RolController {
     }
 
     @PostMapping("/asignaraUsuario/{id}/{email}")
-    public String asignarRolUaUsuario(int id, String email) {
+    public String asignarRolUaUsuario(@PathVariable int id,@PathVariable String email) {
         return rolService.asignarRolAUsuario(id, email);
     }
 
     @PostMapping("/asignaraProfesor/{id}/{rut}")
-    public String asignarRolAProfesor(int id, String email) {
-        return rolService.asignarRolAProfesor(id, email);
+    public String asignarRolAProfesor(@PathVariable int id, @PathVariable String rut) {
+        return rolService.asignarRolAProfesor(id, rut);
     }
 
     @PostMapping("/asignaraAdministrador/{id}/{rut}")
-    public String asignarRolAAdministrador(int id, String email) {
-        return rolService.asignarRolAAdministrador(id, email);
+    public String asignarRolAAdministrador(@PathVariable int id,@PathVariable String rut) {
+        return rolService.asignarRolAAdministrador(id, rut);
     }
 }

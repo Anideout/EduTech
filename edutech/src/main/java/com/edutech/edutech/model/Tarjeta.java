@@ -1,6 +1,7 @@
 package com.edutech.edutech.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Entity;
@@ -17,10 +18,12 @@ public class Tarjeta {
 
     @ManyToOne
     @JoinColumn(name = "usuario_email")
+    @JsonIgnore
     private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(name = "formaPago_")
+    @JsonIgnore
     private FormaPago formaPago;
 
     public Tarjeta() {

@@ -38,10 +38,7 @@ public class CursoController {
         return cursoService.buscar(nombre);
     }
 
-    @PostMapping("/asignar/{sigla}/{id}")
-    public String asignarEvaluacion(@PathVariable String sigla, @PathVariable int id) {
-        return cursoService.asignarEvaluacion(sigla, id);
-    }
+    
 
     @PutMapping("/modificar/{sigla}")
     public String modificarCurso(@PathVariable String sigla, @RequestBody Curso curso){
@@ -56,9 +53,9 @@ public class CursoController {
 
     // ----------------------Asignaciones----------------------
 
-    @PostMapping("/asignar")
-    public String asignarEvaluacion(@RequestBody CursoEvaluacionDto dto) {
-        return cursoService.asignarEvaluacion(dto);
+    @PostMapping("/asignar/{sigla}/{id}")
+    public String asignarEvaluacion(@PathVariable String sigla, @PathVariable int id) {
+        return cursoService.asignarEvaluacion(sigla, id);
     }
 
     @PostMapping("/asignarProfesor/{sigla}/{rut}")

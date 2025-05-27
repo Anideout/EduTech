@@ -76,16 +76,26 @@ public class RolService {
     }
 
     // Asignar rol a usuario
-    public String asignarRolAUsuario(int id, String email) {
+    public String asignarRolAUsuario(Integer id, String email) {
+        if (id == null || email == null || email.isEmpty()) {
+            return "ID de rol o email no válido";
+        }
+    
         Rol rol = rolRepository.findById(id).orElse(null);
         Usuario usuario = usuarioRepository.findByEmail(email);
-        if (rol == null || usuario == null) {
-            return "Rol o usuario no encontrado";
+    
+        if (rol == null) {
+            return "Rol no encontrado";
         }
+        if (usuario == null) {
+            return "Usuario no encontrado";
+        }
+    
         usuario.setRol(rol);
         usuarioRepository.save(usuario);
-        return "Rol asignado al usuario";
+        return "Rol asignado al usuario con éxito";
     }
+
 
     // Asignar rol a profesor
     public String asignarRolAProfesor(int id, String rut) {

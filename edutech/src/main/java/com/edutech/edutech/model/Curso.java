@@ -101,20 +101,27 @@ public class Curso {
         this.contenido = contenido;
     }
 
-    public List<Profesor> getProfesores() {
-        return profesores;
-    }
-
-    public void setProfesores(List<Profesor> profesores) {
-        this.profesores = profesores;
-    }
-
     public List<Usuario> getUsuarios() {
         return usuarios;
     }
 
     public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
+    }
+
+
+    /**
+     * @return List<Profesor> return the profesores
+     */
+    public List<Profesor> getProfesores() {
+        return profesores;
+    }
+
+    /**
+     * @param profesores the profesores to set
+     */
+    public void setProfesores(List<Profesor> profesores) {
+        this.profesores = profesores;
     }
 
 }
