@@ -48,7 +48,7 @@ public class CursoController {
         return cursoService.actualizarCurso(sigla, curso);
     }
 
-    @DeleteMapping("/eliminar({sigla})")
+    @DeleteMapping("/eliminar/{sigla}")
     public Map<String, Boolean> eliminarCurso(@PathVariable String sigla) {
         return cursoService.eliminarCurso(sigla);
     }
