@@ -15,7 +15,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
-
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "email")
 @Entity
 public class Usuario {
@@ -30,7 +29,9 @@ public class Usuario {
     @ManyToOne
     @JoinColumn(name = "rol_id")
     private Rol rol;
-    
+
+    @OneToMany(mappedBy = "usuario")
+    private List<Tarjeta> tarjeta;
     @OneToOne
     @JoinColumn(name = "id_resenia", referencedColumnName = "id")
     private Resenia resenia;
@@ -120,7 +121,6 @@ public class Usuario {
         this.inscripcion = inscripcion;
     }
 
-
     /**
      * @return Rol return the rol
      */
@@ -133,6 +133,14 @@ public class Usuario {
      */
     public void setRol(Rol rol) {
         this.rol = rol;
+    }
+
+    public List<Tarjeta> getTarjeta() {
+        return tarjeta;
+    }
+
+    public void setTarjeta(List<Tarjeta> tarjeta) {
+        this.tarjeta = tarjeta;
     }
 
 }

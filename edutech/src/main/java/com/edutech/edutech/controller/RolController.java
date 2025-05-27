@@ -26,20 +26,39 @@ public class RolController {
     public String almacenar(@RequestBody Rol rol) {
         return rolService.almacenar(rol);
     }
-    @PostMapping
+
+    @PostMapping("/buscar{nombre}")
     public String buscar(@PathVariable String nombre) {
         return rolService.buscar(nombre);
     }
+
     @GetMapping
     public List<Rol> listar() {
         return rolService.listar();
     }
+
     @PutMapping("/modificar/{id}")
     public String modificar(@PathVariable int id, @RequestBody Rol rolActualizado) {
         return rolService.modificar(id, rolActualizado);
     }
+
     @DeleteMapping("/eliminar/{id}")
     public Map<String, Boolean> eliminar(@PathVariable int id) {
         return rolService.eliminar(id);
+    }
+
+    @PostMapping("/asignaraUsuario/{id}/{email}")
+    public String asignarRolUaUsuario(int id, String email) {
+        return rolService.asignarRolAUsuario(id, email);
+    }
+
+    @PostMapping("/asignaraProfesor/{id}/{rut}")
+    public String asignarRolAProfesor(int id, String email) {
+        return rolService.asignarRolAProfesor(id, email);
+    }
+
+    @PostMapping("/asignaraAdministrador/{id}/{rut}")
+    public String asignarRolAAdministrador(int id, String email) {
+        return rolService.asignarRolAAdministrador(id, email);
     }
 }

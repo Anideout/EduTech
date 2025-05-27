@@ -7,14 +7,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.edutech.edutech.model.Administrador;
+import com.edutech.edutech.model.Profesor;
 import com.edutech.edutech.model.Rol;
 import com.edutech.edutech.model.Usuario;
-import com.edutech.edutech.model.Profesor;
-import com.edutech.edutech.model.Administrador;
+import com.edutech.edutech.repository.AdministradorRepository;
+import com.edutech.edutech.repository.ProfesorRepository;
 import com.edutech.edutech.repository.RolRepository;
 import com.edutech.edutech.repository.UsuarioRepository;
-import com.edutech.edutech.repository.ProfesorRepository;
-import com.edutech.edutech.repository.AdministradorRepository;
 
 @Service
 public class RolService {
@@ -44,6 +44,7 @@ public class RolService {
         }
         return "Rol encontrado: " + rol.getNombre();
     }
+
     // Listar todos los roles
     public List<Rol> listar() {
         return rolRepository.findAll();
@@ -75,9 +76,9 @@ public class RolService {
     }
 
     // Asignar rol a usuario
-    public String asignarRolAUsuario(Long rolId, String emailUsuario) {
-        Rol rol = rolRepository.findById(rolId).orElse(null);
-        Usuario usuario = usuarioRepository.findByEmail(emailUsuario);
+    public String asignarRolAUsuario(int id, String email) {
+        Rol rol = rolRepository.findById(id).orElse(null);
+        Usuario usuario = usuarioRepository.findByEmail(email);
         if (rol == null || usuario == null) {
             return "Rol o usuario no encontrado";
         }
@@ -87,9 +88,9 @@ public class RolService {
     }
 
     // Asignar rol a profesor
-    public String asignarRolAProfesor(Long rolId, String rutProfesor) {
-        Rol rol = rolRepository.findById(rolId).orElse(null);
-        Profesor profesor = profesorRepository.findByRut(rutProfesor);
+    public String asignarRolAProfesor(int id, String rut) {
+        Rol rol = rolRepository.findById(id).orElse(null);
+        Profesor profesor = profesorRepository.findByRut(rut);
         if (rol == null || profesor == null) {
             return "Rol o profesor no encontrado";
         }
@@ -99,8 +100,8 @@ public class RolService {
     }
 
     // Asignar rol a administrador
-    public String asignarRolAAdministrador(Long rolId, String rut) {
-        Rol rol = rolRepository.findById(rolId).orElse(null);
+    public String asignarRolAAdministrador(int id, String rut) {
+        Rol rol = rolRepository.findById(id).orElse(null);
         Administrador admin = administradorRepository.findByRut(rut);
         if (rol == null || admin == null) {
             return "Rol o administrador no encontrado";

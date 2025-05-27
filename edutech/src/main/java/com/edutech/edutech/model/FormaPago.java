@@ -3,31 +3,28 @@ package com.edutech.edutech.model;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 
-@Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-
-public class Sede {
+@Entity
+public class FormaPago {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nombre;
 
-    @ManyToMany(mappedBy = "sedes")
-    private List<Profesor> profesores;
+    @OneToMany(mappedBy = "formaPago")
+    @JsonIgnore
+    private List<Tarjeta> tarjetas;
 
-    @OneToOne(mappedBy = "sede")
-    private Administrador administrador;
-
-    public Sede() {
+    public FormaPago() {
         this.id = 0;
         this.nombre = "";
     }
@@ -48,20 +45,12 @@ public class Sede {
         this.nombre = nombre;
     }
 
-    public List<Profesor> getProfesores() {
-        return profesores;
+    public List<Tarjeta> getTarjetas() {
+        return tarjetas;
     }
 
-    public void setProfesores(List<Profesor> profesores) {
-        this.profesores = profesores;
-    }
-
-    public Administrador getAdministrador() {
-        return administrador;
-    }
-
-    public void setAdministrador(Administrador administrador) {
-        this.administrador = administrador;
+    public void setTarjetas(List<Tarjeta> tarjetas) {
+        this.tarjetas = tarjetas;
     }
 
 }

@@ -13,38 +13,32 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.edutech.edutech.model.Sede;
-import com.edutech.edutech.service.SedeService;
+import com.edutech.edutech.model.FormaPago;
+import com.edutech.edutech.service.FormaPagoService;
 
 @RestController
-@RequestMapping("/Sedes")
-public class SedeController {
+@RequestMapping("/formasDePago")
+public class FPagoController {
     @Autowired
-    private SedeService sedeService;
+    private FormaPagoService formaPagoService;
 
     @PostMapping
-    public String almacenar(@RequestBody Sede sede) {
-        return sedeService.almacenar(sede);
+    public String almacenar(@RequestBody FormaPago pago) {
+        return formaPagoService.almacenar(pago);
     }
 
     @GetMapping
-    public List<Sede> listar() {
-        return sedeService.listar();
+    public List<FormaPago> listar() {
+        return formaPagoService.listar();
     }
 
-    @PutMapping("/modificar({id})")
-    public String modificar(@PathVariable int id, @RequestBody Sede sede) {
-        return sedeService.modificar(id, sede);
+    @PutMapping("/modificar/{id}")
+    public String modificar(@PathVariable int id, @RequestBody FormaPago pagoModificado) {
+        return formaPagoService.modificar(id, pagoModificado);
     }
 
     @DeleteMapping("/eliminar/{id}")
     public Map<String, Boolean> eliminar(@PathVariable int id) {
-        return sedeService.eliminar(id);
+        return formaPagoService.eliminar(id);
     }
-
-    @PostMapping("/profesor/{id}/{rut}")
-    public String asignaProfesor(@PathVariable int id, @PathVariable String rut) {
-        return sedeService.asignarProfesorSede(id, rut);
-    }
-
 }

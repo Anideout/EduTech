@@ -2,6 +2,8 @@ package com.edutech.edutech.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,23 +19,23 @@ public class Rol {
     private String nombre;
     private String descripcion;
 
-
     @OneToMany(mappedBy = "rol")
+    @JsonIgnore
     private List<Administrador> administradores;
 
     @OneToMany(mappedBy = "rol")
+    @JsonIgnore
     private List<Profesor> profesores;
 
     @OneToMany(mappedBy = "rol")
+    @JsonIgnore
     private List<Usuario> usuarios;
-    
+
     public Rol() {
         this.id = 0;
         this.nombre = "";
         this.descripcion = "";
     }
-
-    
 
     /**
      * @return int return the id
@@ -90,6 +92,7 @@ public class Rol {
     public void setAdministradores(List<Administrador> administradores) {
         this.administradores = administradores;
     }
+
     /**
      * @return List<Profesor> return the profesores
      */

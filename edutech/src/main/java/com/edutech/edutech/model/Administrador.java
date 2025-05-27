@@ -1,33 +1,37 @@
 package com.edutech.edutech.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "rut")
 @Entity
 public class Administrador {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String rut;
     private String nombre;
     private String apellido;
     private String contrasena;
-    
+
     @ManyToOne
     @JoinColumn(name = "rol_id")
     private Rol rol;
+
+    @OneToOne
+    @JoinColumn(name = "sede_id", referencedColumnName = "id")
+    private Sede sede;
+
     public Administrador() {
         this.rut = "";
         this.nombre = "";
         this.apellido = "";
         this.contrasena = "";
     }
-
-    
-
 
     /**
      * @return String return the nombre
@@ -57,7 +61,6 @@ public class Administrador {
         this.apellido = apellido;
     }
 
-
     /**
      * @return String return the rut
      */
@@ -71,7 +74,6 @@ public class Administrador {
     public void setRut(String rut) {
         this.rut = rut;
     }
-
 
     /**
      * @return String return the contrasena
@@ -87,7 +89,6 @@ public class Administrador {
         this.contrasena = contrasena;
     }
 
-
     /**
      * @return Rol return the rol
      */
@@ -100,6 +101,14 @@ public class Administrador {
      */
     public void setRol(Rol rol) {
         this.rol = rol;
+    }
+
+    public Sede getSede() {
+        return sede;
+    }
+
+    public void setSede(Sede sede) {
+        this.sede = sede;
     }
 
 }
