@@ -40,7 +40,7 @@ public class UsuarioController {
    
     @PutMapping("/modificar/{email}")
     public String modificar(@PathVariable String email, @RequestBody Usuario usuario) {
-        return usuarioService.ActualizarUsuario(email, usuario);
+        return usuarioService.modificarUsuario(email, usuario);
     }
 
     @DeleteMapping("/eliminar/{email}")

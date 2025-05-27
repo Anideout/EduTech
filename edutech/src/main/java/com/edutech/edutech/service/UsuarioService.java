@@ -72,8 +72,8 @@ public class UsuarioService {
                 .collect(Collectors.toList());
 
     }
-
-    public String ActualizarUsuario(String email, Usuario usuarioActualizado) {
+    //modificar
+    public String modificarUsuario(String email, Usuario usuarioActualizado) {
         Usuario usuario = usuarioRepository.findByEmail(email);
         if (usuario != null) {
             usuario.setEmail(usuarioActualizado.getEmail());
@@ -87,9 +87,11 @@ public class UsuarioService {
         }
 
     }
-
+    //eliminar
    public Map<String, Boolean> eliminarUsuario(String email) {
     Usuario usuario = usuarioRepository.findByEmail(email);
+    //map es una estructura de datos que almacena pares clave-valor
+    //para devolver un string y boolean
     Map<String, Boolean> respuesta = new HashMap<>();
     if (usuario != null) {
         // Elimina la relación en ambos lados con cursos
@@ -147,34 +149,36 @@ public class UsuarioService {
             return "usuario no encontrado";
         } else if (notificacion.isEmpty()) {
             return "notificacion no encontrada";
-        }
+        } 
         usuario.getNotificacion().add(notificacion.get());
         notificacion.get().setUsuario(usuario); // Establece la relación inversa
         usuarioRepository.save(usuario);
         return "notificacion asignada correctamente al usuario";
+        
     }
 
     public String almacenarResenia(String email, int id) {
-        Usuario usuario = usuarioRepository.findByEmail(email);
-        if (!reseniaRepository.existsById(id)) {
-            return "la reseña con este id no existe";
-        } else if (usuario == null) {
+        Optional<Resenia> reseniaOpt = reseniaRepository.findById(id);
+        if (reseniaOpt.isEmpty()) {
+            return "reseña no encontrada";
+        }else if (!usuarioRepository.existsByEmail(email)) {
             return "usuario con este email no existe";
-        } else {
-            Resenia resenia = reseniaRepository.findById(id).get();
-            usuario.setResenia(resenia);
-            resenia.setUsuario(usuario);
+        } 
+        Usuario usuario = usuarioRepository.findByEmail(email);
+        Resenia resenia = reseniaOpt.get();    
+        usuario.setResenia(resenia);
+        resenia.setUsuario(usuario);
 
-            usuarioRepository.save(usuario);
-            reseniaRepository.save(resenia);
-            return "Reseña guardad al usuario con exito!";
-        }
+        usuarioRepository.save(usuario);
+        reseniaRepository.save(resenia);
+        return "Reseña guardad al usuario con exito!";
     }
 
     public String asignarInscripcion(String email, Integer id) {
         Usuario usuario = usuarioRepository.findByEmail(email);
+        //optional es una clase que puede contener un valor o no
         Optional<Inscripcion> inscripcion = inscripcionRepository.findById(id);
-        if (usuario == null) {
+        if (!usuarioRepository.existsByEmail(email)) {
             return "usuario no encontrado";
         } else if (inscripcion.isEmpty()) {
             return "notificacion no encontrada";
