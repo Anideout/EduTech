@@ -1,6 +1,9 @@
+//CREADO POR SERGIO PUEBLA
+
 package com.edutech.edutech.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,8 +19,9 @@ public class Resenia {
     private String descripcion;
     private String fecha;
 
-    @OneToOne(mappedBy = "resenia")
+    @OneToOne
     @JsonBackReference("usuario-resenia")
+    @JsonIgnore
     private Usuario usuario;
 
     public Resenia() {

@@ -1,6 +1,6 @@
-package com.edutech.edutech.dto;
+//CREADO POR MATIAS BORQUEZ
 
-import com.edutech.edutech.model.Persona;
+package com.edutech.edutech.dto;
 
 public class UsuarioDto {
 
@@ -8,14 +8,23 @@ public class UsuarioDto {
     private String nombre;
     private String apellido;
     private String direccion;
+    private String rol;
 
-    public UsuarioDto(String email, Persona persona) {
+    public UsuarioDto(String email, String nombre, String apellido, String direccion, String rol) {
         this.email = email;
-        if (persona != null) {
-            this.nombre = persona.getNombre();
-            this.apellido = persona.getApellido();
-            this.direccion = persona.getDireccion();
-        }
+        this.nombre = "";
+        this.apellido = "";
+        this.direccion = "";
+        this.rol = "";
+
+    }
+
+    public UsuarioDto() {
+        this.email = "";
+        this.nombre = "";
+        this.apellido = "";
+        this.direccion = "";
+        this.rol = "";
     }
 
     public String getEmail() {
@@ -48,6 +57,14 @@ public class UsuarioDto {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 
 }

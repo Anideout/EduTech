@@ -1,5 +1,6 @@
-package com.edutech.edutech.dto;
+//CREADO POR MATIAS BORQUEZ
 
+package com.edutech.edutech.dto;
 
 public class UsuarioPersonaDto {
     private String email;
@@ -7,6 +8,7 @@ public class UsuarioPersonaDto {
     private String nombre;
     private String apellido;
     private String direccion;
+
     public UsuarioPersonaDto() {
         this.email = "";
         this.rut = "";
@@ -15,7 +17,7 @@ public class UsuarioPersonaDto {
         this.direccion = "";
     }
 
-    public UsuarioPersonaDto(String email,String rut, String nombre, String apellido, String direccion) {
+    public UsuarioPersonaDto(String email, String rut, String nombre, String apellido, String direccion) {
         this.email = email;
         this.rut = rut;
         this.nombre = nombre;
@@ -23,9 +25,6 @@ public class UsuarioPersonaDto {
         this.direccion = direccion;
 
     }
-
-    
-
 
     /**
      * @return String return the email

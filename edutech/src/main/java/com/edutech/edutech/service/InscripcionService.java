@@ -1,3 +1,5 @@
+//Creada por Matías Borquez
+
 package com.edutech.edutech.service;
 
 import java.util.List;
@@ -22,10 +24,9 @@ public class InscripcionService {
         return inscripcionRepository.findAll();
     }
 
-
     public String modificar(int id, Inscripcion inscripcionModificada) {
         Inscripcion inscripcion = inscripcionRepository.findById(id).orElse(null);
-        if(inscripcion == null) {
+        if (inscripcion == null) {
             return "inscripcion no encontrada";
         }
         inscripcion.setNombre(inscripcionModificada.getNombre());
@@ -37,7 +38,7 @@ public class InscripcionService {
 
     public String eliminar(int id) {
         Inscripcion inscripcion = inscripcionRepository.findById(id).orElse(null);
-        if(inscripcion == null) {
+        if (inscripcion == null) {
             return "inscripcion no encontrada";
         }
         inscripcionRepository.delete(inscripcion);

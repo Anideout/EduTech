@@ -1,3 +1,5 @@
+//Creado por Matías Borquez
+
 package com.edutech.edutech.service;
 
 import java.util.List;
@@ -22,9 +24,9 @@ public class ReseniaService {
         return reseniaRepository.findAll();
     }
 
-    public String modificar (int id, Resenia reseniaModificada) {
+    public String modificar(int id, Resenia reseniaModificada) {
         Resenia resenia = reseniaRepository.findById(id).orElse(null);
-        if(resenia == null) {
+        if (resenia == null) {
             return "resenia no encontrada";
         }
         resenia.setDescripcion(reseniaModificada.getDescripcion());
@@ -34,11 +36,11 @@ public class ReseniaService {
     }
 
     public String eliminar(int id) {
-         Resenia resenia = reseniaRepository.findById(id).orElse(null);
-         if(resenia == null) {
+        Resenia resenia = reseniaRepository.findById(id).orElse(null);
+        if (resenia == null) {
             return "reseña no encontrada";
-         }
-         reseniaRepository.delete(resenia);
-         return "Reseña eliminada con exito!";
+        }
+        reseniaRepository.delete(resenia);
+        return "Reseña eliminada con exito!";
     }
 }

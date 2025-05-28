@@ -1,3 +1,5 @@
+//CREADO POR SERGIO PUEBLA
+
 package com.edutech.edutech.model;
 
 import java.util.List;
@@ -108,7 +110,6 @@ public class Curso {
     public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
     }
-
 
     /**
      * @return List<Profesor> return the profesores

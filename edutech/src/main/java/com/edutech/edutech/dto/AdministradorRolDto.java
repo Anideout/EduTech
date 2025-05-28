@@ -1,4 +1,6 @@
-package com.edutech.edutech.service;
+//CREADO POR MATIAS BORQUEZ
+
+package com.edutech.edutech.dto;
 
 public class AdministradorRolDto {
 
@@ -14,8 +16,6 @@ public class AdministradorRolDto {
         this.rut = "";
         this.id = 0;
     }
-
-    
 
     /**
      * @return String return the rut

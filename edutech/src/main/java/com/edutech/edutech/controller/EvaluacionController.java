@@ -1,3 +1,6 @@
+
+//CREADO POR SERGIO PUEBLA
+
 package com.edutech.edutech.controller;
 
 import java.util.List;
@@ -36,10 +39,10 @@ public class EvaluacionController {
     public List<Evaluacion> buscar(@PathVariable String nombre) {
         return evaluacionService.buscar(nombre);
     }
-    
+
     @PutMapping("/modificar/{id}")
     public String modificar(@PathVariable int id, @RequestBody Evaluacion evaluacionModificada) {
-    return evaluacionService.modificar(id, evaluacionModificada);
+        return evaluacionService.modificar(id, evaluacionModificada);
     }
 
     @DeleteMapping("/eliminar/{id}")

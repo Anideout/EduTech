@@ -1,3 +1,5 @@
+//CREADO POR PROFESOR
+
 package com.edutech.edutech.model;
 
 import java.util.List;
@@ -22,7 +24,7 @@ public class Profesor {
     private String apellido;
     private String direccion;
     private String contrasena;
-    
+
     @ManyToOne
     @JoinColumn(name = "rol_id")
     private Rol rol;
@@ -38,11 +40,7 @@ public class Profesor {
     private List<Sede> sedes;
 
     @ManyToMany
-    @JoinTable(
-        name = "profesor_curso",
-        joinColumns = @JoinColumn(name = "profesor_rut", referencedColumnName = "rut"),
-        inverseJoinColumns = @JoinColumn(name = "curso_sigla", referencedColumnName = "sigla")
-    )
+    @JoinTable(name = "profesor_curso", joinColumns = @JoinColumn(name = "profesor_rut", referencedColumnName = "rut"), inverseJoinColumns = @JoinColumn(name = "curso_sigla", referencedColumnName = "sigla"))
     private List<Curso> cursos;
 
     public Profesor() {
@@ -117,7 +115,6 @@ public class Profesor {
     public void setSedes(List<Sede> sedes) {
         this.sedes = sedes;
     }
-
 
     /**
      * @return Rol return the rol

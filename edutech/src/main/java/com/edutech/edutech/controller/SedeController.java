@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.edutech.edutech.dto.SedeDto;
 import com.edutech.edutech.model.Sede;
 import com.edutech.edutech.service.SedeService;
 
@@ -42,14 +43,14 @@ public class SedeController {
         return sedeService.eliminar(id);
     }
 
-    @PostMapping("/profesor/{id}/{rut}")
-    public String asignaProfesor(@PathVariable int id, @PathVariable String rut) {
-        return sedeService.asignarProfesorSede(id, rut);
+    @PostMapping("/profesor")
+    public String asignaProfesor(@RequestBody SedeDto dto) {
+        return sedeService.profesor(dto);
     }
 
-    @PostMapping("/admin/{id}/{rut}")
-    public String asignarAdmin(@PathVariable int id, @PathVariable String rut) {
-        return sedeService.asignarSedeAdministrador(id, rut);
+    @PostMapping("/administrador/")
+    public String asignarAdmin(@RequestBody SedeDto dto) {
+        return sedeService.admin(dto);
     }
 
 }

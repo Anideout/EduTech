@@ -1,3 +1,5 @@
+//CREADA POR SERGIO PUEBLA
+
 package com.edutech.edutech.model;
 
 import java.util.List;

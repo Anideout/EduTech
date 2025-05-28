@@ -1,3 +1,5 @@
+//Creado por Matías Borquez
+
 package com.edutech.edutech.service;
 
 import java.util.HashMap;
@@ -7,6 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.edutech.edutech.dto.RolDto;
 import com.edutech.edutech.model.Administrador;
 import com.edutech.edutech.model.Profesor;
 import com.edutech.edutech.model.Rol;
@@ -76,34 +79,29 @@ public class RolService {
     }
 
     // Asignar rol a usuario
-    public String asignarRolAUsuario(Integer id, String email) {
-        if (id == null || email == null || email.isEmpty()) {
-            return "ID de rol o email no válido";
+    public String asignarRolAUsuario(int id, String email) {
+        if (!rolRepository.existsById(id)) {
+            return "rol no existe";
+        } else if (!usuarioRepository.existsByEmail(email)) {
+            return "usuario no existe!";
         }
-    
         Rol rol = rolRepository.findById(id).orElse(null);
         Usuario usuario = usuarioRepository.findByEmail(email);
-    
-        if (rol == null) {
-            return "Rol no encontrado";
-        }
-        if (usuario == null) {
-            return "Usuario no encontrado";
-        }
-    
+
         usuario.setRol(rol);
         usuarioRepository.save(usuario);
         return "Rol asignado al usuario con éxito";
     }
 
-
     // Asignar rol a profesor
     public String asignarRolAProfesor(int id, String rut) {
+        if (!rolRepository.existsById(id)) {
+            return "rol no existe";
+        } else if (!profesorRepository.existsByRut(rut)) {
+            return "profesor no existe!";
+        }
         Rol rol = rolRepository.findById(id).orElse(null);
         Profesor profesor = profesorRepository.findByRut(rut);
-        if (rol == null || profesor == null) {
-            return "Rol o profesor no encontrado";
-        }
         profesor.setRol(rol);
         profesorRepository.save(profesor);
         return "Rol asignado al profesor";
@@ -111,11 +109,59 @@ public class RolService {
 
     // Asignar rol a administrador
     public String asignarRolAAdministrador(int id, String rut) {
+        if (!rolRepository.existsById(id)) {
+            return "rol no existe";
+        } else if (!administradorRepository.existsByRut(rut)) {
+            return "administrador no existe!";
+        }
         Rol rol = rolRepository.findById(id).orElse(null);
         Administrador admin = administradorRepository.findByRut(rut);
-        if (rol == null || admin == null) {
-            return "Rol o administrador no encontrado";
+
+        admin.setRol(rol);
+        administradorRepository.save(admin);
+        return "Rol asignado al administrador";
+    }
+
+    // ------------------------- DTO ----------------------------
+    public String usuario(RolDto dto) {
+        if (!rolRepository.existsById(dto.getId())) {
+            return "rol no existe";
+        } else if (!usuarioRepository.existsByEmail(dto.getEmail())) {
+            return "usuario no existe!";
         }
+        Rol rol = rolRepository.findById(dto.getId()).orElse(null);
+        Usuario usuario = usuarioRepository.findByEmail(dto.getEmail());
+
+        usuario.setRol(rol);
+        usuarioRepository.save(usuario);
+        return "Rol asignado al usuario con éxito";
+    }
+
+    // Asignar rol a profesor
+    public String profesor(RolDto dto) {
+        if (!rolRepository.existsById(dto.getId())) {
+            return "rol no existe";
+        } else if (!profesorRepository.existsByRut(dto.getRut())) {
+            return "profesor no existe!";
+        }
+        Rol rol = rolRepository.findById(dto.getId()).orElse(null);
+        Profesor profesor = profesorRepository.findByRut(dto.getRut());
+
+        profesor.setRol(rol);
+        profesorRepository.save(profesor);
+        return "Rol asignado al profesor";
+    }
+
+    // Asignar rol a administrador
+    public String admin(RolDto dto) {
+        if (!rolRepository.existsById(dto.getId())) {
+            return "rol no existe";
+        } else if (!administradorRepository.existsByRut(dto.getRut())) {
+            return "administrador no existe!";
+        }
+        Rol rol = rolRepository.findById(dto.getId()).orElse(null);
+        Administrador admin = administradorRepository.findByRut(dto.getRut());
+
         admin.setRol(rol);
         administradorRepository.save(admin);
         return "Rol asignado al administrador";

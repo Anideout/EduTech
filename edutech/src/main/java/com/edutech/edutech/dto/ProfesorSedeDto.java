@@ -1,3 +1,5 @@
+//CREADO POR SERGIO PUEBLA
+
 package com.edutech.edutech.dto;
 
 public class ProfesorSedeDto {
@@ -12,10 +14,8 @@ public class ProfesorSedeDto {
     public ProfesorSedeDto() {
         this.id = 0;
         this.rut = "";
-    
-    }
 
-    
+    }
 
     /**
      * @return int return the id

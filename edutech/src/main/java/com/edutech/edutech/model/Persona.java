@@ -1,3 +1,5 @@
+//CREADO POR MATIAS BORQUEZ
+
 package com.edutech.edutech.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -6,6 +8,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -17,7 +20,8 @@ public class Persona {
     private String apellido;
     private String direccion;
 
-    @OneToOne(mappedBy = "persona")
+    @OneToOne
+    @JoinColumn(name = "usuario_email")
     @JsonIgnore
     private Usuario usuario;
 

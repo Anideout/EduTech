@@ -1,3 +1,4 @@
+//Creado por Matías Borquez
 package com.edutech.edutech.service;
 
 import java.util.List;
@@ -39,7 +40,6 @@ public class TarjetaService {
     public List<Tarjeta> listar() {
         return tarjetaRepository.findAll();
     }
-    
 
     public String eliminar(String nroTarjeta) {
         Tarjeta tarjeta = tarjetaRepository.findById(nroTarjeta).orElse(null);
@@ -49,5 +49,5 @@ public class TarjetaService {
         tarjetaRepository.delete(tarjeta);
         return "tarjeta eliminada con éxito!";
     }
-    
+
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.edutech.edutech.dto.AsignarCursoDto;
 import com.edutech.edutech.model.Curso;
 import com.edutech.edutech.service.CursoService;
 
@@ -37,10 +38,8 @@ public class CursoController {
         return cursoService.buscar(nombre);
     }
 
-    
-
     @PutMapping("/modificar/{sigla}")
-    public String modificarCurso(@PathVariable String sigla, @RequestBody Curso curso){
+    public String modificarCurso(@PathVariable String sigla, @RequestBody Curso curso) {
         return cursoService.actualizarCurso(sigla, curso);
     }
 
@@ -48,7 +47,6 @@ public class CursoController {
     public Map<String, Boolean> eliminarCurso(@PathVariable String sigla) {
         return cursoService.eliminarCurso(sigla);
     }
-
 
     // ----------------------Asignaciones----------------------
 
@@ -70,6 +68,27 @@ public class CursoController {
     @PostMapping("/asignarContenido/{sigla}/{id}")
     public String asignarContenido(@PathVariable String sigla, @PathVariable int id) {
         return cursoService.asignarContenido(sigla, id);
+    }
+
+    // ---------------- DTO --------------------
+    @PostMapping("/evaluacion")
+    public String evaluacion(@RequestBody AsignarCursoDto dto) {
+        return cursoService.evaluacion(dto);
+    }
+
+    @PostMapping("profesor")
+    public String asignarProfesor(@RequestBody AsignarCursoDto dto) {
+        return cursoService.profesor(dto);
+    }
+
+    @PostMapping("usuario")
+    public String asignarUsuario(@RequestBody AsignarCursoDto dto) {
+        return cursoService.usuario(dto);
+    }
+
+    @PostMapping("contenido")
+    public String asignarContenido(@RequestBody AsignarCursoDto dto) {
+        return cursoService.contenido(dto);
     }
 
 }

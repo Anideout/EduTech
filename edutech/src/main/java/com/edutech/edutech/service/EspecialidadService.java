@@ -1,3 +1,5 @@
+//CREADA POR SERGIO PUEBLA
+
 package com.edutech.edutech.service;
 
 import java.util.HashMap;
@@ -39,7 +41,7 @@ public class EspecialidadService {
 
     public String modificar(String nombre, Especialidad especialidadModificado) {
         Especialidad especialidad = especialidadRepository.findByNombre(nombre);
-        if(especialidad == null) {
+        if (especialidad == null) {
             return "especialidad no encontrada";
         }
         especialidad.setNombre(especialidadModificado.getNombre());
@@ -47,25 +49,25 @@ public class EspecialidadService {
         return "especialidad guardada con exito";
     }
 
-    public Map<String, Boolean> eliminar(String nombre ) {
+    public Map<String, Boolean> eliminar(String nombre) {
         Especialidad especialidad = especialidadRepository.findByNombre(nombre);
         Map<String, Boolean> respuesta = new HashMap<>();
         if (especialidad != null) {
-            if(especialidad.getProfesores() != null) {
-                for(Profesor profesor: especialidad.getProfesores()) {
+            if (especialidad.getProfesores() != null) {
+                for (Profesor profesor : especialidad.getProfesores()) {
                     profesor.setEspecialidad(null);
                     profesorRepository.save(profesor);
                 }
                 especialidad.getProfesores().clear();
             }
 
-            //eliminar la especliada
+            // eliminar la especliada
             especialidadRepository.delete(especialidad);
             respuesta.put("especialidad eliminada con exito!", Boolean.TRUE);
-        }else {
+        } else {
             respuesta.put("especialiadad no encontrada...", Boolean.FALSE);
         }
         return respuesta;
-            
+
     }
 }

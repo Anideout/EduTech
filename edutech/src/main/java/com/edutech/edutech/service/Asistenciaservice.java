@@ -1,9 +1,10 @@
+//Creado Por MATIAS BORQUEZ
+
 package com.edutech.edutech.service;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,10 +27,11 @@ public class Asistenciaservice {
         return asistenciaRepository.findAll();
     }
 
-    public String actualizarAsistencia(Integer id, Asistencia asistenciaActualizado) {
-        Optional<Asistencia> asistenciaOpt = asistenciaRepository.findById(id);
-        if (asistenciaOpt.isPresent()) {
-            Asistencia asistencia = asistenciaOpt.get();
+    public String actualizarAsistencia(int id, Asistencia asistenciaActualizado) {
+        if (!asistenciaRepository.existsById(id)) {
+            return "asistencia no existe";
+        } else {
+            Asistencia asistencia = asistenciaRepository.findById(id);
             // Actualizar los campos de la asistencia
             asistencia.setId(id);
             asistencia.setNombre(asistenciaActualizado.getNombre());
@@ -37,17 +39,15 @@ public class Asistenciaservice {
             asistencia.setFecha(asistenciaActualizado.getFecha());
             asistenciaRepository.save(asistencia);
             return "Asistencia actualizado con exito!";
-        } else {
-            return "id de la asistencia no existe!!";
         }
     }
 
     // @DeleteMapping("/Personas/{rut}")
-    public Map<String, Boolean> eliminarAsistencia(Integer id) {
-        Optional<Asistencia> asistenciaOpt = asistenciaRepository.findById(id);
+    public Map<String, Boolean> eliminarAsistencia(int id) {
+        Asistencia asistencia = asistenciaRepository.findById(id);
         Map<String, Boolean> respuesta = new HashMap<>();
-        if (asistenciaOpt.isPresent()) {
-            asistenciaRepository.delete(asistenciaOpt.get());
+        if (asistencia != null) {
+            asistenciaRepository.delete(asistencia);
             respuesta.put("asistencia eliminada", Boolean.TRUE);
 
         } else {

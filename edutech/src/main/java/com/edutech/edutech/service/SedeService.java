@@ -1,3 +1,5 @@
+//Creado por SERGIO PUEBLA
+
 package com.edutech.edutech.service;
 
 import java.util.HashMap;
@@ -7,8 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.edutech.edutech.dto.AdministradorSedeDto;
-import com.edutech.edutech.dto.ProfesorSedeDto;
+import com.edutech.edutech.dto.SedeDto;
 import com.edutech.edutech.model.Administrador;
 import com.edutech.edutech.model.Profesor;
 import com.edutech.edutech.model.Sede;
@@ -25,7 +26,8 @@ public class SedeService {
     AdministradorRepository administradorRepository;
     @Autowired
     private ProfesorRepository profesorRepository;
-    //almacenar
+
+    // almacenar
     public String almacenar(Sede sede) {
         if (sedeRepository.findByNombre(sede.getNombre()) == null) {
             sedeRepository.save(sede);
@@ -39,7 +41,7 @@ public class SedeService {
         return sedeRepository.findAll();
     }
 
-    //modificar
+    // modificar
     public String modificar(int id, Sede sedeActualizado) {
         if (!sedeRepository.existsById(id)) {
             return "la sede no existe";
@@ -49,7 +51,8 @@ public class SedeService {
             return "Sede modificada con exito";
         }
     }
-    //ELiminar
+
+    // ELiminar
     public Map<String, Boolean> eliminar(int id) {
         Map<String, Boolean> respuesta = new HashMap<>();
         if (!sedeRepository.existsById(id)) {
@@ -62,8 +65,7 @@ public class SedeService {
 
     }
 
-
-    //-----------------------Asignaciones----------------------
+    // -----------------------Asignaciones----------------------
     public String asignarProfesorSede(int id, String rut) {
         if (!sedeRepository.existsById(id)) {
             return "La sede ingresada no existe";
@@ -81,7 +83,27 @@ public class SedeService {
             return "Profesor asignado correctamente al curso";
         }
     }
-    public String asignarProfesorSedeDto(ProfesorSedeDto dto) {
+
+    public String asignarSedeAdministrador(int id, String rut) {
+        if (!sedeRepository.existsById(id)) {
+            return "La sede ingresada no existe";
+        } else if (!administradorRepository.existsByRut(rut)) {
+            return "El administrador ingresado no existe";
+        }
+        Sede sede = sedeRepository.findById(id).orElse(null);
+        Administrador administrador = administradorRepository.findByRut(rut);
+
+        sede.setAdministrador(administrador);
+        sedeRepository.save(sede);
+
+        administrador.setSede(sede);
+        administradorRepository.save(administrador);
+        return "Administrador asignado correctamente a la sede";
+
+    }
+
+    // ---------------------DTO -----------------------
+    public String profesor(SedeDto dto) {
         if (!sedeRepository.existsById(dto.getId())) {
             return "La sede ingresada no existe";
         } else if (!profesorRepository.existsByRut(dto.getRut())) {
@@ -98,32 +120,13 @@ public class SedeService {
             return "Profesor asignado correctamente al curso";
         }
     }
-    
 
-    public String asignarSedeAdministrador(int id, String rut) {
-        if (!sedeRepository.existsById(id)) {
-            return "La sede ingresada no existe";
-        } else if (!administradorRepository.existsByRut(rut)) {
-            return "El administrador ingresado no existe";
-        } 
-        Sede sede = sedeRepository.findById(id).orElse(null);
-        Administrador administrador = administradorRepository.findByRut(rut);
-
-        sede.setAdministrador(administrador);
-        sedeRepository.save(sede);
-
-        administrador.setSede(sede);
-        administradorRepository.save(administrador);
-        return "Administrador asignado correctamente a la sede";
-        
-    }
-    
-    public String asignarSedeAdministradorDto(AdministradorSedeDto dto) {
+    public String admin(SedeDto dto) {
         if (!sedeRepository.existsById(dto.getId())) {
             return "La sede ingresada no existe";
         } else if (!administradorRepository.existsByRut(dto.getRut())) {
             return "El administrador ingresado no existe";
-        } 
+        }
         Sede sede = sedeRepository.findById(dto.getId()).orElse(null);
         Administrador administrador = administradorRepository.findByRut(dto.getRut());
 
@@ -133,7 +136,7 @@ public class SedeService {
         administrador.setSede(sede);
         administradorRepository.save(administrador);
         return "Administrador asignado correctamente a la sede";
-        
+
     }
 
 }

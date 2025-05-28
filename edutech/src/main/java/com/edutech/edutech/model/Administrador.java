@@ -1,3 +1,5 @@
+//CREADO POR SERGIO PUEBLA
+
 package com.edutech.edutech.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;

@@ -1,6 +1,8 @@
+//CREADO POR MATIAS BORQUEZ
+
 package com.edutech.edutech.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,10 +20,9 @@ public class Inscripcion {
     private String estado;
     private String fechaIngreso;
 
-    
     @ManyToOne
     @JoinColumn(name = "usuario_email")
-    @JsonBackReference("usuario_inscripcion")
+    @JsonIgnore
     private Usuario usuario;
 
     public Inscripcion() {

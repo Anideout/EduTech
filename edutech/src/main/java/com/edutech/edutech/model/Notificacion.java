@@ -1,6 +1,8 @@
+//CREADO POR MATIAS BORQUEZ
+
 package com.edutech.edutech.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,7 +22,7 @@ public class Notificacion {
 
     @ManyToOne
     @JoinColumn(name = "usuario_email")
-    @JsonBackReference("usuario-notificacion")
+    @JsonIgnore
     private Usuario usuario;
 
     public Notificacion() {

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.edutech.edutech.dto.RolDto;
 import com.edutech.edutech.model.Rol;
 import com.edutech.edutech.service.RolService;
 
@@ -47,18 +48,18 @@ public class RolController {
         return rolService.eliminar(id);
     }
 
-    @PostMapping("/asignaraUsuario/{id}/{email}")
-    public String asignarRolUaUsuario(@PathVariable int id,@PathVariable String email) {
-        return rolService.asignarRolAUsuario(id, email);
+    @PostMapping("/usuario")
+    public String usuario(RolDto dto) {
+        return rolService.usuario(dto);
     }
 
-    @PostMapping("/asignaraProfesor/{id}/{rut}")
-    public String asignarRolAProfesor(@PathVariable int id, @PathVariable String rut) {
-        return rolService.asignarRolAProfesor(id, rut);
+    @PostMapping("profesor")
+    public String profesor(RolDto dto) {
+        return rolService.profesor(dto);
     }
 
-    @PostMapping("/asignaraAdministrador/{id}/{rut}")
-    public String asignarRolAAdministrador(@PathVariable int id,@PathVariable String rut) {
-        return rolService.asignarRolAAdministrador(id, rut);
+    @PostMapping("/administrador")
+    public String administrador(RolDto dto) {
+        return rolService.admin(dto);
     }
 }

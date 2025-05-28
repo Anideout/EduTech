@@ -1,9 +1,12 @@
+//CREADO POR SERGIO PUEBLA
+
 package com.edutech.edutech.model;
 
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,7 +22,7 @@ public class Contenido {
     private String descripcion;
     private String estado;
 
-    @OneToMany(mappedBy = "contenido")
+    @OneToMany(mappedBy = "contenido", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Curso> cursos;
 

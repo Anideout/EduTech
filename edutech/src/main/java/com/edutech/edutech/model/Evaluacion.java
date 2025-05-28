@@ -1,9 +1,10 @@
+//CREADO POR SERGI PUEBLA
+
 package com.edutech.edutech.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,8 +18,7 @@ public class Evaluacion {
     private int id;
     private String nombre;
 
-    @OneToMany(mappedBy = "evaluacion")
-    @JsonBackReference
+    @OneToMany(mappedBy = "evaluacion", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Curso> cursos;
 
     public Evaluacion() {

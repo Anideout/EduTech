@@ -1,45 +1,44 @@
-//CREADO POR SERGIO PUEBLA
+//CREADO POR MATIAS BORQUEZ
 
 package com.edutech.edutech.dto;
 
-public class AdministradorSedeDto {
+public class AsignarUsuarioDto {
+    private String email;
     private int id;
     private String rut;
 
-    public AdministradorSedeDto(int id, String rut) {
+    public AsignarUsuarioDto(String email, int id, String rut) {
+        this.email = email;
         this.id = id;
         this.rut = rut;
     }
 
-    public AdministradorSedeDto() {
+    public AsignarUsuarioDto() {
+        this.email = "";
         this.id = 0;
         this.rut = "";
     }
 
-    /**
-     * @return int return the id
-     */
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public int getId() {
         return id;
     }
 
-    /**
-     * @param id the id to set
-     */
     public void setId(int id) {
         this.id = id;
     }
 
-    /**
-     * @return String return the rut
-     */
     public String getRut() {
         return rut;
     }
 
-    /**
-     * @param rut the rut to set
-     */
     public void setRut(String rut) {
         this.rut = rut;
     }

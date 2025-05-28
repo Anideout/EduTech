@@ -1,3 +1,5 @@
+//Creado por Sergio Puebla
+
 package com.edutech.edutech.service;
 
 import java.util.HashMap;
@@ -23,7 +25,7 @@ public class EvaluacionService {
         return evaluacionRepository.findAll();
     }
 
-    public List<Evaluacion> buscar(String nombre){
+    public List<Evaluacion> buscar(String nombre) {
         return evaluacionRepository.findByNombreContaining(nombre);
     }
 
@@ -38,16 +40,17 @@ public class EvaluacionService {
     }
 
     public Map<String, Boolean> eliminar(int id) {
-    Map<String, Boolean> respuesta = new HashMap<>();
-    Evaluacion evaluacion = evaluacionRepository.findById(id).orElse(null);
-    if (evaluacion != null) {
-        // Limpia relaciones si es necesario (si Evaluacion tiene relaciones con otras entidades)
-        evaluacionRepository.delete(evaluacion);
-        respuesta.put("evaluacion eliminada", Boolean.TRUE);
-    } else {
-        respuesta.put("evaluacion no encontrada", Boolean.FALSE);
+        Map<String, Boolean> respuesta = new HashMap<>();
+        Evaluacion evaluacion = evaluacionRepository.findById(id).orElse(null);
+        if (evaluacion != null) {
+            // Limpia relaciones si es necesario (si Evaluacion tiene relaciones con otras
+            // entidades)
+            evaluacionRepository.delete(evaluacion);
+            respuesta.put("evaluacion eliminada", Boolean.TRUE);
+        } else {
+            respuesta.put("evaluacion no encontrada", Boolean.FALSE);
+        }
+        return respuesta;
     }
-    return respuesta;
-}
 
 }

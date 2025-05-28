@@ -1,3 +1,5 @@
+//Creado Por Sergio Puebla
+
 package com.edutech.edutech.service;
 
 import java.util.HashMap;
@@ -7,6 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.edutech.edutech.dto.AdministradorRolDto;
 import com.edutech.edutech.model.Administrador;
 import com.edutech.edutech.model.Rol;
 import com.edutech.edutech.repository.AdministradorRepository;
@@ -53,6 +56,12 @@ public class AdministradorService {
         Map<String, Boolean> respuesta = new HashMap<>();
         Administrador admin = administradorRepository.findByRut(Rut);
         if (admin != null) {
+            // if para borrar desvincular admin de la sede
+            if (admin.getSede() != null) {
+                admin.getSede().setAdministrador(null);
+                admin.setSede(null);
+            }
+            administradorRepository.save(admin);
             administradorRepository.delete(admin);
             respuesta.put("administrador eliminado", Boolean.TRUE);
         } else {

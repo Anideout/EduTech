@@ -1,3 +1,5 @@
+//CREADA POR MATIAS BORQUEZ
+
 package com.edutech.edutech.model;
 
 import java.util.List;
@@ -22,15 +24,14 @@ public class Usuario {
     private String email;
     private String contrasena;
 
-    @OneToOne
-    @JoinColumn(name = "rut_persona", referencedColumnName = "rut")
-
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private Persona persona;
+
     @ManyToOne
     @JoinColumn(name = "rol_id")
     private Rol rol;
 
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tarjeta> tarjeta;
     @OneToOne
     @JoinColumn(name = "id_resenia", referencedColumnName = "id")

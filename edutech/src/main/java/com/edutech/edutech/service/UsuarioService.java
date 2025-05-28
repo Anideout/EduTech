@@ -1,21 +1,22 @@
+
+//Creado por Matías Borquez
 package com.edutech.edutech.service;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.edutech.edutech.dto.UsuarioDto;
+import com.edutech.edutech.dto.AsignarUsuarioDto;
 import com.edutech.edutech.model.Asistencia;
 import com.edutech.edutech.model.Curso;
 import com.edutech.edutech.model.Inscripcion;
 import com.edutech.edutech.model.Notificacion;
 import com.edutech.edutech.model.Persona;
 import com.edutech.edutech.model.Resenia;
+import com.edutech.edutech.model.Tarjeta;
 import com.edutech.edutech.model.Usuario;
 import com.edutech.edutech.repository.AsistenciaRepository;
 import com.edutech.edutech.repository.CursoRepository;
@@ -23,6 +24,7 @@ import com.edutech.edutech.repository.InscripcionRepository;
 import com.edutech.edutech.repository.NotificacionRepository;
 import com.edutech.edutech.repository.PersonaRepository;
 import com.edutech.edutech.repository.ReseniaRepository;
+import com.edutech.edutech.repository.TarjetaRepository;
 import com.edutech.edutech.repository.UsuarioRepository;
 
 @Service
@@ -47,6 +49,10 @@ public class UsuarioService {
 
     @Autowired
     private CursoRepository cursoRepository;
+
+    @Autowired
+    private TarjetaRepository tarjetaRepository;
+
     public String almacenar(Usuario usuario) {
         Usuario validacion = usuarioRepository.findByEmail(usuario.getEmail());
         if (validacion != null) {
@@ -56,23 +62,18 @@ public class UsuarioService {
             return "usuario " + usuario.getEmail() + " almacenada con exito";
         }
     }
-    //listar
+
+    // listar
     public List<Usuario> listar() {
         return usuarioRepository.findAll();
     }
-    //buscar por email
+
+    // buscar por email
     public List<Usuario> buscar(String email) {
         return usuarioRepository.findByEmailContaining(email);
     }
 
-    public List<UsuarioDto> buscarUsuario() {
-        List<Usuario> usuarios = usuarioRepository.findAll();
-        return usuarios.stream()
-                .map(usuario -> new UsuarioDto(usuario.getEmail(), usuario.getPersona()))
-                .collect(Collectors.toList());
-
-    }
-    //modificar
+    // modificar
     public String modificarUsuario(String email, Usuario usuarioActualizado) {
         Usuario usuario = usuarioRepository.findByEmail(email);
         if (usuario != null) {
@@ -86,28 +87,37 @@ public class UsuarioService {
         }
 
     }
-    //eliminar
-   public Map<String, Boolean> eliminarUsuario(String email) {
-    Usuario usuario = usuarioRepository.findByEmail(email);
-    //map es una estructura de datos que almacena pares clave-valor
-    //para devolver un string y boolean
-    Map<String, Boolean> respuesta = new HashMap<>();
-    if (usuario != null) {
-        // Elimina la relación en ambos lados con cursos
-        for (Curso curso : usuario.getCursos()) {
-            curso.getUsuarios().remove(usuario);
-            cursoRepository.save(curso);
-        }
-        usuario.getCursos().clear();
 
-        usuarioRepository.save(usuario);
-        usuarioRepository.delete(usuario);
-        respuesta.put("usuario eliminado", Boolean.TRUE);
-    } else {
-        respuesta.put("usuario no encontrado", Boolean.FALSE);
+    // eliminar
+    public Map<String, Boolean> eliminarUsuario(String email) {
+        Usuario usuario = usuarioRepository.findByEmail(email);
+        // map es una estructura de datos que almacena pares clave-valor
+        // para devolver un string y boolean
+        Map<String, Boolean> respuesta = new HashMap<>();
+        if (usuario != null) {
+            // Elimina la relación en ambos lados con cursos
+            for (Curso curso : usuario.getCursos()) {
+                curso.getUsuarios().remove(usuario);
+                cursoRepository.save(curso);
+            }
+            usuario.getCursos().clear();
+
+            // eliminar relacion con tarjeta
+            if (usuario.getTarjeta() != null) {
+                for (Tarjeta tarjeta : usuario.getTarjeta()) {
+                    tarjeta.setUsuario(null);
+                    tarjetaRepository.save(tarjeta);
+                }
+            }
+
+            usuarioRepository.save(usuario);
+            usuarioRepository.delete(usuario);
+            respuesta.put("usuario eliminado", Boolean.TRUE);
+        } else {
+            respuesta.put("usuario no encontrado", Boolean.FALSE);
+        }
+        return respuesta;
     }
-    return respuesta;
-}
 
     public String almacenarPersona(String email, String rut) {
         Usuario usuario = usuarioRepository.findByEmail(email);
@@ -127,44 +137,46 @@ public class UsuarioService {
 
     // ---------------------- ASIGNACIONES --------------------------------
 
-    public String asignarAsistencia(String email, Integer id) {
-        Usuario usuario = usuarioRepository.findByEmail(email);
-        Optional<Asistencia> asistencia = asistenciaRepository.findById(id);
-        if (usuario == null) {
-            return "usuario no encontrado";
-        } else if (asistencia.isEmpty()) {
-            return "asistencia no encontrada";
+    public String asignarAsistencia(String email, int id) {
+        if (!usuarioRepository.existsByEmail(email)) {
+            return "el email ingresado no existe";
+        } else if (!asistenciaRepository.existsById(id)) {
+            return "La especialidad no existe";
+        } else {
+            Usuario usuario = usuarioRepository.findByEmail(email);
+            Asistencia asistencia = asistenciaRepository.findById(id);
+            usuario.getAsistencia().add(asistencia);
+            asistencia.setUsuario(usuario); // Establece la relación inversa
+            usuarioRepository.save(usuario);
+            return "asistencia asignada correctamente al usuario";
         }
-        usuario.getAsistencia().add(asistencia.get());
-        asistencia.get().setUsuario(usuario); // Establece la relación inversa
-        usuarioRepository.save(usuario);
-        return "asistencia asignada correctamente al usuario";
+
     }
 
-    public String asignarNotificacion(String email, Integer id) {
+    public String asignarNotificacion(String email, int id) {
+        if (!usuarioRepository.existsByEmail(email)) {
+            return "el email no existe..";
+        } else if (!notificacionRepository.existsById(id)) {
+            return "notificacion no existe";
+        }
         Usuario usuario = usuarioRepository.findByEmail(email);
-        Optional<Notificacion> notificacion = notificacionRepository.findById(id);
-        if (usuario == null) {
-            return "usuario no encontrado";
-        } else if (notificacion.isEmpty()) {
-            return "notificacion no encontrada";
-        } 
-        usuario.getNotificacion().add(notificacion.get());
-        notificacion.get().setUsuario(usuario); // Establece la relación inversa
+        Notificacion notificacion = notificacionRepository.findById(id);
+        usuario.getNotificacion().add(notificacion);
+        notificacion.setUsuario(usuario); // Establece la relación inversa
         usuarioRepository.save(usuario);
         return "notificacion asignada correctamente al usuario";
-        
+
     }
 
     public String almacenarResenia(String email, int id) {
-        Optional<Resenia> reseniaOpt = reseniaRepository.findById(id);
-        if (reseniaOpt.isEmpty()) {
+        if (!reseniaRepository.existsById(id)) {
             return "reseña no encontrada";
-        }else if (!usuarioRepository.existsByEmail(email)) {
+        } else if (!usuarioRepository.existsByEmail(email)) {
             return "usuario con este email no existe";
-        } 
+        }
+        Resenia resenia = reseniaRepository.findById(id).orElse(null);
         Usuario usuario = usuarioRepository.findByEmail(email);
-        Resenia resenia = reseniaOpt.get();    
+
         usuario.setResenia(resenia);
         resenia.setUsuario(usuario);
 
@@ -173,21 +185,97 @@ public class UsuarioService {
         return "Reseña guardad al usuario con exito!";
     }
 
-    public String asignarInscripcion(String email, Integer id) {
-        Usuario usuario = usuarioRepository.findByEmail(email);
-        //optional es una clase que puede contener un valor o no
-        Optional<Inscripcion> inscripcion = inscripcionRepository.findById(id);
+    public String asignarInscripcion(String email, int id) {
         if (!usuarioRepository.existsByEmail(email)) {
             return "usuario no encontrado";
-        } else if (inscripcion.isEmpty()) {
+        } else if (inscripcionRepository.existsById(id)) {
             return "notificacion no encontrada";
         }
-        usuario.getInscripcion().add(inscripcion.get());
-        inscripcion.get().setUsuario(usuario); // Establece la relación inversa
+        Usuario usuario = usuarioRepository.findByEmail(email);
+        Inscripcion inscripcion = inscripcionRepository.findById(id).orElse(null);
+
+        inscripcion.setUsuario(usuario); // Establece la relación inversa
         usuarioRepository.save(usuario);
         return "Inscripcion asignada correctamente al usuario";
     }
 
-    //-------------------- DTO --------------------
-   
+    // -------------------- DTO --------------------
+
+    public String persona(AsignarUsuarioDto dto) {
+        if (!personaRepository.existsByRut(dto.getRut())) {
+            return "la persona con este rut no existe";
+        } else if (!usuarioRepository.existsByEmail(dto.getEmail())) {
+            return "usuario con este email no existe";
+        }
+
+        Usuario usuario = usuarioRepository.findByEmail(dto.getEmail());
+        Persona persona = personaRepository.findByRut(dto.getRut());
+
+        usuario.setPersona(persona);
+        persona.setUsuario(usuario);
+        usuarioRepository.save(usuario);
+        personaRepository.save(persona);
+        return "persona y usuarios asociados con exito!";
+
+    }
+
+    public String asistencia(AsignarUsuarioDto dto) {
+        if (!usuarioRepository.existsByEmail(dto.getEmail())) {
+            return "el email ingresado no existe";
+        } else if (!asistenciaRepository.existsById(dto.getId())) {
+            return "La especialidad no existe";
+        }
+        Usuario usuario = usuarioRepository.findByEmail(dto.getEmail());
+        Asistencia asistencia = asistenciaRepository.findById(dto.getId());
+        usuario.getAsistencia().add(asistencia);
+        asistencia.setUsuario(usuario); // Establece la relación inversa
+        usuarioRepository.save(usuario);
+        return "asistencia asignada correctamente al usuario";
+    }
+
+    public String resenia(AsignarUsuarioDto dto) {
+        if (!reseniaRepository.existsById(dto.getId())) {
+            return "reseña no encontrada";
+        } else if (!usuarioRepository.existsByEmail(dto.getEmail())) {
+            return "usuario con este email no existe";
+        }
+        Resenia resenia = reseniaRepository.findById(dto.getId()).orElse(null);
+        Usuario usuario = usuarioRepository.findByEmail(dto.getEmail());
+
+        usuario.setResenia(resenia);
+        resenia.setUsuario(usuario);
+
+        usuarioRepository.save(usuario);
+        reseniaRepository.save(resenia);
+        return "Reseña guardad al usuario con exito!";
+    }
+
+    public String notificacion(AsignarUsuarioDto dto) {
+        if (!usuarioRepository.existsByEmail(dto.getEmail())) {
+            return "el email no existe..";
+        } else if (!notificacionRepository.existsById(dto.getId())) {
+            return "notificacion no existe";
+        }
+        Usuario usuario = usuarioRepository.findByEmail(dto.getEmail());
+        Notificacion notificacion = notificacionRepository.findById(dto.getId());
+        notificacion.setUsuario(usuario); // Establece la relación inversa
+        usuarioRepository.save(usuario);
+        return "notificacion asignada correctamente al usuario";
+
+    }
+
+    public String inscripcion(AsignarUsuarioDto dto) {
+        if (!usuarioRepository.existsByEmail(dto.getEmail())) {
+            return "usuario no encontrado";
+        } else if (!inscripcionRepository.existsById(dto.getId())) {
+            return "notificacion no encontrada";
+        }
+        Usuario usuario = usuarioRepository.findByEmail(dto.getEmail());
+        Inscripcion inscripcion = inscripcionRepository.findById(dto.getId()).orElse(null);
+
+        inscripcion.setUsuario(usuario); // Establece la relación inversa
+        usuarioRepository.save(usuario);
+        return "Inscripcion asignada correctamente al usuario";
+    }
+
 }
