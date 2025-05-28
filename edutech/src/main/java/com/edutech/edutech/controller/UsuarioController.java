@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.edutech.edutech.dto.AsignarUsuarioDto;
+import com.edutech.edutech.dto.UsuarioModificarDto;
 import com.edutech.edutech.model.Usuario;
 import com.edutech.edutech.service.UsuarioService;
 
@@ -104,6 +105,16 @@ public class UsuarioController {
     @PostMapping("/inscripcion")
     public String inscripcion(@RequestBody AsignarUsuarioDto dto) {
         return usuarioService.inscripcion(dto);
+    }
+
+    @PutMapping("/modificar")
+    public String modificar(@RequestBody UsuarioModificarDto dto) {
+        return usuarioService.modificar(dto);
+    }
+
+    @GetMapping("/listar")
+    public List<UsuarioEmailDto> obt() {
+        return usuarioService.obtUsuario();
     }
 
 }

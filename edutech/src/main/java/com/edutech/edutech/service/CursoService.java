@@ -9,6 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.edutech.edutech.dto.ActualizarCursoDto;
 import com.edutech.edutech.dto.AsignarCursoDto;
 import com.edutech.edutech.model.Contenido;
 import com.edutech.edutech.model.Curso;
@@ -67,6 +68,7 @@ public class CursoService {
         }
     }
 
+    // Creado por matias borquez
     // @DeleteMapping("/eliminarCurso/{rut}")
     public Map<String, Boolean> eliminarCurso(String sigla) {
         Curso curso = cursoRepository.findBySigla(sigla);
@@ -238,6 +240,21 @@ public class CursoService {
         usuarioRepository.save(usuario);
         return "usuario asignado correctamente al curso";
 
+    }
+
+    public String actualizar(ActualizarCursoDto dto) {
+        Curso curso = cursoRepository.findBySigla(dto.getSigla());
+        if (curso != null) {
+            curso.setSigla(dto.getSigla());
+            curso.setNombre(dto.getNombre());
+            curso.setDescripcion(dto.getDescripcion());
+            curso.setEstado(dto.getEstado());
+            curso.setValor(dto.getValor());
+            cursoRepository.save(curso);
+            return "Curso actualizado con exito!";
+        } else {
+            return "Curso no existe!";
+        }
     }
 
 }

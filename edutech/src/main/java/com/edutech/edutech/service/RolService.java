@@ -166,4 +166,14 @@ public class RolService {
         administradorRepository.save(admin);
         return "Rol asignado al administrador";
     }
+
+    public String modificar(RolDto dto) {
+        Rol rol = rolRepository.findById(dto.getId()).orElse(null);
+        if (rol == null) {
+            return "Rol no encontrado";
+        }
+        rol.setNombre(dto.getNombre());
+        rolRepository.save(rol);
+        return "Rol actualizado con éxito";
+    }
 }

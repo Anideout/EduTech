@@ -9,6 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.edutech.edutech.dto.PersonaDTO;
 import com.edutech.edutech.model.Persona;
 import com.edutech.edutech.repository.PersonaRepository;
 
@@ -63,6 +64,20 @@ public class PersonaService {
             respuesta.put("persona no encontrada", Boolean.FALSE);
         }
         return respuesta;
+    }
+
+    public String modificar(PersonaDTO dto) {
+        Persona persona = personaRepository.findByRut(dto.getRut());
+        if (persona != null) {
+            persona.setNombre(dto.getNombre());
+            persona.setApellido(dto.getApellido());
+            persona.setDireccion(dto.getDireccion());
+            personaRepository.save(persona);
+
+            return "persona actualizada correctamente";
+        } else {
+            return " persona con ese rut no existe";
+        }
     }
 
 }

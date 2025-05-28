@@ -1,3 +1,5 @@
+//CREADO POR MATIAS BORQUEZ
+
 package com.edutech.edutech.controller;
 
 import java.util.List;
@@ -41,6 +43,11 @@ public class RolController {
     @PutMapping("/modificar/{id}")
     public String modificar(@PathVariable int id, @RequestBody Rol rolActualizado) {
         return rolService.modificar(id, rolActualizado);
+    }
+
+    @PutMapping("/modificar")
+    public String modificar(RolDto dto) {
+        return rolService.modificar(dto);
     }
 
     @DeleteMapping("/eliminar/{id}")

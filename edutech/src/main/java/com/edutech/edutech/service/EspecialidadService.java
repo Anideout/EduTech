@@ -9,6 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.edutech.edutech.dto.EspecialidadDTO;
 import com.edutech.edutech.model.Especialidad;
 import com.edutech.edutech.model.Profesor;
 import com.edutech.edutech.repository.EspecialidadRepository;
@@ -46,7 +47,17 @@ public class EspecialidadService {
         }
         especialidad.setNombre(especialidadModificado.getNombre());
         especialidadRepository.save(especialidad);
-        return "especialidad guardada con exito";
+        return "especialidad modificada con exito";
+    }
+
+    public String modificar(EspecialidadDTO dto) {
+        Especialidad especialidad = especialidadRepository.findByNombre(dto.getNombre());
+        if (especialidad == null) {
+            return "especialidad no encontrada";
+        }
+        especialidad.setNombre(dto.getNombre());
+        especialidadRepository.save(especialidad);
+        return "especialidad modificada con exito";
     }
 
     public Map<String, Boolean> eliminar(String nombre) {

@@ -1,3 +1,5 @@
+//CREADA POR MATIAS BORQUEZ
+
 package com.edutech.edutech.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;

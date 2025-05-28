@@ -1,38 +1,31 @@
-//CREADO POR MATIAS BORQUEZ
-
 package com.edutech.edutech.dto;
 
-public class UsuarioDto {
-
-    private String email;
+public class PersonaDTO {
+    private String rut;
     private String nombre;
     private String apellido;
     private String direccion;
-    private String rol;
 
-    public UsuarioDto(String email, String nombre, String apellido, String direccion, String rol) {
-        this.email = email;
+    public PersonaDTO() {
+        this.rut = "";
         this.nombre = "";
         this.apellido = "";
         this.direccion = "";
-        this.rol = "";
-
     }
 
-    public UsuarioDto() {
-        this.email = "";
-        this.nombre = "";
-        this.apellido = "";
-        this.direccion = "";
-        this.rol = "";
+    public PersonaDTO(String rut, String nombre, String apellido, String direccion) {
+        this.rut = rut;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.direccion = direccion;
     }
 
-    public String getEmail() {
-        return email;
+    public String getRut() {
+        return rut;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setRut(String rut) {
+        this.rut = rut;
     }
 
     public String getNombre() {
@@ -57,14 +50,6 @@ public class UsuarioDto {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
-    }
-
-    public String getRol() {
-        return rol;
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol;
     }
 
 }

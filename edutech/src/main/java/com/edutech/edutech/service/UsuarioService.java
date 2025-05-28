@@ -5,9 +5,12 @@ package com.edutech.edutech.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.edutech.edutech.dto.UsuarioModificarDto;
 
 import com.edutech.edutech.dto.AsignarUsuarioDto;
 import com.edutech.edutech.model.Asistencia;
@@ -109,7 +112,6 @@ public class UsuarioService {
                     tarjetaRepository.save(tarjeta);
                 }
             }
-
             usuarioRepository.save(usuario);
             usuarioRepository.delete(usuario);
             respuesta.put("usuario eliminado", Boolean.TRUE);
@@ -276,6 +278,26 @@ public class UsuarioService {
         inscripcion.setUsuario(usuario); // Establece la relación inversa
         usuarioRepository.save(usuario);
         return "Inscripcion asignada correctamente al usuario";
+    }
+
+    public String modificar(UsuarioModificarDto dto) {
+        Usuario usuario = usuarioRepository.findByEmail(dto.getEmail());
+        if (usuario != null) {
+            usuario.setEmail(dto.getEmail());
+            usuario.setContrasena(dto.getContrasena());
+            usuarioRepository.save(usuario);
+            return "usuario actualizado con exito!";
+        } else {
+            return "email del usuario no existe!";
+        }
+
+    }
+
+    public List<UsuarioEmailDto> obtUsuario() {
+        List<Usuario> usuarios = usuarioRepository.findAll();
+        return usuarios.stream()
+                .map(usuario -> new UsuarioDTO(usuario.getEmail()))
+                .collect(Collectors.toList());
     }
 
 }

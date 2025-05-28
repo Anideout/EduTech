@@ -82,6 +82,7 @@ public class AdministradorService {
         return "Rol asignado al administrador";
     }
 
+    // DTO
     public String asignarRolDto(AdministradorRolDto dto) {
         Administrador admin = administradorRepository.findByRut(dto.getRut());
         Rol rol = rolRepository.findById(dto.getId()).orElse(null);

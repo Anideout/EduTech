@@ -1,3 +1,5 @@
+//CREADO POR SERGIO PUEBLA
+
 package com.edutech.edutech.controller;
 
 import java.util.List;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.edutech.edutech.dto.ActualizarCursoDto;
 import com.edutech.edutech.dto.AsignarCursoDto;
 import com.edutech.edutech.model.Curso;
 import com.edutech.edutech.service.CursoService;
@@ -41,6 +44,11 @@ public class CursoController {
     @PutMapping("/modificar/{sigla}")
     public String modificarCurso(@PathVariable String sigla, @RequestBody Curso curso) {
         return cursoService.actualizarCurso(sigla, curso);
+    }
+
+    @PutMapping("/modificar")
+    public String actualizar(@RequestBody ActualizarCursoDto dto) {
+        return cursoService.actualizar(dto);
     }
 
     @DeleteMapping("/eliminar/{sigla}")
