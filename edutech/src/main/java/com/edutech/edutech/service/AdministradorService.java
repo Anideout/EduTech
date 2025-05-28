@@ -72,4 +72,15 @@ public class AdministradorService {
         administradorRepository.save(admin);
         return "Rol asignado al administrador";
     }
+
+    public String asignarRolDto(AdministradorRolDto dto) {
+        Administrador admin = administradorRepository.findByRut(dto.getRut());
+        Rol rol = rolRepository.findById(dto.getId()).orElse(null);
+        if (admin == null || rol == null) {
+            return "Administrador o rol no encontrado";
+        }
+        admin.setRol(rol);
+        administradorRepository.save(admin);
+        return "Rol asignado al administrador";
+    }
 }

@@ -44,8 +44,8 @@ public class ProfesorController {
     }
 
     @PostMapping("/asignar")
-    public String asignarEspecialidad(@RequestBody ProfesorEspecialidadDto dto) {
-        return profesorService.asignarEspecialidad(dto);
+    public String asignarEspecialidadDto(@RequestBody ProfesorEspecialidadDto dto) {
+        return profesorService.asignarEspecialidadDto(dto);
     }
 
     @PutMapping("/actualizar/{rut}")

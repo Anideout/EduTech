@@ -7,6 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.edutech.edutech.dto.AdministradorSedeDto;
+import com.edutech.edutech.dto.ProfesorSedeDto;
 import com.edutech.edutech.model.Administrador;
 import com.edutech.edutech.model.Profesor;
 import com.edutech.edutech.model.Sede;
@@ -23,7 +25,7 @@ public class SedeService {
     AdministradorRepository administradorRepository;
     @Autowired
     private ProfesorRepository profesorRepository;
-
+    //almacenar
     public String almacenar(Sede sede) {
         if (sedeRepository.findByNombre(sede.getNombre()) == null) {
             sedeRepository.save(sede);
@@ -37,6 +39,31 @@ public class SedeService {
         return sedeRepository.findAll();
     }
 
+    //modificar
+    public String modificar(int id, Sede sedeActualizado) {
+        if (!sedeRepository.existsById(id)) {
+            return "la sede no existe";
+        } else {
+            sedeActualizado.setNombre(sedeActualizado.getNombre());
+            sedeRepository.save(sedeActualizado);
+            return "Sede modificada con exito";
+        }
+    }
+    //ELiminar
+    public Map<String, Boolean> eliminar(int id) {
+        Map<String, Boolean> respuesta = new HashMap<>();
+        if (!sedeRepository.existsById(id)) {
+            respuesta.put("Sede no existe", Boolean.FALSE);
+        } else {
+            sedeRepository.deleteById(id);
+            respuesta.put("Sede eliminada", Boolean.TRUE);
+        }
+        return respuesta;
+
+    }
+
+
+    //-----------------------Asignaciones----------------------
     public String asignarProfesorSede(int id, String rut) {
         if (!sedeRepository.existsById(id)) {
             return "La sede ingresada no existe";
@@ -54,6 +81,24 @@ public class SedeService {
             return "Profesor asignado correctamente al curso";
         }
     }
+    public String asignarProfesorSedeDto(ProfesorSedeDto dto) {
+        if (!sedeRepository.existsById(dto.getId())) {
+            return "La sede ingresada no existe";
+        } else if (!profesorRepository.existsByRut(dto.getRut())) {
+            return "el profesor ingresado no existe";
+        } else {
+            Sede sede = sedeRepository.findById(dto.getId()).orElse(null);
+            Profesor profesor = profesorRepository.findByRut(dto.getRut());
+
+            sede.getProfesores().add(profesor);
+            sedeRepository.save(sede);
+
+            profesor.getSedes().add(sede);
+            profesorRepository.save(profesor);
+            return "Profesor asignado correctamente al curso";
+        }
+    }
+    
 
     public String asignarSedeAdministrador(int id, String rut) {
         if (!sedeRepository.existsById(id)) {
@@ -72,26 +117,23 @@ public class SedeService {
         return "Administrador asignado correctamente a la sede";
         
     }
+    
+    public String asignarSedeAdministradorDto(AdministradorSedeDto dto) {
+        if (!sedeRepository.existsById(dto.getId())) {
+            return "La sede ingresada no existe";
+        } else if (!administradorRepository.existsByRut(dto.getRut())) {
+            return "El administrador ingresado no existe";
+        } 
+        Sede sede = sedeRepository.findById(dto.getId()).orElse(null);
+        Administrador administrador = administradorRepository.findByRut(dto.getRut());
 
-    public String modificar(int id, Sede sedeActualizado) {
-        if (!sedeRepository.existsById(id)) {
-            return "la sede no existe";
-        } else {
-            sedeActualizado.setNombre(sedeActualizado.getNombre());
-            sedeRepository.save(sedeActualizado);
-            return "Sede modificada con exito";
-        }
+        sede.setAdministrador(administrador);
+        sedeRepository.save(sede);
+
+        administrador.setSede(sede);
+        administradorRepository.save(administrador);
+        return "Administrador asignado correctamente a la sede";
+        
     }
 
-    public Map<String, Boolean> eliminar(int id) {
-        Map<String, Boolean> respuesta = new HashMap<>();
-        if (!sedeRepository.existsById(id)) {
-            respuesta.put("Sede no existe", Boolean.FALSE);
-        } else {
-            sedeRepository.deleteById(id);
-            respuesta.put("Sede eliminada", Boolean.TRUE);
-        }
-        return respuesta;
-
-    }
 }

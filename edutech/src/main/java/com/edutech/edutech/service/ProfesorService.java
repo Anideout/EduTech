@@ -56,7 +56,7 @@ public class ProfesorService {
         }
     }
 
-    public String asignarEspecialidad(ProfesorEspecialidadDto dto) {
+    public String asignarEspecialidadDto(ProfesorEspecialidadDto dto) {
         if (!profesorRepository.existsById(dto.getRut())) {
             return "El rut ingresado no existe!";
         } else if (!especialidadRepository.existsById(dto.getId())) {

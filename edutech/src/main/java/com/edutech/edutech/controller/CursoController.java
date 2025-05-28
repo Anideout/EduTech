@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.edutech.edutech.dto.CursoEvaluacionDto;
 import com.edutech.edutech.model.Curso;
 import com.edutech.edutech.service.CursoService;
 

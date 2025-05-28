@@ -38,4 +38,6 @@ public class AdministradorController {
     public Map<String, Boolean> eliminar(@PathVariable String rut) {
         return administradorService.eliminar(rut);
     }
+
+    @PostMapping("/asignarRol/{rut}/{id}")
 }
