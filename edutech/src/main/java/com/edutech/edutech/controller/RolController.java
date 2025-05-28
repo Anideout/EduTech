@@ -46,7 +46,7 @@ public class RolController {
     }
 
     @PutMapping("/modificar")
-    public String modificar(RolDto dto) {
+    public String modificar(@RequestBody RolDto dto) {
         return rolService.modificar(dto);
     }
 
@@ -56,17 +56,17 @@ public class RolController {
     }
 
     @PostMapping("/usuario")
-    public String usuario(RolDto dto) {
+    public String usuario(@RequestBody RolDto dto) {
         return rolService.usuario(dto);
     }
 
     @PostMapping("profesor")
-    public String profesor(RolDto dto) {
+    public String profesor(@RequestBody RolDto dto) {
         return rolService.profesor(dto);
     }
 
     @PostMapping("/administrador")
-    public String administrador(RolDto dto) {
+    public String administrador(@RequestBody RolDto dto) {
         return rolService.admin(dto);
     }
 }

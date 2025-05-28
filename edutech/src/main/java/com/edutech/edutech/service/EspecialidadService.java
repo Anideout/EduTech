@@ -44,7 +44,6 @@ public class EspecialidadService {
         if (especialidad == null) {
             return "especialidad no encontrada";
         }
-        especialidad.setId(especialidadModificado.getId());
         especialidad.setNombre(especialidadModificado.getNombre());
         especialidadRepository.save(especialidad);
         return "especialidad modificada con exito";
