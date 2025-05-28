@@ -10,7 +10,7 @@ import com.edutech.edutech.model.Especialidad;
 
 public interface EspecialidadRepository extends JpaRepository<Especialidad, Integer> {
 
-    Especialidad findByNombre(String nombre);
+    Especialidad findById(int id);
 
     List<Especialidad> findByNombreContaining(String nombre);
 

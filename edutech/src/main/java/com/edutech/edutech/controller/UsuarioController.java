@@ -112,9 +112,6 @@ public class UsuarioController {
         return usuarioService.modificar(dto);
     }
 
-    @GetMapping("/listar")
-    public List<UsuarioEmailDto> obt() {
-        return usuarioService.obtUsuario();
-    }
+   
 
 }

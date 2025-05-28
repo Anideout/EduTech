@@ -48,7 +48,7 @@ public class ProfesorService {
             return "La especiadad no existe";
         } else {
             Profesor profesor = profesorRepository.findById(rut).get();
-            Especialidad especialidad = especialidadRepository.findById(id).get();
+            Especialidad especialidad = especialidadRepository.findById(id);
 
             profesor.setEspecialidad(especialidad);
             profesorRepository.save(profesor);
@@ -65,7 +65,7 @@ public class ProfesorService {
             return "La especiadad no existe";
         } else {
             Profesor profesor = profesorRepository.findById(dto.getRut()).get();
-            Especialidad especialidad = especialidadRepository.findById(dto.getId()).get();
+            Especialidad especialidad = especialidadRepository.findById(dto.getId());
 
             profesor.setEspecialidad(especialidad);
             profesorRepository.save(profesor);

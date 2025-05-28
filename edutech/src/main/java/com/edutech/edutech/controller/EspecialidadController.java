@@ -39,13 +39,15 @@ public class EspecialidadController {
         return especialidadService.buscar(nombre);
     }
 
-    @PutMapping("/modificar/{nombre}")
-    public String modificar(@PathVariable String nombre, @RequestBody Especialidad especialidadModificado) {
-        return especialidadService.modificar(nombre, especialidadModificado);
+    @PutMapping("/modificar/{id}")
+    public String modificar(@PathVariable int id, @RequestBody Especialidad especialidadModificado) {
+        return especialidadService.modificar(id, especialidadModificado);
     }
 
-    @DeleteMapping("/eliminar/{nombre}")
-    public Map<String, Boolean> eliminar(@PathVariable String nombre) {
-        return especialidadService.eliminar(nombre);
+    @DeleteMapping("/eliminar/{id}")
+    public Map<String, Boolean> eliminar(@PathVariable int id) {
+        return especialidadService.eliminar(id);
     }
+
+    
 }

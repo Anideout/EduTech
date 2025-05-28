@@ -5,7 +5,6 @@ package com.edutech.edutech.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -293,11 +292,6 @@ public class UsuarioService {
 
     }
 
-    public List<UsuarioEmailDto> obtUsuario() {
-        List<Usuario> usuarios = usuarioRepository.findAll();
-        return usuarios.stream()
-                .map(usuario -> new UsuarioDTO(usuario.getEmail()))
-                .collect(Collectors.toList());
-    }
+    
 
 }

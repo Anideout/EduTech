@@ -9,7 +9,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.edutech.edutech.dto.EspecialidadDTO;
 import com.edutech.edutech.model.Especialidad;
 import com.edutech.edutech.model.Profesor;
 import com.edutech.edutech.repository.EspecialidadRepository;
@@ -23,7 +22,7 @@ public class EspecialidadService {
     private ProfesorRepository profesorRepository;
 
     public String almacenar(Especialidad especialidad) {
-        Especialidad validacion = especialidadRepository.findByNombre(especialidad.getNombre());
+        Especialidad validacion = especialidadRepository.findById(especialidad.getId());
         if (validacion != null) {
             return "error: especialidad ya existe!";
         } else {
@@ -40,28 +39,21 @@ public class EspecialidadService {
         return especialidadRepository.findByNombreContaining(nombre);
     }
 
-    public String modificar(String nombre, Especialidad especialidadModificado) {
-        Especialidad especialidad = especialidadRepository.findByNombre(nombre);
+    public String modificar(int id, Especialidad especialidadModificado) {
+        Especialidad especialidad = especialidadRepository.findById(id);
         if (especialidad == null) {
             return "especialidad no encontrada";
         }
+        especialidad.setId(especialidadModificado.getId());
         especialidad.setNombre(especialidadModificado.getNombre());
         especialidadRepository.save(especialidad);
         return "especialidad modificada con exito";
     }
 
-    public String modificar(EspecialidadDTO dto) {
-        Especialidad especialidad = especialidadRepository.findByNombre(dto.getNombre());
-        if (especialidad == null) {
-            return "especialidad no encontrada";
-        }
-        especialidad.setNombre(dto.getNombre());
-        especialidadRepository.save(especialidad);
-        return "especialidad modificada con exito";
-    }
+    
 
-    public Map<String, Boolean> eliminar(String nombre) {
-        Especialidad especialidad = especialidadRepository.findByNombre(nombre);
+    public Map<String, Boolean> eliminar(int id) {
+        Especialidad especialidad = especialidadRepository.findById(id);
         Map<String, Boolean> respuesta = new HashMap<>();
         if (especialidad != null) {
             if (especialidad.getProfesores() != null) {
