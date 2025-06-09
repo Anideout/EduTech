@@ -1,0 +1,46 @@
+[
+  {
+    "label": "spring-run",
+    "command": ".\\mvnw.cmd spring-boot:run",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "reveal": "always",
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "spring-package",
+    "command": ".\\mvnw.cmd clean package",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "reveal": "always",
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "spring-test",
+    "command": ".\\mvnw.cmd test",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "reveal": "always",
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "java-run-jar",
+    "command": "java -jar mockito-0.0.1-SNAPSHOT.jar",
+    "cwd": "$ZED_WORKTREE_ROOT\\target",
+    "reveal": "always",
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "lazygit",
+    "command": "lazygit",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "reveal": "always",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false
+  },
+  {
+    "label": "yazi",
+    "command": "yazi",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "reveal": "always",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false
+  }
+]

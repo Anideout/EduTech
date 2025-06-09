@@ -1,0 +1,50 @@
+{
+  "mappings": [
+    {
+      "bindings": ["ctrl+shift+r"],
+      "command": "tasks::run_task",
+      "arguments": {
+        "task_name": "spring-run"
+      }
+    },
+    {
+      "bindings": ["ctrl+shift+b"],
+      "command": "tasks::run_task",
+      "arguments": {
+        "task_name": "spring-package"
+      }
+    },
+    {
+      "bindings": ["ctrl+shift+t"],
+      "command": "tasks::run_task",
+      "arguments": {
+        "task_name": "spring-test"
+      }
+    },
+    {
+      "bindings": ["ctrl+shift+j"],
+      "command": "tasks::run_task",
+      "arguments": {
+        "task_name": "java-run-jar"
+      }
+    },
+    {
+      "bindings": ["ctrl+alt+n"],
+      "command": "workspace::NewFile"
+    },
+    {
+      "bindings": ["ctrl+alt+g"],
+      "command": "tasks::run_task",
+      "arguments": {
+        "task_name": "lazygit"
+      }
+    },
+    {
+      "bindings": ["ctrl+alt+y"],
+      "command": "tasks::run_task",
+      "arguments": {
+        "task_name": "yazi"
+      }
+    }
+  ]
+}
