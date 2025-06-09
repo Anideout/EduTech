@@ -19,13 +19,11 @@ public class PersonaService {
     private PersonaRepository personaRepository;
 
     public String almacenar(Persona persona) {
-        Persona validacion = personaRepository.findByRut(persona.getRut());
-        if (validacion != null) {
-            return "error: persona con este RUT ya existe";
-        } else { // Si no se encuentra ninguna persona con este RUT
-            personaRepository.save(persona);
-            return "persona almacenada con exito";
+        if (personaRepository.existsById(persona.getRut())) {
+            return "NOK"; // Persona ya existe
         }
+        personaRepository.save(persona);
+        return "OK"; // Persona almacenada correctamente
     }
 
     public List<Persona> listar() {

@@ -41,7 +41,7 @@ public class CursoService {
             return "El curso ya existe";
         } else {
             cursoRepository.save(curso);
-            return "Curso " + curso.getNombre() + " se ha almacenado";
+            return "OK";
         }
     }
 
