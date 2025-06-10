@@ -25,11 +25,11 @@ public class ProfesorService {
 
     public String almacenar(Profesor profesor) {
         if (profesorRepository.existsById(profesor.getRut())) {
-            return "el rut ingresado ya existe! ";
+            return "NOK";
 
         } else {
             profesorRepository.save(profesor);
-            return "profesor almacenado";
+            return "OK";
         }
     }
 
@@ -78,11 +78,10 @@ public class ProfesorService {
     public String actualizarProfesor(String rut, Profesor profesorActualizado) {
         Profesor profesor = profesorRepository.findByRut(rut);
         if (profesor != null) {
-            profesor.setRut(profesorActualizado.getRut());
             profesor.setNombre(profesorActualizado.getNombre());
             profesor.setApellido(profesorActualizado.getApellido());
             profesor.setDireccion(profesorActualizado.getDireccion());
-            profesor.setEspecialidad(profesorActualizado.getEspecialidad());
+            profesor.setContrasena(profesorActualizado.getContrasena());
             profesorRepository.save(profesor);
             return "profesor actualizado con exito!";
         } else {

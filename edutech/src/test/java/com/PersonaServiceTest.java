@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -25,6 +26,7 @@ public class PersonaServiceTest {
     @InjectMocks
     private PersonaService personaService;
 
+    @DisplayName("test para almacenarun Persona existente ")
     @Test
     void almacenarPersonaRepetida() {
         Persona persona = new Persona();
@@ -101,8 +103,7 @@ public class PersonaServiceTest {
         persona.setRut(rut);
         persona.setNombre("persona 1");
 
-        when(personaRepository.findByRut(rut))
-                .thenReturn(persona);
+        when(personaRepository.findByRut(rut)).thenReturn(persona);
 
         PersonaDTO dto = new PersonaDTO();
         dto.setRut(rut);

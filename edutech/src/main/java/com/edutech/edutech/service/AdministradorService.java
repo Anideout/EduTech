@@ -24,12 +24,13 @@ public class AdministradorService {
     private RolRepository rolRepository;
 
     // Almacenar un nuevo administrador
-    public String almacenar(Administrador admin) {
-        if (administradorRepository.existsByRut(admin.getRut())) {
+    public String almacenar(Administrador administrador) {
+        if (administradorRepository.existsByRut(administrador.getRut())) {
             return "El administrador ya existe";
+        } else {
+            administradorRepository.save(administrador);
+            return "Administrador almacenado con éxito";
         }
-        administradorRepository.save(admin);
-        return "Administrador almacenado con éxito";
     }
 
     // Listar todos los administradores
