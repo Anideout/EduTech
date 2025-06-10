@@ -2,6 +2,7 @@
 
 package com.edutech.edutech.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,9 +37,8 @@ public class CursoService {
     private ContenidoRepository contenidoRepository;
 
     public String almacenar(Curso curso) {
-        Curso validacion = cursoRepository.findBySigla(curso.getSigla());
-        if (validacion != null) {
-            return "El curso ya existe";
+        if (cursoRepository.existsBySigla(curso.getSigla())) {
+            return "NOK";
         } else {
             cursoRepository.save(curso);
             return "OK";
@@ -81,6 +81,12 @@ public class CursoService {
                 profesorRepository.save(profesor);
             }
             curso.getProfesores().clear();
+
+            // Inicializa la lista de usuarios si es null
+            if (curso.getUsuarios() == null) {
+                curso.setUsuarios(new ArrayList<>());
+            }
+
             for (Usuario usuario : curso.getUsuarios()) {
                 usuario.getCursos().remove(curso);
                 usuarioRepository.save(usuario);

@@ -121,8 +121,7 @@ public class PersonaServiceTest {
     @Test
     void modificarPersonaNoExistente() {
         String rut = "11.111.111-1";
-        when(personaRepository.findByRut(rut))
-                .thenReturn(null);
+        when(personaRepository.findByRut(rut)).thenReturn(null);
 
         PersonaDTO dto = new PersonaDTO();
         dto.setRut(rut);
