@@ -16,8 +16,12 @@ public class InscripcionService {
     private InscripcionRepository inscripcionRepository;
 
     public String almacenar(Inscripcion inscripcion) {
-        inscripcionRepository.save(inscripcion);
-        return "Inscripcion almacenada";
+        if (inscripcionRepository.existsById(inscripcion.getId())) {
+            return "inscripcion ya existe!";
+        } else {
+            inscripcionRepository.save(inscripcion);
+            return "Inscripcion almacenada";
+        }
     }
 
     public List<Inscripcion> listar() {

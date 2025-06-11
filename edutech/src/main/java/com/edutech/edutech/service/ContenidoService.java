@@ -19,7 +19,7 @@ public class ContenidoService {
 
     public String almacenar(Contenido contenido) {
         if (contenidoRepository.existsById(contenido.getId())) {
-            return "el rut ingresado ya existe! ";
+            return "el contenido ingresado ya existe!";
 
         } else {
             contenidoRepository.save(contenido);

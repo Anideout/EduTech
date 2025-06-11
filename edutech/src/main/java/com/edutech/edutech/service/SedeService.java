@@ -29,11 +29,11 @@ public class SedeService {
 
     // almacenar
     public String almacenar(Sede sede) {
-        if (sedeRepository.findByNombre(sede.getNombre()) == null) {
+        if (sedeRepository.existsById(sede.getId())) {
+            return "La sede ya existe";
+        } else {
             sedeRepository.save(sede);
             return "Sede almacenada con exito";
-        } else {
-            return "La sede ya existe";
         }
     }
 

@@ -19,6 +19,10 @@ public class Asistenciaservice {
     private AsistenciaRepository asistenciaRepository;
 
     public String almacenar(Asistencia asistencia) {
+        if (asistenciaRepository.existsById(asistencia.getId())) {
+            return "error: asistencia ya existe!";
+        }
+
         asistenciaRepository.save(asistencia);
         return "Asistencia guardada correctamente";
     }

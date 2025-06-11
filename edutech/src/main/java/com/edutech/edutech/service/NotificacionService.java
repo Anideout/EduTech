@@ -19,8 +19,12 @@ public class NotificacionService {
     private NotificacionRepository notificacionRepository;
 
     public String almacenar(Notificacion notificacion) {
-        notificacionRepository.save(notificacion);
-        return "notificacion almacenada con exito!";
+        if (notificacionRepository.existsById(notificacion.getId())) {
+            return "notificacion ya existe!";
+        } else {
+            notificacionRepository.save(notificacion);
+            return "notificacion almacenada con exito!";
+        }
     }
 
     public List<Notificacion> listar() {

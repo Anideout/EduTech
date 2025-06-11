@@ -56,12 +56,11 @@ public class UsuarioService {
     private TarjetaRepository tarjetaRepository;
 
     public String almacenar(Usuario usuario) {
-        Usuario validacion = usuarioRepository.findByEmail(usuario.getEmail());
-        if (validacion != null) {
-            return "error: usuario con este email ya existe";
+        if (usuarioRepository.existsByEmail(usuario.getEmail())) {
+            return "error: usuario ya existe!";
         } else {
             usuarioRepository.save(usuario);
-            return "usuario " + usuario.getEmail() + " almacenada con exito";
+            return "Usuario almacenada con exito!";
         }
     }
 
@@ -291,7 +290,5 @@ public class UsuarioService {
         }
 
     }
-
-    
 
 }

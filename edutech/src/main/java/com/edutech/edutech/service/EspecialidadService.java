@@ -22,12 +22,11 @@ public class EspecialidadService {
     private ProfesorRepository profesorRepository;
 
     public String almacenar(Especialidad especialidad) {
-        Especialidad validacion = especialidadRepository.findById(especialidad.getId());
-        if (validacion != null) {
+        if (especialidadRepository.existsById(especialidad.getId())) {
             return "error: especialidad ya existe!";
         } else {
             especialidadRepository.save(especialidad);
-            return "Especialidad " + especialidad.getNombre() + " almacenada con exito!";
+            return "Especialidad almacenada con exito!";
         }
     }
 
@@ -48,8 +47,6 @@ public class EspecialidadService {
         especialidadRepository.save(especialidad);
         return "especialidad modificada con exito";
     }
-
-    
 
     public Map<String, Boolean> eliminar(int id) {
         Especialidad especialidad = especialidadRepository.findById(id);

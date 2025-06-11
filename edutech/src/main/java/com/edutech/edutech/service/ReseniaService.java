@@ -16,8 +16,13 @@ public class ReseniaService {
     private ReseniaRepository reseniaRepository;
 
     public String almacenar(Resenia resenia) {
-        reseniaRepository.save(resenia);
-        return "resenia guardada con exito!";
+        if (reseniaRepository.existsById(resenia.getId())) {
+            return "resenia ya existe";
+        } else {
+            reseniaRepository.save(resenia);
+            return "resenia guardada con exito!";
+        }
+
     }
 
     public List<Resenia> listar() {
