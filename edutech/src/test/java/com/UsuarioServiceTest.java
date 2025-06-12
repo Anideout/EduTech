@@ -5,8 +5,11 @@ import static org.mockito.Mockito.when;
 
 import java.util.List;
 
+import com.edutech.edutech.model.Persona;
 import com.edutech.edutech.model.Usuario;
+import com.edutech.edutech.repository.PersonaRepository;
 import com.edutech.edutech.repository.UsuarioRepository;
+import com.edutech.edutech.service.PersonaService;
 import com.edutech.edutech.service.UsuarioService;
 
 import org.junit.jupiter.api.Test;
@@ -20,6 +23,9 @@ public class UsuarioServiceTest {
     @Mock
     private UsuarioRepository usuarioRepository;
 
+    @Mock
+    private PersonaRepository  personaRepository;
+    
     @InjectMocks
     private UsuarioService usuarioService;
 
@@ -65,5 +71,36 @@ public class UsuarioServiceTest {
         assertEquals("1", usuarios.get(0).getEmail());
         assertEquals("2", usuarios.get(1).getEmail());
 
+    }
+
+
+    @Test
+    void asignarnada() {
+        Usuario usuario = new Usuario();
+        usuario.setEmail("1");
+
+        Persona persona = new Persona();
+        persona.setRut("111");
+
+        String resultado = usuarioService.almacenarPersona(usuario.getEmail(),persona.getRut());
+        
+        assertEquals("la persona con este rut no existe", resultado);
+    }
+
+    @Test
+    void asignarPersona() {
+        Usuario usuario = new Usuario();
+        usuario.setEmail("1");
+
+        Persona persona = new Persona();
+        persona.setRut("111");
+
+
+        when(usuarioRepository.findByEmail(usuario.getEmail())).thenReturn(usuario);
+        when(personaRepository.findByRut(persona.getRut())).thenReturn(persona);
+        
+        String resultado = usuarioService.almacenarPersona(usuario.getEmail(),persona.getRut());
+
+        assertEquals("persona y usuarios asociados con exito!", resultado);
     }
 }
