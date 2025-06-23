@@ -1,3 +1,4 @@
+//creado por matías borquez
 package com;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -9,7 +10,6 @@ import com.edutech.edutech.model.Persona;
 import com.edutech.edutech.model.Usuario;
 import com.edutech.edutech.repository.PersonaRepository;
 import com.edutech.edutech.repository.UsuarioRepository;
-import com.edutech.edutech.service.PersonaService;
 import com.edutech.edutech.service.UsuarioService;
 
 import org.junit.jupiter.api.Test;
