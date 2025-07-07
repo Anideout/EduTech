@@ -2,22 +2,24 @@
 
 package com.edutech.edutech.service;
 
+import com.edutech.edutech.model.FormaPago;
+import com.edutech.edutech.repository.FormaPagoRepository;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.edutech.edutech.model.FormaPago;
-import com.edutech.edutech.repository.FormaPagoRepository;
-
 @Service
 public class FormaPagoService {
+
     @Autowired
     private FormaPagoRepository formaPagoRepository;
 
     public String almacenar(FormaPago formaPago) {
+        if (formaPagoRepository.existsById(formaPago.getId())) {
+            return "La forma de pago ya existe";
+        }
         formaPagoRepository.save(formaPago);
         return "Forma de pago almacenada correctamente";
     }

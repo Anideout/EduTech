@@ -4,6 +4,7 @@ package com;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,9 @@ import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.edutech.edutech.model.Administrador;
+import com.edutech.edutech.model.Rol;
 import com.edutech.edutech.repository.AdministradorRepository;
+import com.edutech.edutech.repository.RolRepository;
 import com.edutech.edutech.service.AdministradorService;
 
 @ExtendWith(MockitoExtension.class)
@@ -22,6 +25,9 @@ public class AdministradorServiceTest {
 
     @Mock
     private AdministradorRepository administradorRepository;
+
+    @Mock
+    private RolRepository rolRepository;
 
     @InjectMocks
     private AdministradorService administradorService;
@@ -125,5 +131,54 @@ public class AdministradorServiceTest {
         String resultado = administradorService.modificar(rut, adminActualizado);
 
         assertEquals("Administrador no encontrado", resultado);
+    }
+
+    @Test
+    void asignarRolExitoso() {
+        String rut = "12345678-9";
+        int id = 1;
+
+        Administrador admin = new Administrador();
+        admin.setRut(rut);
+
+        Rol rol = new Rol();
+        rol.setId(id);
+
+        when(administradorRepository.findByRut(rut)).thenReturn(admin);
+        when(rolRepository.findById(id)).thenReturn(Optional.of(rol));
+
+        String resultado = administradorService.asignarRol(rut, id);
+
+        assertEquals("Rol asignado al administrador", resultado);
+        assertEquals(rol, admin.getRol());
+    }
+
+    @Test
+    void asignarRolNoExitosoAdministradorNoEncontrado() {
+        String rut = "12345678-9";
+        int id = 1;
+
+        when(administradorRepository.findByRut(rut)).thenReturn(null);
+        when(rolRepository.findById(id)).thenReturn(Optional.of(new Rol()));
+
+        String resultado = administradorService.asignarRol(rut, id);
+
+        assertEquals("Administrador o rol no encontrado", resultado);
+    }
+
+    @Test
+    void asignarRolNoExitosoRolNoEncontrado() {
+        String rut = "12345678-9";
+        int id = 1;
+
+        Administrador admin = new Administrador();
+        admin.setRut(rut);
+
+        when(administradorRepository.findByRut(rut)).thenReturn(admin);
+        when(rolRepository.findById(id)).thenReturn(Optional.empty());
+
+        String resultado = administradorService.asignarRol(rut, id);
+
+        assertEquals("Administrador o rol no encontrado", resultado);
     }
 }

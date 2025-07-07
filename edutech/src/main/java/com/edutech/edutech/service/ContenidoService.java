@@ -45,7 +45,7 @@ public class ContenidoService {
             contenidoRepository.save(contenido);
             return "contenido actualizado con exito!";
         } else {
-            return "rut del contenido no existe!";
+            return "id del contenido no existe!";
         }
     }
 

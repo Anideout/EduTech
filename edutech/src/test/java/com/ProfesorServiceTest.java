@@ -2,26 +2,29 @@
 
 package com;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
+import com.edutech.edutech.model.Profesor;
+import com.edutech.edutech.repository.EspecialidadRepository;
+import com.edutech.edutech.repository.ProfesorRepository;
+import com.edutech.edutech.service.ProfesorService;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import static org.mockito.Mockito.when;
 import org.mockito.junit.jupiter.MockitoExtension;
-import com.edutech.edutech.model.Profesor;
-
-import com.edutech.edutech.repository.ProfesorRepository;
-import com.edutech.edutech.service.ProfesorService;
 
 @ExtendWith(MockitoExtension.class)
 public class ProfesorServiceTest {
 
     @Mock
     private ProfesorRepository profesorRepository;
+
+    @Mock
+    private EspecialidadRepository especialidadRepository;
 
     @InjectMocks
     private ProfesorService profesorService;
@@ -110,7 +113,10 @@ public class ProfesorServiceTest {
 
         when(profesorRepository.findByRut(rut)).thenReturn(profesorExistente);
 
-        String resultado = profesorService.actualizarProfesor(rut, profesorActualizado);
+        String resultado = profesorService.actualizarProfesor(
+            rut,
+            profesorActualizado
+        );
 
         assertEquals("profesor actualizado con exito!", resultado);
         assertEquals("Nuevo Nombre", profesorExistente.getNombre());
@@ -131,8 +137,96 @@ public class ProfesorServiceTest {
         profesorActualizado.setDireccion("Direccion Modificado");
         profesorActualizado.setContrasena("Contrasena Modificada");
 
-        String resultado = profesorService.actualizarProfesor(rut, profesorActualizado);
+        String resultado = profesorService.actualizarProfesor(
+            rut,
+            profesorActualizado
+        );
 
         assertEquals("rut del profesor no existe!", resultado);
+    }
+
+    @Test
+    void asignarEspecialidadProfesorExistenteYEspecialidadExistente() {
+        String rut = "11.111.111-1";
+        int idEspecialidad = 1;
+
+        Profesor profesor = new Profesor();
+        profesor.setRut(rut);
+        profesor.setNombre("Profe");
+        profesor.setApellido("Apellido");
+
+        com.edutech.edutech.model.Especialidad especialidad =
+            new com.edutech.edutech.model.Especialidad();
+        especialidad.setId(idEspecialidad);
+        especialidad.setNombre("Matemáticas");
+
+        when(profesorRepository.existsById(rut)).thenReturn(true);
+        when(especialidadRepository.existsById(idEspecialidad)).thenReturn(
+            true
+        );
+        when(profesorRepository.findById(rut)).thenReturn(
+            java.util.Optional.of(profesor)
+        );
+        when(especialidadRepository.findById(idEspecialidad)).thenReturn(
+            especialidad
+        );
+
+        String resultado = profesorService.asignarEspecialidad(
+            rut,
+            idEspecialidad
+        );
+
+        assertEquals(
+            "Especialidad: Matemáticas asignada al profesor: Profe Apellido",
+            resultado
+        );
+        assertEquals(especialidad, profesor.getEspecialidad());
+    }
+
+    @Test
+    void asignarEspecialidadProfesorNoExiste() {
+        String rut = "11.111.111-1";
+        int idEspecialidad = 1;
+
+        when(profesorRepository.existsById(rut)).thenReturn(false);
+
+        String resultado = profesorService.asignarEspecialidad(
+            rut,
+            idEspecialidad
+        );
+
+        assertEquals("El rut ingresado no existe!", resultado);
+    }
+
+    @Test
+    void asignarEspecialidadEspecialidadNoExiste() {
+        String rut = "11.111.111-1";
+        int idEspecialidad = 1;
+
+        when(profesorRepository.existsById(rut)).thenReturn(true);
+        when(especialidadRepository.existsById(idEspecialidad)).thenReturn(
+            false
+        );
+
+        String resultado = profesorService.asignarEspecialidad(
+            rut,
+            idEspecialidad
+        );
+
+        assertEquals("La especiadad no existe", resultado);
+    }
+
+    @Test
+    void asignarEspecialidadDtoProfesorNoExiste() {
+        com.edutech.edutech.dto.ProfesorEspecialidadDto dto =
+            new com.edutech.edutech.dto.ProfesorEspecialidadDto();
+        dto.setRut("11.111.111-1");
+        dto.setId(1);
+
+        when(profesorRepository.existsById(dto.getRut())).thenReturn(false);
+
+        String resultado = profesorService.asignarEspecialidadDto(dto);
+
+        assertEquals("El rut ingresado no existe!", resultado);
     }
 }

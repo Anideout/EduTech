@@ -1,23 +1,24 @@
-//creado por sergio puebla 
+//creado por sergio puebla
 package com;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
-
 import java.util.List;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import static org.mockito.Mockito.when;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.edutech.edutech.model.Especialidad;
 import com.edutech.edutech.repository.EspecialidadRepository;
 import com.edutech.edutech.service.EspecialidadService;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
-
 @ExtendWith(MockitoExtension.class)
 public class EspecialidadServiceTest {
+
     @Mock
     private EspecialidadRepository especialidadRepository;
 
@@ -30,7 +31,8 @@ public class EspecialidadServiceTest {
         especialidad.setId(1);
         especialidad.setNombre("progra");
 
-        when(especialidadRepository.existsById(especialidad.getId())).thenReturn(true);
+        when(
+                especialidadRepository.existsById(especialidad.getId())).thenReturn(true);
 
         String resultado = especialidadService.almacenar(especialidad);
 
@@ -65,5 +67,64 @@ public class EspecialidadServiceTest {
         assertEquals(2, resultado.size());
         assertEquals("progra", resultado.get(0).getNombre());
         assertEquals("bd", resultado.get(1).getNombre());
+    }
+
+    @Test
+    void eliminarEspecialidad() {
+        int id = 1;
+        Especialidad espe = new Especialidad();
+        espe.setId(id);
+        espe.setNombre("especialidad");
+
+        when(especialidadRepository.findById(id)).thenReturn(espe);
+
+        Map<String, Boolean> resultado = especialidadService.eliminar(id);
+
+        assertEquals(
+                Boolean.TRUE,
+                resultado.get("especialidad eliminada con exito!"));
+    }
+
+    @Test
+    void eliminarNada() {
+        int id = 1;
+        when(especialidadRepository.findById(id)).thenReturn(null);
+
+        Map<String, Boolean> resultado = especialidadService.eliminar(id);
+
+        assertEquals(
+                Boolean.FALSE,
+                resultado.get("especialiadad no encontrada..."));
+    }
+
+    @Test
+    void modificar() {
+        int id = 1;
+        Especialidad espe = new Especialidad();
+        espe.setId(id);
+        espe.setNombre("matias");
+
+        Especialidad especiaAc = new Especialidad();
+        especiaAc.setNombre("nombre");
+
+        when(especialidadRepository.findById(id)).thenReturn(especiaAc);
+
+        String resultado = especialidadService.modificar(id, especiaAc);
+
+        assertEquals("especialidad modificada con exito", resultado);
+        assertEquals("nombre", especiaAc.getNombre());
+    }
+
+    @Test
+    void modificarNadie() {
+        int id = 1;
+        Especialidad espe = new Especialidad();
+        espe.setId(id);
+        espe.setNombre("matias");
+        when(especialidadRepository.findById(id)).thenReturn(null);
+
+        String resultado = especialidadService.modificar(id, espe);
+
+        assertEquals("especialidad no encontrada", resultado);
     }
 }

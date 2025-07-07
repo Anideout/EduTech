@@ -1,17 +1,8 @@
-
 //Creado por Matías Borquez
 package com.edutech.edutech.service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.edutech.edutech.dto.UsuarioModificarDto;
-
 import com.edutech.edutech.dto.AsignarUsuarioDto;
+import com.edutech.edutech.dto.UsuarioModificarDto;
 import com.edutech.edutech.model.Asistencia;
 import com.edutech.edutech.model.Curso;
 import com.edutech.edutech.model.Inscripcion;
@@ -28,9 +19,15 @@ import com.edutech.edutech.repository.PersonaRepository;
 import com.edutech.edutech.repository.ReseniaRepository;
 import com.edutech.edutech.repository.TarjetaRepository;
 import com.edutech.edutech.repository.UsuarioRepository;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class UsuarioService {
+
     @Autowired
     private UsuarioRepository usuarioRepository;
 
@@ -86,7 +83,6 @@ public class UsuarioService {
         } else {
             return "email del usuario no existe!";
         }
-
     }
 
     // eliminar
@@ -132,7 +128,6 @@ public class UsuarioService {
         usuarioRepository.save(usuario);
         personaRepository.save(persona);
         return "persona y usuarios asociados con exito!";
-
     }
 
     // ---------------------- ASIGNACIONES --------------------------------
@@ -150,7 +145,6 @@ public class UsuarioService {
             usuarioRepository.save(usuario);
             return "asistencia asignada correctamente al usuario";
         }
-
     }
 
     public String asignarNotificacion(String email, int id) {
@@ -165,7 +159,6 @@ public class UsuarioService {
         notificacion.setUsuario(usuario); // Establece la relación inversa
         usuarioRepository.save(usuario);
         return "notificacion asignada correctamente al usuario";
-
     }
 
     public String almacenarResenia(String email, int id) {
@@ -188,11 +181,13 @@ public class UsuarioService {
     public String asignarInscripcion(String email, int id) {
         if (!usuarioRepository.existsByEmail(email)) {
             return "usuario no encontrado";
-        } else if (inscripcionRepository.existsById(id)) {
-            return "notificacion no encontrada";
+        } else if (!inscripcionRepository.existsById(id)) {
+            return "inscripcion no encontrada";
         }
         Usuario usuario = usuarioRepository.findByEmail(email);
-        Inscripcion inscripcion = inscripcionRepository.findById(id).orElse(null);
+        Inscripcion inscripcion = inscripcionRepository
+            .findById(id)
+            .orElse(null);
 
         inscripcion.setUsuario(usuario); // Establece la relación inversa
         usuarioRepository.save(usuario);
@@ -216,7 +211,6 @@ public class UsuarioService {
         usuarioRepository.save(usuario);
         personaRepository.save(persona);
         return "persona y usuarios asociados con exito!";
-
     }
 
     public String asistencia(AsignarUsuarioDto dto) {
@@ -257,11 +251,12 @@ public class UsuarioService {
             return "notificacion no existe";
         }
         Usuario usuario = usuarioRepository.findByEmail(dto.getEmail());
-        Notificacion notificacion = notificacionRepository.findById(dto.getId());
+        Notificacion notificacion = notificacionRepository.findById(
+            dto.getId()
+        );
         notificacion.setUsuario(usuario); // Establece la relación inversa
         usuarioRepository.save(usuario);
         return "notificacion asignada correctamente al usuario";
-
     }
 
     public String inscripcion(AsignarUsuarioDto dto) {
@@ -271,7 +266,9 @@ public class UsuarioService {
             return "notificacion no encontrada";
         }
         Usuario usuario = usuarioRepository.findByEmail(dto.getEmail());
-        Inscripcion inscripcion = inscripcionRepository.findById(dto.getId()).orElse(null);
+        Inscripcion inscripcion = inscripcionRepository
+            .findById(dto.getId())
+            .orElse(null);
 
         inscripcion.setUsuario(usuario); // Establece la relación inversa
         usuarioRepository.save(usuario);
@@ -288,7 +285,5 @@ public class UsuarioService {
         } else {
             return "email del usuario no existe!";
         }
-
     }
-
 }

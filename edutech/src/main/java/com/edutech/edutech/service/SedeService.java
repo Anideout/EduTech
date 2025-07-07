@@ -2,13 +2,6 @@
 
 package com.edutech.edutech.service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.edutech.edutech.dto.SedeDto;
 import com.edutech.edutech.model.Administrador;
 import com.edutech.edutech.model.Profesor;
@@ -16,14 +9,22 @@ import com.edutech.edutech.model.Sede;
 import com.edutech.edutech.repository.AdministradorRepository;
 import com.edutech.edutech.repository.ProfesorRepository;
 import com.edutech.edutech.repository.SedeRepository;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class SedeService {
+
     @Autowired
     private SedeRepository sedeRepository;
 
     @Autowired
     AdministradorRepository administradorRepository;
+
     @Autowired
     private ProfesorRepository profesorRepository;
 
@@ -53,16 +54,19 @@ public class SedeService {
     }
 
     // ELiminar
+
     public Map<String, Boolean> eliminar(int id) {
         Map<String, Boolean> respuesta = new HashMap<>();
-        if (!sedeRepository.existsById(id)) {
+        Optional<Sede> sedeOpt = sedeRepository.findById(id);
+        if (!sedeOpt.isPresent()) {
             respuesta.put("Sede no existe", Boolean.FALSE);
+        } else if (!sedeOpt.get().getProfesores().isEmpty()) {
+            respuesta.put("Sede tiene profes asignados", Boolean.FALSE);
         } else {
             sedeRepository.deleteById(id);
             respuesta.put("Sede eliminada", Boolean.TRUE);
         }
         return respuesta;
-
     }
 
     // -----------------------Asignaciones----------------------
@@ -99,7 +103,6 @@ public class SedeService {
         administrador.setSede(sede);
         administradorRepository.save(administrador);
         return "Administrador asignado correctamente a la sede";
-
     }
 
     // ---------------------DTO -----------------------
@@ -128,7 +131,9 @@ public class SedeService {
             return "El administrador ingresado no existe";
         }
         Sede sede = sedeRepository.findById(dto.getId()).orElse(null);
-        Administrador administrador = administradorRepository.findByRut(dto.getRut());
+        Administrador administrador = administradorRepository.findByRut(
+            dto.getRut()
+        );
 
         sede.setAdministrador(administrador);
         sedeRepository.save(sede);
@@ -136,7 +141,5 @@ public class SedeService {
         administrador.setSede(sede);
         administradorRepository.save(administrador);
         return "Administrador asignado correctamente a la sede";
-
     }
-
 }
