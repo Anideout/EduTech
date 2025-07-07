@@ -73,7 +73,7 @@ Las entidades que arman el corazón de EduTech:
 
 ---
 
-##  Tecnologías que usé
+##  Tecnologías que usamos
 
 | Componente       | Tecnología        | Versión  | Para qué sirve                      |
 |------------------|-------------------|----------|-------------------------------------|
