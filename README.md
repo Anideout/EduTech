@@ -1,18 +1,18 @@
-# 🎓 EduTech Platform
+#  EduTech Platform
 
 > **Proyecto educativo en Spring Boot**
 
 ---
 
-## 📚 ¿Qué es EduTech?
+##  ¿Qué es EduTech?
 
 **EduTech** es un sistema que hicimos junto a Sergio Puebla en **Spring Boot** para administrar instituciones educativas. Sirve para manejar usuarios, cursos, inscripciones y pagos, todo con roles para estudiantes, profes y administradores.  
 
-Está pensado como un sistema completo para la empresa de EduTech. Con arquitectura en capas y conceptos de programación en Java.
+Está pensado como un sistema completo para la empresa de EduTech. Con arquitectura en capas y conceptos de programación en Java. Hasta el momento solo está creado el backend: la lógica de la aplicación web. 
 
 ---
 
-## 🛠️ ¿Qué hace?
+##  ¿Qué hace?
 
 | Funcionalidad              | ¿Para qué sirve?                                      | Quién lo usa                |
 |----------------------------|------------------------------------------------------|-----------------------------|
@@ -27,7 +27,7 @@ Está pensado como un sistema completo para la empresa de EduTech. Con arquitect
 
 ---
 
-## 🏛️ ¿Cómo está armado?
+##  ¿Cómo está armado?
 
 El sistema sigue arquitectura en capas:
 
@@ -50,7 +50,7 @@ El sistema sigue arquitectura en capas:
 
 ---
 
-## 🧩 Entidades principales
+##  Entidades principales
 
 Las entidades que arman el corazón de EduTech:
 
@@ -67,19 +67,20 @@ Las entidades que arman el corazón de EduTech:
 - Especialidad  
 - Sede  
 - Notificacion  
-- Resenia  
+- Reseña
 - Tarjeta  
 - FormaPago
 
 ---
 
-## ⚙️ Tecnologías que usé
+##  Tecnologías que usé
 
 | Componente       | Tecnología        | Versión  | Para qué sirve                      |
 |------------------|-------------------|----------|-------------------------------------|
 | Framework        | Spring Boot       | 3.4.5    | El motor de la app                  |
-| IDE              | VSCode y Zed      | 3.4.5    | El motor de la app                  |
-| Framework        | Spring Boot       | 3.4.5    | El motor de la app                  |
+| IDE              | VSCode y Zed      | 0.192.7  | Programar el proyecto               |
+| Debuger          | desde terminal    |          | Para realizar Tests                 |
+|                  | y vscode          |          | para cada metodo del proyecto       |             
 | Lenguaje         | Java              | 17       | Puro Java                           |
 | Build Tool       | Maven             | 3.9.9    | Manejar dependencias                |
 | Base de datos    | MySQL             | Latest   | Persistencia de datos               |
@@ -91,9 +92,9 @@ Las entidades que arman el corazón de EduTech:
 
 ---
 
-## 🔄 Principales flujos
+##  Principales flujos
 
-### ➡️ Registrar usuario
+### ➡ Registrar usuario
 
 ```plaintext
 POST /usuarios
