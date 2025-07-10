@@ -62,6 +62,8 @@ public class SedeService {
             respuesta.put("Sede no existe", Boolean.FALSE);
         } else if (!sedeOpt.get().getProfesores().isEmpty()) {
             respuesta.put("Sede tiene profes asignados", Boolean.FALSE);
+        } else if (sedeOpt.get().getAdministrador() != null) {
+            respuesta.put("Sede tiene admin asignado", Boolean.FALSE);
         } else {
             sedeRepository.deleteById(id);
             respuesta.put("Sede eliminada", Boolean.TRUE);

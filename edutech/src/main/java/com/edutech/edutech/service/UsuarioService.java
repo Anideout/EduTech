@@ -86,11 +86,11 @@ public class UsuarioService {
     }
 
     // eliminar
+
     public Map<String, Boolean> eliminarUsuario(String email) {
         Usuario usuario = usuarioRepository.findByEmail(email);
-        // map es una estructura de datos que almacena pares clave-valor
-        // para devolver un string y boolean
         Map<String, Boolean> respuesta = new HashMap<>();
+
         if (usuario != null) {
             // Elimina la relación en ambos lados con cursos
             for (Curso curso : usuario.getCursos()) {
@@ -106,7 +106,21 @@ public class UsuarioService {
                     tarjetaRepository.save(tarjeta);
                 }
             }
-            usuarioRepository.save(usuario);
+
+            //manejar la reseña
+            if (usuario.getResenia() != null) {
+                Resenia resenia = usuario.getResenia();
+
+                // romper la relación bidireccional
+                usuario.setResenia(null);
+                resenia.setUsuario(null);
+
+                reseniaRepository.save(resenia);
+
+                reseniaRepository.delete(resenia);
+            }
+
+            //  eliminar el usuario
             usuarioRepository.delete(usuario);
             respuesta.put("usuario eliminado", Boolean.TRUE);
         } else {

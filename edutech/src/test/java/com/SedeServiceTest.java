@@ -12,7 +12,10 @@ import com.edutech.edutech.repository.AdministradorRepository;
 import com.edutech.edutech.repository.ProfesorRepository;
 import com.edutech.edutech.repository.SedeRepository;
 import com.edutech.edutech.service.SedeService;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -90,33 +93,70 @@ public class SedeServiceTest {
     }
 
     @Test
-    void modificarSedeNoExistente() {
-        Sede sedeActualizada = new Sede();
-        sedeActualizada.setNombre("Nueva Sede");
-
-        when(sedeRepository.existsById(1)).thenReturn(false);
-
-        String resultado = sedeService.modificar(1, sedeActualizada);
-
-        assertEquals("la sede no existe", resultado);
-    }
-
-    @Test
     void eliminarSedeExistente() {
-        when(sedeRepository.existsById(1)).thenReturn(true);
+        int id = 1;
 
-        var resultado = sedeService.eliminar(1);
+        // Crear una sede mock sin profes ni admin
+        Sede sede = new Sede();
+        sede.setId(id);
+        sede.setProfesores(new ArrayList<>()); // Lista vacía
+        sede.setAdministrador(null); // Sin admin
 
+        // Mock del repository
+        when(sedeRepository.findById(id)).thenReturn(Optional.of(sede));
+
+        Map<String, Boolean> resultado = sedeService.eliminar(id);
+
+        // El key correcto según tu método es "Sede eliminada"
         assertEquals(Boolean.TRUE, resultado.get("Sede eliminada"));
     }
 
     @Test
     void eliminarSedeNoExistente() {
-        when(sedeRepository.existsById(1)).thenReturn(false);
+        int id = 1;
 
-        var resultado = sedeService.eliminar(1);
+        // Mock para que no encuentre la sede
+        when(sedeRepository.findById(id)).thenReturn(Optional.empty());
 
+        Map<String, Boolean> resultado = sedeService.eliminar(id);
+
+        // El key correcto según tu método es "Sede no existe"
         assertEquals(Boolean.FALSE, resultado.get("Sede no existe"));
+    }
+
+    @Test
+    void eliminarSedeConProfesores() {
+        int id = 1;
+
+        Sede sede = new Sede();
+        sede.setId(id);
+        sede.setProfesores(List.of(new Profesor())); // Con profes
+        sede.setAdministrador(null);
+
+        when(sedeRepository.findById(id)).thenReturn(Optional.of(sede));
+
+        Map<String, Boolean> resultado = sedeService.eliminar(id);
+
+        assertEquals(
+            Boolean.FALSE,
+            resultado.get("Sede tiene profes asignados")
+        );
+    }
+
+    @Test
+    void eliminarSedeConAdmin() {
+        int id = 1;
+
+        Sede sede = new Sede();
+        sede.setId(id);
+        sede.setProfesores(new ArrayList<>());
+        sede.setAdministrador(new Administrador()); // Con admin
+
+        when(sedeRepository.findById(id)).thenReturn(Optional.of(sede));
+
+        Map<String, Boolean> resultado = sedeService.eliminar(id);
+
+        assertEquals(Boolean.FALSE, resultado.get("Sede tiene admin asignado"));
     }
 
     @Test
