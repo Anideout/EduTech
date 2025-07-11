@@ -1,4 +1,4 @@
-#  EduTech Platform
+#  EduTech - EcoStyle
 
 > **Proyecto educativo en Spring Boot**
 
@@ -6,7 +6,7 @@
 
 ##  ¿Qué es EduTech?
 
-**EduTech** es un software diseñado por Sergio Puebla y Matías Borquez en **Spring Boot** para administrar instituciones educativas. Sirve para manejar usuarios, cursos, inscripciones y pagos, todo con roles para estudiantes, profes y administradores.  
+**EduTech** es un software diseñado por EcoStyle (Sergio Puebla y Matías Borquez) en **Spring Boot** para administrar instituciones educativas. Sirve para manejar usuarios, cursos, inscripciones y pagos, todo con roles para estudiantes, profes y administradores.  
 
 Está pensado como un sistema completo para la empresa de EduTech. Con arquitectura en capas y conceptos de programación en Java. Hasta el momento solo está creado el backend: la lógica de la aplicación web. 
 
