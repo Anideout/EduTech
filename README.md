@@ -6,7 +6,7 @@
 
 ##  ¿Qué es EduTech?
 
-**EduTech** es un sistema que hicimos junto a Sergio Puebla en **Spring Boot** para administrar instituciones educativas. Sirve para manejar usuarios, cursos, inscripciones y pagos, todo con roles para estudiantes, profes y administradores.  
+**EduTech** es un software diseñado por Sergio Puebla y Matías Borquez en **Spring Boot** para administrar instituciones educativas. Sirve para manejar usuarios, cursos, inscripciones y pagos, todo con roles para estudiantes, profes y administradores.  
 
 Está pensado como un sistema completo para la empresa de EduTech. Con arquitectura en capas y conceptos de programación en Java. Hasta el momento solo está creado el backend: la lógica de la aplicación web. 
 
@@ -78,9 +78,8 @@ Las entidades que arman el corazón de EduTech:
 | Componente       | Tecnología        | Versión  | Para qué sirve                      |
 |------------------|-------------------|----------|-------------------------------------|
 | Framework        | Spring Boot       | 3.4.5    | El motor de la app                  |
-| IDE              | VSCode y Zed      | 0.192.7  | Programar el proyecto               |
-| Debuger          | desde terminal    |          | Para realizar Tests                 |
-|                  | y vscode          |          | para cada metodo del proyecto       |             
+| IDE              | VSCode y Zed      |          | Programar el proyecto               |
+| Debuger          | desde terminal    |          | Test de metodos                     |
 | Lenguaje         | Java              | 17       | Puro Java                           |
 | Build Tool       | Maven             | 3.9.9    | Manejar dependencias                |
 | Base de datos    | MySQL             | Latest   | Persistencia de datos               |
