@@ -79,7 +79,7 @@ Las entidades que arman el corazón de EduTech:
 |------------------|-------------------|----------|-------------------------------------|
 | Framework        | Spring Boot       | 3.4.5    | El motor de la app                  |
 | IDE              | VSCode y Zed      |          | Programar el proyecto               |
-| Debuger          | desde terminal    |          | Test de metodos                     |
+| Debuger          | terminal/Vscode   |          | Test de metodos                     |
 | Lenguaje         | Java              | 17       | Puro Java                           |
 | Build Tool       | Maven             | 3.9.9    | Manejar dependencias                |
 | Base de datos    | MySQL             | Latest   | Persistencia de datos               |
